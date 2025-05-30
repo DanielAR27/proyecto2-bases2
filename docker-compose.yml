@@ -1,0 +1,513 @@
+version: "3.9"
+
+services:
+  # PostgreSQL
+  postgres:
+    image: postgres:17
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    command: postgres -c 'listen_addresses=*' -c 'password_encryption=md5'
+    ports:
+      - "15432:${POSTGRES_PORT}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # REDIS (CACHÉ VOLÁTIL)
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - app_network
+
+  # Elastic Search
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "${ELASTIC_PORT}:${ELASTIC_PORT}"
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    networks:
+      - app_network
+
+  # AUTH SERVICE - INSTANCIA 1
+  auth_service1:
+    build: ./auth_service
+    container_name: auth_service1
+    profiles:
+      - backend
+      - test
+    restart: always
+    ports:
+      - "${AUTH_PORT}:${AUTH_PORT}"
+    depends_on:
+      - postgres
+      - mongos1
+    environment:
+      API_URL: ${API_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      AUTH_PORT: ${AUTH_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - app_network
+
+  # AUTH SERVICE - INSTANCIA 2
+  auth_service2:
+    build: ./auth_service
+    container_name: auth_service2
+    profiles:
+      - backend
+      - test
+    restart: always
+    expose:
+      - "${AUTH_PORT}"
+    depends_on:
+      - postgres
+      - mongos1
+    environment:
+      API_URL: ${API_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      AUTH_PORT: ${AUTH_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - app_network
+
+  auth_test:
+    build:
+      context: ./auth_service
+      dockerfile: dockerfile.test
+    container_name: auth_service_test_container
+    profiles:
+      - test
+    depends_on:
+      - postgres
+      - mongos1
+    environment:
+      API_URL: ${API_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      AUTH_PORT: ${AUTH_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - app_network
+
+  # API SERVICE - INSTANCIA 1
+  api1:
+    build: ./api
+    container_name: api1
+    profiles:
+      - backend
+      - test
+    restart: always
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - auth_service1
+      - postgres
+      - mongos1
+    environment:
+      AUTH_SERVICE_URL: ${AUTH_SERVICE_URL}
+      SEARCH_SERVICE_URL: ${SEARCH_SERVICE_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      API_PORT: ${API_PORT}
+    networks:
+      - app_network
+
+  # API SERVICE - INSTANCIA 2
+  api2:
+    build: ./api
+    container_name: api2
+    profiles:
+      - backend
+      - test
+    restart: always
+    expose:
+      - "${API_PORT}"
+    depends_on:
+      - auth_service1
+      - postgres
+      - mongos1
+    environment:
+      AUTH_SERVICE_URL: ${AUTH_SERVICE_URL}
+      SEARCH_SERVICE_URL: ${SEARCH_SERVICE_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      API_PORT: ${API_PORT}
+    networks:
+      - app_network
+
+  api_test:
+    build:
+      context: ./api
+      dockerfile: dockerfile.test
+    container_name: api_service_test_container
+    profiles:
+      - test
+    depends_on:
+      - postgres
+      - mongos1
+    environment:
+      AUTH_SERVICE_URL: ${AUTH_SERVICE_URL}
+      SEARCH_SERVICE_URL: ${SEARCH_SERVICE_URL}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+      DB_TYPE: ${DB_TYPE}
+      MONGO_URI: ${MONGO_URI}
+      DB_HOST: ${POSTGRES_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      DB_PORT: ${POSTGRES_PORT}
+      API_PORT: ${API_PORT}
+    networks:
+      - app_network
+
+  # SEARCH SERVICE - INSTANCIA 1
+  search_service1:
+    build: ./search_service
+    container_name: search_service1
+    profiles:
+      - backend
+      - test
+    restart: always
+    ports:
+      - "${SEARCH_PORT}:${SEARCH_PORT}"
+    depends_on:
+      - auth_service1
+      - api1
+      - elasticsearch
+      - redis
+    environment:
+      - API_URL=${API_URL}
+      - AUTH_SERVICE_URL=${AUTH_SERVICE_URL}
+      - ELASTIC_NODE=${ELASTIC_NODE}
+      - ELASTIC_USER=${ELASTIC_USER}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - SEARCH_PORT=${SEARCH_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - app_network
+
+  # SEARCH SERVICE - INSTANCIA 2
+  search_service2:
+    build: ./search_service
+    container_name: search_service2
+    profiles:
+      - backend
+      - test
+    restart: always
+    expose:
+      - "${SEARCH_PORT}"
+    depends_on:
+      - auth_service1
+      - api1
+      - elasticsearch
+      - redis
+    environment:
+      - API_URL=${API_URL}
+      - AUTH_SERVICE_URL=${AUTH_SERVICE_URL}
+      - ELASTIC_NODE=${ELASTIC_NODE}
+      - ELASTIC_USER=${ELASTIC_USER}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - SEARCH_PORT=${SEARCH_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - app_network
+
+  search_test:
+    build:
+      context: ./search_service
+      dockerfile: dockerfile.test
+    container_name: search_service_test_container
+    profiles:
+      - test
+    depends_on:
+      - elasticsearch
+      - redis
+    environment:
+      - API_URL=${API_URL}
+      - AUTH_SERVICE_URL=${AUTH_SERVICE_URL}
+      - ELASTIC_NODE=${ELASTIC_NODE}
+      - ELASTIC_USER=${ELASTIC_USER}
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - SEARCH_PORT=${SEARCH_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - app_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:80"
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+  # Config Servers MongoDB
+  mongocfg1:
+    image: mongo:6.0.6
+    container_name: mongocfg1
+    command: mongod --configsvr --replSet configReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongocfg1-data:/data/db
+    networks:
+      - app_network
+
+  mongocfg2:
+    image: mongo:6.0.6
+    container_name: mongocfg2
+    command: mongod --configsvr --replSet configReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongocfg2-data:/data/db
+    networks:
+      - app_network
+
+  mongocfg3:
+    image: mongo:6.0.6
+    container_name: mongocfg3
+    command: mongod --configsvr --replSet configReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongocfg3-data:/data/db
+    networks:
+      - app_network
+
+  # Primer Shard ReplicaSet
+  mongors1n1:
+    image: mongo:6.0.6
+    container_name: mongors1n1
+    command: mongod --shardsvr --replSet shard1ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors1n1-data:/data/db
+    networks:
+      - app_network
+
+  mongors1n2:
+    image: mongo:6.0.6
+    container_name: mongors1n2
+    command: mongod --shardsvr --replSet shard1ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors1n2-data:/data/db
+    networks:
+      - app_network
+
+  mongors1n3:
+    image: mongo:6.0.6
+    container_name: mongors1n3
+    command: mongod --shardsvr --replSet shard1ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors1n3-data:/data/db
+    networks:
+      - app_network
+
+  # Segundo Shard ReplicaSet
+  mongors2n1:
+    image: mongo:6.0.6
+    container_name: mongors2n1
+    command: mongod --shardsvr --replSet shard2ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors2n1-data:/data/db
+    networks:
+      - app_network
+
+  mongors2n2:
+    image: mongo:6.0.6
+    container_name: mongors2n2
+    command: mongod --shardsvr --replSet shard2ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors2n2-data:/data/db
+    networks:
+      - app_network
+
+  mongors2n3:
+    image: mongo:6.0.6
+    container_name: mongors2n3
+    command: mongod --shardsvr --replSet shard2ReplSet --port 27017 --bind_ip_all
+    volumes:
+      - mongors2n3-data:/data/db
+    networks:
+      - app_network
+
+  # Mongos Router
+  mongos1:
+    image: mongo:6.0.6
+    container_name: mongos1
+    ports:
+      - "27019:27017"
+    depends_on:
+      - mongocfg1
+      - mongocfg2
+      - mongocfg3
+      - mongors1n1
+      - mongors1n2
+      - mongors1n3
+    command: mongos --configdb configReplSet/mongocfg1:27017,mongocfg2:27017,mongocfg3:27017 --port 27017 --bind_ip_all
+    networks:
+      - app_network
+
+  mongos2:
+    image: mongo:6.0.6
+    container_name: mongos2
+    ports:
+      - "27029:27017"
+    depends_on:
+      - mongocfg1
+      - mongocfg2
+      - mongocfg3
+      - mongors1n1
+      - mongors1n2
+      - mongors1n3
+    command: mongos --configdb configReplSet/mongocfg1:27017,mongocfg2:27017,mongocfg3:27017 --port 27017 --bind_ip_all
+    networks:
+      - app_network
+
+  mongos3:
+    image: mongo:6.0.6
+    container_name: mongos3
+    ports:
+      - "27039:27017"
+    depends_on:
+      - mongocfg1
+      - mongocfg2
+      - mongocfg3
+      - mongors1n1
+      - mongors1n2
+      - mongors1n3
+    command: mongos --configdb configReplSet/mongocfg1:27017,mongocfg2:27017,mongocfg3:27017 --port 27017 --bind_ip_all
+    networks:
+      - app_network
+
+  # Mongo Express (admin web para Mongo)
+  mongo-express:
+    image: mongo-express
+    container_name: mongo_express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGOSRV: "false"
+      ME_CONFIG_MONGODB_SERVER: mongos1
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USER}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASS}
+    depends_on:
+      - mongos1
+    networks:
+      - app_network
+
+  # Kibana (para gestionar ElasticSearch)
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.6.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=${ELASTIC_NODE}
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - app_network
+
+  # Load Balancer
+  nginx:
+    image: nginx:latest
+    container_name: nginx_load_balancer
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+      - search_service1
+      - search_service2
+      - auth_service1
+      - auth_service2
+    networks:
+      - app_network
+    profiles:
+      - backend
+
+volumes:
+  postgres_data:
+  mongocfg1-data:
+  mongocfg2-data:
+  mongocfg3-data:
+  mongors1n1-data:
+  mongors1n2-data:
+  mongors1n3-data:
+  mongors2n1-data:
+  mongors2n2-data:
+  mongors2n3-data:
+  elastic_data:
+
+networks:
+  app_network:

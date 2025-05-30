@@ -1,0 +1,25 @@
+# Node modules
+api/node_modules/
+auth_service/node_modules/
+pruebas/node_modules/
+search_service/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+
+
+# Coverage reports (de tests)
+api/coverage/
+auth_service/coverage/
+search_service/coverage/
+
+# Misc
+.DS_Store
+Thumbs.db

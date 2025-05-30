@@ -1,0 +1,139 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Copy template.env to .env
+        run: cp template.env .env
+      
+      - name: Start infrastructure
+        run: docker compose up -d
+      
+      - name: Initialize MongoDB cluster
+        run: |
+          chmod +x ./init_cluster.sh
+          ./init_cluster.sh
+      
+      - name: Start backend services
+        run: docker compose --profile backend up --build -d
+      
+      - name: Run auth tests
+        run: |
+          docker compose --profile test build auth_test
+          docker compose --profile test run --rm auth_test
+      
+      - name: Run API tests
+        run: |
+          docker compose --profile test build api_test
+          docker compose --profile test run --rm api_test
+        
+      - name: Run search tests
+        run: |
+          docker compose --profile test build search_test
+          docker compose --profile test run --rm search_test
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Copy template.env to .env
+        run: cp template.env .env
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      
+      - name: Build and push Auth Service
+        uses: docker/build-push-action@v4
+        with:
+          context: ./auth_service
+          push: true
+          tags: ghcr.io/danielar27/proyecto1-bases2/auth_service:latest
+      
+      - name: Build and push API
+        uses: docker/build-push-action@v4
+        with:
+          context: ./api
+          push: true
+          tags: ghcr.io/danielar27/proyecto1-bases2/api:latest
+      
+      - name: Build and push Search Service
+        uses: docker/build-push-action@v4
+        with:
+          context: ./search_service
+          push: true
+          tags: ghcr.io/danielar27/proyecto1-bases2/search_service:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create deployment artifact
+        run: |
+          mkdir -p deploy
+          cp docker-compose.yml deploy/
+          cp .env deploy/ || cp template.env deploy/.env
+          cp nginx.conf deploy/
+          cp init.sql deploy/
+          cp init_cluster.sh deploy/
+          chmod +x deploy/init_cluster.sh
+          tar -czf deploy.tar.gz deploy
+      
+      - name: Upload deployment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment
+          path: deploy.tar.gz
+          retention-days: 1
+      
+      - name: Create deployment instructions
+        run: |
+          cat > DEPLOYMENT.md << EOF
+          # Deployment Instructions
+          
+          1. Download the deployment artifact
+          2. Extract the archive: \`tar -xzf deploy.tar.gz\`
+          3. Navigate to the deploy directory: \`cd deploy\`
+          4. Make sure your .env file is properly configured
+          5. Start the infrastructure: \`docker compose up -d\`
+          6. Initialize the MongoDB cluster: \`./init_cluster.sh\`
+          7. Start the backend services: \`docker compose --profile backend up --build -d\`
+          
+          ## Pull the latest images
+          \`\`\`
+          docker pull ghcr.io/${{ github.repository }}/auth_service:latest
+          docker pull ghcr.io/${{ github.repository }}/api:latest
+          docker pull ghcr.io/${{ github.repository }}/search_service:latest
+          \`\`\`
+          EOF
+      
+      - name: Upload deployment instructions
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-instructions
+          path: DEPLOYMENT.md
+          retention-days: 7
