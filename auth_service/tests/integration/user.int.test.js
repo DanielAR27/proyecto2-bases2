@@ -115,6 +115,157 @@ describe('UserRoutes - Integración Completa', () => {
     });
   });
 
+// REEMPLAZAR COMPLETO el describe de GET /users/location en user.int.test.js:
+
+  describe('GET /users/location - Obtener usuarios con ubicación', () => {
+    beforeAll(async () => {
+      // Limpiar caché antes de empezar
+      await redisClient.del('users:geo:all');
+      
+      // Agregar ubicación a los usuarios de prueba
+      await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', userToken)
+        .send({
+          latitud: 9.9341,
+          longitud: -84.0877,
+          direccion_completa: 'Cartago, Costa Rica'
+        });
+
+      await request(app)
+        .put(`/users/${secondUserId}/location`)
+        .set('Authorization', adminToken)
+        .send({
+          latitud: 9.9280,
+          longitud: -83.9200,
+          direccion_completa: 'San José, Costa Rica'
+        });
+    });
+
+    afterAll(async () => {
+      // Limpiar caché después de las pruebas
+      await redisClient.del('users:geo:all');
+    });
+
+    it('un administrador puede obtener todos los usuarios con ubicación', async () => {
+      const res = await request(app)
+        .get('/users/location')
+        .set('Authorization', adminToken);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty('message', 'Usuarios con ubicación obtenidos correctamente.');
+      expect(res.body).toHaveProperty('total');
+      expect(res.body).toHaveProperty('usuarios');
+      expect(Array.isArray(res.body.usuarios)).toBe(true);
+      
+      // Debe haber al menos los 2 usuarios que configuramos
+      expect(res.body.total).toBeGreaterThanOrEqual(2);
+      
+      // Verificar que incluye los usuarios con ubicación que configuramos
+      const userWithLocation = res.body.usuarios.find(u => u.id_usuario === userId);
+      expect(userWithLocation).toBeDefined();
+      
+      // Convertir a números para comparar (maneja string y number)
+      expect(parseFloat(userWithLocation.latitud)).toBeCloseTo(9.9341, 4);
+      expect(parseFloat(userWithLocation.longitud)).toBeCloseTo(-84.0877, 4);
+      expect(userWithLocation).toHaveProperty('direccion_completa', 'Cartago, Costa Rica');
+      expect(userWithLocation).toHaveProperty('nombre');
+      expect(userWithLocation).toHaveProperty('email');
+      expect(userWithLocation).toHaveProperty('rol');
+    });
+
+    it('debe guardar la respuesta en caché y recuperarla en solicitudes subsecuentes', async () => {
+      // Primera solicitud - debería guardar en caché
+      const firstRes = await request(app)
+        .get('/users/location')
+        .set('Authorization', adminToken);
+      
+      expect(firstRes.statusCode).toBe(200);
+      
+      // Verificar que se guardó en caché
+      const cacheKey = 'users:geo:all';
+      const cachedData = await redisClient.get(cacheKey);
+      expect(cachedData).not.toBeNull();
+      
+      // El caché debe contener el objeto completo
+      const parsedCache = JSON.parse(cachedData);
+      expect(parsedCache).toHaveProperty('message');
+      expect(parsedCache).toHaveProperty('total');
+      expect(parsedCache).toHaveProperty('usuarios');
+      
+      // Segunda solicitud - debería recuperar de caché
+      const secondRes = await request(app)
+        .get('/users/location')
+        .set('Authorization', adminToken);
+      
+      expect(secondRes.statusCode).toBe(200);
+      expect(secondRes.body).toEqual(firstRes.body);
+    });
+
+    it('no debe permitir a un cliente acceder a la información de ubicaciones', async () => {
+      const res = await request(app)
+        .get('/users/location')
+        .set('Authorization', userToken);
+
+      expect(res.statusCode).toBe(403);
+      expect(res.body.error).toBe('No tiene permisos para acceder a esta información.');
+    });
+
+    it('debe retornar error 401 sin token de autenticación', async () => {
+      const res = await request(app).get('/users/location');
+      expect(res.statusCode).toBe(401);
+    });
+
+    it('debe retornar error 401 con token inválido', async () => {
+      const res = await request(app)
+        .get('/users/location')
+        .set('Authorization', 'Bearer invalid.token.here');
+      
+      expect(res.statusCode).toBe(401);
+    });
+
+    it('debe retornar solo usuarios que tienen ubicación configurada', async () => {
+      const res = await request(app)
+        .get('/users/location')
+        .set('Authorization', adminToken);
+
+      expect(res.statusCode).toBe(200);
+      
+      // Todos los usuarios en la respuesta deben tener latitud y longitud
+      res.body.usuarios.forEach(usuario => {
+        expect(usuario.latitud).toBeDefined();
+        expect(usuario.longitud).toBeDefined();
+        
+        // Convertir a números para verificar tipo (maneja string y number)
+        const lat = parseFloat(usuario.latitud);
+        const lng = parseFloat(usuario.longitud);
+        expect(typeof lat).toBe('number');
+        expect(typeof lng).toBe('number');
+        expect(lat).not.toBeNaN();
+        expect(lng).not.toBeNaN();
+      });
+    });
+
+    it('debe incluir todos los campos necesarios para análisis OLAP', async () => {
+      const res = await request(app)
+        .get('/users/location')
+        .set('Authorization', adminToken);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.usuarios.length).toBeGreaterThan(0);
+      
+      const usuario = res.body.usuarios[0];
+      expect(usuario).toHaveProperty('id_usuario');
+      expect(usuario).toHaveProperty('nombre');
+      expect(usuario).toHaveProperty('email');
+      expect(usuario).toHaveProperty('rol');
+      expect(usuario).toHaveProperty('latitud');
+      expect(usuario).toHaveProperty('longitud');
+      expect(usuario).toHaveProperty('direccion_completa');
+      expect(usuario).toHaveProperty('fecha_registro');
+    });
+  });
+
   describe('PUT /users/:id - Actualizar usuario', () => {
     it('un usuario puede actualizar su propia información', async () => {
       const res = await request(app)
@@ -239,6 +390,83 @@ describe('UserRoutes - Integración Completa', () => {
 
       expect(res.statusCode).toBe(404);
       expect(res.body.error).toBe('Usuario no encontrado.');
+    });
+  });
+
+  describe('PUT /users/:id/location - Actualizar ubicación usuario', () => {
+    it('un usuario puede actualizar su propia ubicación', async () => {
+      const locationData = {
+        latitud: 9.9341,
+        longitud: -84.0877,
+        direccion_completa: 'Cartago, Costa Rica'
+      };
+
+      const res = await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', userToken)
+        .send(locationData);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.message).toBe('Ubicación actualizada correctamente.');
+      // Convertir a números para comparar (maneja string y number de Postgres)
+      expect(parseFloat(res.body.usuario.latitud)).toBeCloseTo(9.9341, 4);
+      expect(parseFloat(res.body.usuario.longitud)).toBeCloseTo(-84.0877, 4);
+    });
+
+    it('un administrador puede actualizar ubicación de cualquier usuario', async () => {
+      const locationData = {
+        latitud: 10.0,
+        longitud: -84.0,
+        direccion_completa: 'San José, Costa Rica'
+      };
+
+      const res = await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', adminToken)
+        .send(locationData);
+
+      expect(res.statusCode).toBe(200);
+      expect(res.body.message).toBe('Ubicación actualizada correctamente.');
+    });
+
+    it('debe rechazar actualización sin latitud', async () => {
+      const res = await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', userToken)
+        .send({ longitud: -84.0877 });
+
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Latitud y longitud son obligatorios.');
+    });
+
+    it('debe rechazar latitud fuera de rango', async () => {
+      const res = await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', userToken)
+        .send({ latitud: 91, longitud: -84.0877 });
+
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Latitud debe estar entre -90 y 90 grados.');
+    });
+
+    it('debe rechazar longitud fuera de rango', async () => {
+      const res = await request(app)
+        .put(`/users/${userId}/location`)
+        .set('Authorization', userToken)
+        .send({ latitud: 9.9341, longitud: 181 });
+
+      expect(res.statusCode).toBe(400);
+      expect(res.body.error).toBe('Longitud debe estar entre -180 y 180 grados.');
+    });
+
+    it('no debe permitir a un cliente actualizar ubicación de otro usuario', async () => {
+      const res = await request(app)
+        .put(`/users/${secondUserId}/location`)
+        .set('Authorization', userToken)
+        .send({ latitud: 9.9341, longitud: -84.0877 });
+
+      expect(res.statusCode).toBe(403);
+      expect(res.body.error).toBe('No autorizado para actualizar esta ubicación.');
     });
   });
 

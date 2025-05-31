@@ -30,6 +30,16 @@ const restaurantSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  latitud: {
+    type: Number,
+    min: -90,
+    max: 90
+  },
+  longitud: {
+    type: Number,
+    min: -180,
+    max: 180
+  }
 });
 
 // Borrado en cascada de menús (con productos), reservas y pedidos

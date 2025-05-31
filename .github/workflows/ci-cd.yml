@@ -68,21 +68,21 @@ jobs:
         with:
           context: ./auth_service
           push: true
-          tags: ghcr.io/danielar27/proyecto1-bases2/auth_service:latest
+          tags: ghcr.io/danielar27/proyecto2-bases2/auth_service:latest
       
       - name: Build and push API
         uses: docker/build-push-action@v4
         with:
           context: ./api
           push: true
-          tags: ghcr.io/danielar27/proyecto1-bases2/api:latest
+          tags: ghcr.io/danielar27/proyecto2-bases2/api:latest
       
       - name: Build and push Search Service
         uses: docker/build-push-action@v4
         with:
           context: ./search_service
           push: true
-          tags: ghcr.io/danielar27/proyecto1-bases2/search_service:latest
+          tags: ghcr.io/danielar27/proyecto2-bases2/search_service:latest
 
   deploy:
     needs: build-and-push

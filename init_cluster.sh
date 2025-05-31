@@ -82,6 +82,14 @@ db.restaurantes.createIndex({ id_restaurante: 1 });
 sh.shardCollection("apidb.restaurantes", { id_restaurante: "hashed" });
 '
 
+echo "Configurando colección repartidores..."
+docker exec mongos1 mongosh --eval '
+db = db.getSiblingDB("apidb");
+db.createCollection("repartidores");
+db.repartidores.createIndex({ id_repartidor: 1 });
+sh.shardCollection("apidb.repartidores", { id_repartidor: "hashed" });
+'
+
 echo "Configurando colección menus..."
 docker exec mongos1 mongosh --eval '
 db = db.getSiblingDB("apidb");
@@ -121,6 +129,7 @@ db.createCollection("counters");
 db.counters.insertMany([
   { _id: "usuarios", seq: 0 },
   { _id: "restaurantes", seq: 0 },
+  {_id: "repartidores", seq: 0},
   { _id: "menus", seq: 0 },
   { _id: "productos", seq: 0 },
   { _id: "reservas", seq: 0 },

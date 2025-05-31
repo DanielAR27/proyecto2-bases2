@@ -11,7 +11,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://localhost:${PORT}`,
+      url: `http://localhost/auth`,
       description: 'Servidor local de desarrollo',
     },
   ],

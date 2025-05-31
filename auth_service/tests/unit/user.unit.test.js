@@ -82,6 +82,154 @@ describe('User Controller', () => {
     });
   });
 
+// REEMPLAZAR COMPLETO el describe de getAllUsersWithLocation en user.unit.test.js:
+
+  describe('getAllUsersWithLocation', () => {
+    const redisClient = require('../../src/config/redis');
+
+    beforeEach(() => {
+      // Resetear mocks de Redis
+      redisClient.get.mockClear();
+      redisClient.set.mockClear();
+    });
+
+    it('debería devolver todos los usuarios con ubicación para administradores', async () => {
+      const mockUsers = [
+        {
+          id_usuario: 1,
+          nombre: 'Usuario Test',
+          email: 'test@example.com',
+          rol: 'cliente',
+          latitud: 9.9341,
+          longitud: -84.0877,
+          direccion_completa: 'Cartago, Costa Rica',
+          fecha_registro: '2025-01-15T10:30:00Z'
+        },
+        {
+          id_usuario: 2,
+          nombre: 'Otro Usuario',
+          email: 'otro@example.com',
+          rol: 'cliente',
+          latitud: 9.9280,
+          longitud: -83.9200,
+          direccion_completa: 'San José, Costa Rica',
+          fecha_registro: '2025-01-16T11:30:00Z'
+        }
+      ];
+
+      // Mock: no hay datos en caché
+      redisClient.get.mockResolvedValue(null);
+      UserDAO.getAllUsersWithLocation.mockResolvedValue(mockUsers);
+
+      const req = { usuario: { rol: 'administrador' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      expect(redisClient.get).toHaveBeenCalledWith('users:geo:all');
+      expect(UserDAO.getAllUsersWithLocation).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'Usuarios con ubicación obtenidos correctamente.',
+        total: 2,
+        usuarios: mockUsers
+      });
+    });
+
+    it('debería devolver error 403 si no es administrador', async () => {
+      const req = { usuario: { rol: 'cliente' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(403);
+      expect(res.json).toHaveBeenCalledWith({ 
+        error: 'No tiene permisos para acceder a esta información.' 
+      });
+      expect(UserDAO.getAllUsersWithLocation).not.toHaveBeenCalled();
+      expect(redisClient.get).not.toHaveBeenCalled();
+    });
+
+    it('debería devolver lista vacía si no hay usuarios con ubicación', async () => {
+      // Mock: no hay datos en caché
+      redisClient.get.mockResolvedValue(null);
+      UserDAO.getAllUsersWithLocation.mockResolvedValue([]);
+
+      const req = { usuario: { rol: 'administrador' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      expect(UserDAO.getAllUsersWithLocation).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({
+        message: 'Usuarios con ubicación obtenidos correctamente.',
+        total: 0,
+        usuarios: []
+      });
+    });
+
+    it('debería manejar errores de servidor', async () => {
+      // Mock: no hay datos en caché
+      redisClient.get.mockResolvedValue(null);
+      UserDAO.getAllUsersWithLocation.mockRejectedValue(new Error('DB Error'));
+
+      const req = { usuario: { rol: 'administrador' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Error en el servidor.' });
+    });
+
+    it('debería usar caché si está disponible', async () => {
+      const cachedResponse = {
+        message: 'Usuarios con ubicación obtenidos correctamente.',
+        total: 1,
+        usuarios: [{ id_usuario: 1, nombre: 'Test Usuario' }]
+      };
+      
+      // Mock: hay datos en caché
+      redisClient.get.mockResolvedValue(JSON.stringify(cachedResponse));
+
+      const req = { usuario: { rol: 'administrador' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      expect(redisClient.get).toHaveBeenCalledWith('users:geo:all');
+      expect(UserDAO.getAllUsersWithLocation).not.toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith(cachedResponse);
+    });
+
+    it('debería guardar en caché cuando no hay datos en caché', async () => {
+      const mockUsers = [{ id_usuario: 1, nombre: 'Test' }];
+      
+      // Mock: no hay datos en caché
+      redisClient.get.mockResolvedValue(null);
+      UserDAO.getAllUsersWithLocation.mockResolvedValue(mockUsers);
+
+      const req = { usuario: { rol: 'administrador' } };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.getAllUsersWithLocation(req, res);
+
+      const expectedResponse = {
+        message: 'Usuarios con ubicación obtenidos correctamente.',
+        total: 1,
+        usuarios: mockUsers
+      };
+
+      expect(redisClient.get).toHaveBeenCalledWith('users:geo:all');
+      expect(UserDAO.getAllUsersWithLocation).toHaveBeenCalled();
+      expect(redisClient.set).toHaveBeenCalledWith(
+        'users:geo:all',
+        JSON.stringify(expectedResponse),
+        { EX: 600 }
+      );
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
+    });
+  });
+  
   describe('updateUser', () => {
     it('debería actualizar el usuario si está autorizado', async () => {
       UserDAO.findById.mockResolvedValue({ id_usuario: 1 });
@@ -187,6 +335,95 @@ describe('User Controller', () => {
 
       expect(res.status).toHaveBeenCalledWith(500);
       expect(res.json).toHaveBeenCalledWith({ error: 'Error en el servidor.' });
+    });
+  });
+
+  describe('updateUserLocation', () => {
+    it('debería actualizar la ubicación del usuario', async () => {
+      UserDAO.updateUserLocation.mockResolvedValue({
+        id_usuario: 1,
+        nombre: 'Juan',
+        email: 'juan@example.com',
+        latitud: 9.9341,
+        longitud: -84.0877,
+        direccion_completa: 'Cartago, Costa Rica'
+      });
+
+      const req = {
+        params: { id: '1' },
+        body: { latitud: 9.9341, longitud: -84.0877, direccion_completa: 'Cartago, Costa Rica' },
+        usuario: { id_usuario: 1, rol: 'cliente' }
+      };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.updateUserLocation(req, res);
+
+      expect(UserDAO.updateUserLocation).toHaveBeenCalledWith('1', {
+        latitud: 9.9341,
+        longitud: -84.0877,
+        direccion_completa: 'Cartago, Costa Rica'
+      });
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+        message: 'Ubicación actualizada correctamente.'
+      }));
+    });
+
+    it('debería devolver error 400 si faltan latitud o longitud', async () => {
+      const req = {
+        params: { id: '1' },
+        body: { latitud: 9.9341 },
+        usuario: { id_usuario: 1, rol: 'cliente' }
+      };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.updateUserLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Latitud y longitud son obligatorios.' });
+    });
+
+    it('debería devolver error 400 si latitud está fuera de rango', async () => {
+      const req = {
+        params: { id: '1' },
+        body: { latitud: 91, longitud: -84.0877 },
+        usuario: { id_usuario: 1, rol: 'cliente' }
+      };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.updateUserLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Latitud debe estar entre -90 y 90 grados.' });
+    });
+
+    it('debería devolver error 403 si no está autorizado', async () => {
+      const req = {
+        params: { id: '2' },
+        body: { latitud: 9.9341, longitud: -84.0877 },
+        usuario: { id_usuario: 1, rol: 'cliente' }
+      };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.updateUserLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(403);
+      expect(res.json).toHaveBeenCalledWith({ error: 'No autorizado para actualizar esta ubicación.' });
+    });
+
+    it('debería devolver error 404 si el usuario no existe', async () => {
+      UserDAO.updateUserLocation.mockResolvedValue(null);
+
+      const req = {
+        params: { id: '1' },
+        body: { latitud: 9.9341, longitud: -84.0877 },
+        usuario: { id_usuario: 1, rol: 'cliente' }
+      };
+      const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+      await userController.updateUserLocation(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Usuario no encontrado.' });
     });
   });
 

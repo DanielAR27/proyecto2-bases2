@@ -126,6 +126,100 @@ const PedidoDAO = {
     } else if (dbType === 'mongo') {
       return await PedidoModelMongo.findOneAndDelete({ id_pedido });
     }
+  },
+
+  // Asignar repartidor a un pedido
+  async assignDriver(id_pedido, id_repartidor) {
+    if (dbType === 'postgres') {
+      const result = await pool.query(
+        `UPDATE Pedido 
+         SET id_repartidor = $1
+         WHERE id_pedido = $2
+         RETURNING id_pedido, id_usuario, id_restaurante, id_repartidor, estado, tipo, fecha_hora`,
+        [id_repartidor, id_pedido]
+      );
+      return result.rows[0];
+    } else if (dbType === 'mongo') {
+      return await PedidoModelMongo.findOneAndUpdate(
+        { id_pedido },
+        { id_repartidor },
+        { new: true, runValidators: true }
+      ).lean();
+    }
+  },
+
+  // Obtener pedidos asignados a un repartidor
+  async findByDriver(id_repartidor) {
+    if (dbType === 'postgres') {
+      const pedidosResult = await pool.query(
+        `SELECT * FROM Pedido 
+         WHERE id_repartidor = $1 
+         AND estado IN ('pendiente', 'en preparacion', 'listo')
+         ORDER BY fecha_hora ASC`,
+        [id_repartidor]
+      );
+      
+      const pedidos = pedidosResult.rows;
+      
+      // Agregar detalles a cada pedido
+      for (const pedido of pedidos) {
+        const detallesResult = await pool.query(
+          `SELECT id_producto, cantidad, subtotal
+           FROM Detalle_Pedido WHERE id_pedido = $1`,
+          [pedido.id_pedido]
+        );
+        
+        pedido.detalles = detallesResult.rows.map(detalle => ({
+          ...detalle,
+          subtotal: parseFloat(detalle.subtotal)
+        }));
+      }
+      
+      return pedidos;
+    } else if (dbType === 'mongo') {
+      return await PedidoModelMongo.find({ 
+        id_repartidor,
+        estado: { $in: ['pendiente', 'en preparacion', 'listo'] }
+      }).lean();
+    }
+  },
+
+  // Obtener pedidos pendientes sin repartidor asignado
+  async findUnassignedOrders() {
+    if (dbType === 'postgres') {
+      const result = await pool.query(
+        `SELECT * FROM Pedido 
+         WHERE id_repartidor IS NULL 
+         AND estado = 'pendiente'
+         ORDER BY fecha_hora ASC`
+      );
+      return result.rows;
+    } else if (dbType === 'mongo') {
+      return await PedidoModelMongo.find({
+        id_repartidor: { $exists: false },
+        estado: 'pendiente'
+      }).lean();
+    }
+  },
+
+  // Actualizar estado de entrega
+  async updateDeliveryStatus(id_pedido, estado) {
+    if (dbType === 'postgres') {
+      const result = await pool.query(
+        `UPDATE Pedido 
+         SET estado = $1
+         WHERE id_pedido = $2
+         RETURNING id_pedido, id_repartidor, estado`,
+        [estado, id_pedido]
+      );
+      return result.rows[0];
+    } else if (dbType === 'mongo') {
+      return await PedidoModelMongo.findOneAndUpdate(
+        { id_pedido },
+        { estado },
+        { new: true, runValidators: true }
+      ).lean();
+    }
   }
 };
 

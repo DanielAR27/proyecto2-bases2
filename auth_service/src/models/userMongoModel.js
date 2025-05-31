@@ -32,6 +32,20 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  latitud: {
+      type: Number,
+      min: -90,
+      max: 90
+    },
+    longitud: {
+      type: Number,
+      min: -180,
+      max: 180
+    },
+    direccion_completa: {
+      type: String,
+      maxlength: 500
+    }
 });
 
 // Generar id_usuario automáticamente si no se asigna
