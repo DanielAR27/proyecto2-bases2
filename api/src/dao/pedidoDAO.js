@@ -180,7 +180,7 @@ const PedidoDAO = {
       return await PedidoModelMongo.find({ 
         id_repartidor,
         estado: { $in: ['pendiente', 'en preparacion', 'listo'] }
-      }).lean();
+      }, { _id: 0, __v: 0 } ).lean();
     }
   },
 

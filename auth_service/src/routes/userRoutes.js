@@ -12,19 +12,52 @@ const router = express.Router();
  */
 
 /**
- * @swagger
- * /users/me:
- *   get:
- *     summary: Obtener información del usuario autenticado
- *     tags: [Usuarios]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Información del usuario
- *       401:
- *         description: Token inválido o no proporcionado
- */
+* @swagger
+* /users/me:
+*   get:
+*     summary: Obtener información del usuario autenticado
+*     tags: [Usuarios]
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: Información del usuario.
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 id_usuario:
+*                    type: integer
+*                    example: 5
+*                 nombre:
+*                    type: string
+*                    example: "Juan"
+*                 email:
+*                    type: string
+*                    example: "juan@gmail.com"
+*                 rol:
+*                    type: string
+*                    example: "cliente"
+*                 latitud:
+*                     type: integer
+*                     nullable: true
+*                     example: null
+*                 longitud:
+*                     type: integer
+*                     nullable: true
+*                     example: null
+*                 direccion_completa:
+*                     type: string
+*                     nullable: true
+*                     example: null
+*                 id_referido:
+*                     type: integer
+*                     nullable: true
+*                     example: null
+*       401:
+*         description: Token inválido o no proporcionado
+*/
 router.get('/me', verificarToken, userController.getMe);
 
 /**
@@ -310,5 +343,73 @@ router.delete('/:id', verificarToken, userController.deleteUser);
  *         description: Error interno del servidor
  */
 router.put('/:id/location', verificarToken, userController.updateUserLocation);
+
+/**
+* @swagger
+* /users/{id}/registration-date:
+*   put:
+*     summary: Actualizar fecha de registro de un usuario (solo administradores)
+*     tags: [Usuarios]
+*     security:
+*       - bearerAuth: []
+*     parameters:
+*       - in: path
+*         name: id
+*         required: true
+*         schema:
+*           type: string
+*         description: ID del usuario cuya fecha de registro se va a actualizar
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             required:
+*               - fecha_registro
+*             properties:
+*               fecha_registro:
+*                 type: string
+*                 format: date-time
+*                 description: Nueva fecha de registro en formato ISO
+*                 example: "2024-01-15T10:30:00Z"
+*     responses:
+*       200:
+*         description: Fecha de registro actualizada correctamente.
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 message:
+*                   type: string
+*                   example: "Fecha de registro actualizada correctamente."
+*                 usuario:
+*                   type: object
+*                   properties:
+*                     id_usuario:
+*                       type: integer
+*                       example: 5
+*                     nombre:
+*                       type: string
+*                       example: "Juan"
+*                     email:
+*                       type: string
+*                       example: "juan@gmail.com"
+*                     fecha_registro:
+*                       type: string
+*                       format: date-time
+*                       description: Nueva fecha de registro en formato ISO
+*                       example: "2024-01-15T10:30:00Z"
+*       400:
+*         description: Fecha de registro obligatoria o formato inválido
+*       401:
+*         description: Token inválido
+*       403:
+*         description: No autorizado (requiere rol de administrador)
+*       404:
+*         description: Usuario no encontrado
+ */
+router.put('/:id/registration-date', verificarToken, userController.updateUserRegistrationDate);
 
 module.exports = router;

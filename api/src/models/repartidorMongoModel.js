@@ -49,7 +49,6 @@ const repartidorSchema = new mongoose.Schema({
 // Índices para optimizar búsquedas geográficas
 repartidorSchema.index({ latitud_actual: 1, longitud_actual: 1 });
 repartidorSchema.index({ estado: 1 });
-repartidorSchema.index({ id_repartidor: 1 });
 
 // Generar id_repartidor automáticamente si no se asigna
 repartidorSchema.pre('save', async function (next) {
@@ -64,6 +63,6 @@ repartidorSchema.pre('save', async function (next) {
   next();
 });
 
-const RepartidorModelMongo = mongoose.model('Repartidor', repartidorSchema);
+const RepartidorModelMongo = mongoose.model('Repartidor', repartidorSchema, 'repartidores');
 
 module.exports = RepartidorModelMongo;

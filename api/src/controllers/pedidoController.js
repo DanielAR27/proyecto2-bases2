@@ -60,7 +60,7 @@ const pedidoController = {
       /* istanbul ignore next*/
       console.error(error);
       /* istanbul ignore next*/
-      res.status(500).json({ error: 'Error al crear el pedido.' });
+      res.status(500).json({ error: 'Error al crear el pedido.'});
     }
   },
 
@@ -122,7 +122,7 @@ const pedidoController = {
       /* istanbul ignore next*/
       console.error(error);
       /* istanbul ignore next*/
-      res.status(500).json({ error: 'Error al buscar el pedido.' });
+      res.status(500).json({ error: 'Error al buscar el pedido.' , details: error.message});
     }
   },
 
@@ -154,6 +154,258 @@ const pedidoController = {
       console.error(error);
       /* istanbul ignore next*/
       res.status(500).json({ error: 'Error al eliminar el pedido.' });
+    }
+  },
+
+// Obtener pedidos de un repartidor (con caché)
+async getPedidosByDriver(req, res) {
+  try {
+    const { id } = req.params;
+    const cacheKey = `pedidos:driver:${id}`;
+    
+    // Intentar obtener de caché
+    const cachedData = await redisClient.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json(JSON.parse(cachedData));
+    }
+    
+    const pedidos = await PedidoDAO.findByDriver(id);
+    
+    const response = {
+      message: 'Pedidos del repartidor obtenidos correctamente.',
+      pedidos
+    };
+
+    // Guardar en caché (expira en 2 minutos - datos más dinámicos)
+    await redisClient.set(cacheKey, JSON.stringify(response), {
+      EX: 120
+    });
+    
+    res.json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener pedidos del repartidor.' });
+  }
+},
+
+// Obtener pedidos sin asignar (con caché)
+async getUnassignedOrders(req, res) {
+  try {
+    if (req.usuario.rol !== 'administrador') {
+      return res.status(403).json({ error: 'No autorizado.' });
+    }
+    
+    const cacheKey = 'pedidos:unassigned';
+    
+    // Intentar obtener de caché
+    const cachedData = await redisClient.get(cacheKey);
+    
+    if (cachedData) {
+      return res.json(JSON.parse(cachedData));
+    }
+    
+    const pedidos = await PedidoDAO.findUnassignedOrders();
+    
+    const response = {
+      message: 'Pedidos sin asignar obtenidos correctamente.',
+      total: pedidos.length,
+      pedidos
+    };
+
+    // Guardar en caché (expira en 1 minuto - muy dinámico)
+    await redisClient.set(cacheKey, JSON.stringify(response), {
+      EX: 60
+    });
+    
+    res.json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener pedidos sin asignar.' });
+  }
+},
+
+// Asignar repartidor (invalida múltiples cachés)
+async assignDriver(req, res) {
+  try {
+    const { id } = req.params;
+    const { id_repartidor } = req.body;
+
+    if (req.usuario.rol !== 'administrador') {
+      return res.status(403).json({ error: 'No autorizado. Solo administradores pueden asignar repartidores.' });
+    }
+
+    if (!id_repartidor) {
+      return res.status(400).json({ error: 'ID del repartidor es requerido.' });
+    }
+
+    const pedidoActualizado = await PedidoDAO.assignDriver(id, id_repartidor);
+    
+    if (!pedidoActualizado) {
+      return res.status(404).json({ error: 'Pedido no encontrado.' });
+    }
+
+    // Invalidar múltiples cachés relacionados
+    await Promise.all([
+      redisClient.del(`pedido:${id}`),
+      redisClient.del('pedidos:all'),
+      redisClient.del('pedidos:unassigned'),
+      redisClient.del(`pedidos:driver:${id_repartidor}`)
+    ]);
+
+    res.json({ 
+      message: 'Repartidor asignado correctamente.', 
+      pedido: pedidoActualizado 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al asignar repartidor.', details: error.message });
+  }
+},
+
+  // Actualizar estado (invalida múltiples cachés)
+  async updateDeliveryStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const { estado } = req.body;
+
+      const estadosValidos = ['pendiente', 'en preparacion', 'listo', 'en camino', 'entregado', 'cancelado'];
+      
+      if (!estado || !estadosValidos.includes(estado)) {
+        return res.status(400).json({ 
+          error: 'Estado inválido.',
+          estadosValidos 
+        });
+      }
+
+      const pedidoActualizado = await PedidoDAO.updateDeliveryStatus(id, estado);
+      
+      if (!pedidoActualizado) {
+        return res.status(404).json({ error: 'Pedido no encontrado.' });
+      }
+
+      // Invalidar cachés relacionados
+      await Promise.all([
+        redisClient.del(`pedido:${id}`),
+        redisClient.del('pedidos:all'),
+        redisClient.del('pedidos:unassigned'),
+        redisClient.del(`pedidos:driver:${pedidoActualizado.id_repartidor}`)
+      ]);
+
+      res.json({
+        message: 'Estado del pedido actualizado correctamente.',
+        pedido: pedidoActualizado
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al actualizar estado del pedido.', details: error.message });
+    }
+  },
+
+  // Obtener pedidos de un repartidor (con caché)
+  async getPedidosByDriver(req, res) {
+    try {
+      const { id } = req.params;
+      const cacheKey = `pedidos:driver:${id}`;
+      
+      // Intentar obtener de caché
+      const cachedData = await redisClient.get(cacheKey);
+      
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
+      }
+      
+      const pedidos = await PedidoDAO.findByDriver(id);
+      
+      const response = {
+        message: 'Pedidos del repartidor obtenidos correctamente.',
+        pedidos
+      };
+
+      // Guardar en caché (expira en 2 minutos - datos más dinámicos)
+      await redisClient.set(cacheKey, JSON.stringify(response), {
+        EX: 120
+      });
+      
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al obtener pedidos del repartidor.' });
+    }
+  },
+
+  // Obtener pedidos sin asignar (con caché)
+  async getUnassignedOrders(req, res) {
+    try {
+      if (req.usuario.rol !== 'administrador') {
+        return res.status(403).json({ error: 'No autorizado.' });
+      }
+      
+      const cacheKey = 'pedidos:unassigned';
+      
+      // Intentar obtener de caché
+      const cachedData = await redisClient.get(cacheKey);
+      
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
+      }
+      
+      const pedidos = await PedidoDAO.findUnassignedOrders();
+      
+      const response = {
+        message: 'Pedidos sin asignar obtenidos correctamente.',
+        total: pedidos.length,
+        pedidos
+      };
+
+      // Guardar en caché (expira en 1 minuto - muy dinámico)
+      await redisClient.set(cacheKey, JSON.stringify(response), {
+        EX: 60
+      });
+      
+      res.json(response);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al obtener pedidos sin asignar.' });
+    }
+  },
+
+  // Actualizar estado (invalida múltiples cachés)
+  async updateDeliveryStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const { estado } = req.body;
+
+      const estadosValidos = ['pendiente', 'en preparacion', 'listo', 'en camino', 'entregado', 'cancelado'];
+      
+      if (!estado || !estadosValidos.includes(estado)) {
+        return res.status(400).json({ 
+          error: 'Estado inválido.',
+          estadosValidos 
+        });
+      }
+
+      const pedidoActualizado = await PedidoDAO.updateDeliveryStatus(id, estado);
+      
+      if (!pedidoActualizado) {
+        return res.status(404).json({ error: 'Pedido no encontrado.' });
+      }
+
+      // Invalidar cachés relacionados
+      await Promise.all([
+        redisClient.del(`pedido:${id}`),
+        redisClient.del('pedidos:all'),
+        redisClient.del('pedidos:unassigned'),
+        redisClient.del(`pedidos:driver:${pedidoActualizado.id_repartidor}`)
+      ]);
+
+      res.json({
+        message: 'Estado del pedido actualizado correctamente.',
+        pedido: pedidoActualizado
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al actualizar estado del pedido.', details: error.message });
     }
   }
 };

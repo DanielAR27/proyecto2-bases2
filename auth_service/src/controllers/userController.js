@@ -155,6 +155,7 @@ const userController = {
     }
   },
 
+  // Actualizar la ubicación de un usuario
   updateUserLocation: async (req, res) => {
     try {
       const { id } = req.params;
@@ -213,6 +214,46 @@ const userController = {
       /* istanbul ignore next*/
       console.error(error);
       /* istanbul ignore next*/
+      res.status(500).json({ error: 'Error en el servidor.' });
+    }
+  },
+
+  // Actualizar la fecha de registro de un usuario (solo administrador).
+  updateUserRegistrationDate: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { fecha_registro } = req.body;
+
+      // Solo administradores pueden actualizar fecha de registro
+      if (req.usuario.rol !== 'administrador') {
+        return res.status(403).json({ error: 'No tiene permisos para actualizar fecha de registro.' });
+      }
+
+      if (!fecha_registro) {
+        return res.status(400).json({ error: 'La fecha de registro es obligatoria.' });
+      }
+
+      // Validar formato de fecha
+      const fecha = new Date(fecha_registro);
+      if (isNaN(fecha.getTime())) {
+        return res.status(400).json({ error: 'Formato de fecha inválido.' });
+      }
+
+      const usuarioActualizado = await UserDAO.updateUserRegistrationDate(id, fecha);
+
+      if (!usuarioActualizado) {
+        return res.status(404).json({ error: 'Usuario no encontrado.' });
+      }
+
+      // Invalidar caché del usuario
+      await redisClient.del(`user:${id}`);
+
+      res.json({
+        message: 'Fecha de registro actualizada correctamente.',
+        usuario: usuarioActualizado
+      });
+    } catch (error) {
+      console.error(error);
       res.status(500).json({ error: 'Error en el servidor.' });
     }
   }

@@ -23,7 +23,7 @@ const authController = {
   // Registrar un nuevo usuario
   register: async (req, res) => {
     try {
-      const { nombre, email, contrasena, rol } = req.body;
+      const { nombre, email, contrasena, rol, id_referido = null } = req.body;
 
       if (!nombre || !email || !contrasena || !rol) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios.' });
@@ -38,13 +38,18 @@ const authController = {
         return res.status(400).json({ error: 'El email ya está registrado.' });
       }
 
+      // Validar que el usuario referido existe si se proporciona id_referido
+      if (id_referido) {
+        const usuarioReferido = await UserDAO.findById(id_referido);
+        if (!usuarioReferido) {
+          return res.status(400).json({ error: 'El usuario referido no existe.' });
+        }
+      }
+
       const salt = await bcrypt.genSalt(10);
       const contrasena_hash = await bcrypt.hash(contrasena, salt);
 
-      const nuevoUsuario = await UserDAO.createUser({ nombre, email, contrasena_hash, rol });
-
-      console.log("")
-      delete nuevoUsuario.contrasena_hash;
+      const nuevoUsuario = await UserDAO.createUser({ nombre, email, contrasena_hash, rol, id_referido});
 
       res.status(201).json({
         message: 'Usuario registrado exitosamente.',
@@ -78,7 +83,7 @@ const authController = {
       }
 
       const payload = {
-        id_usuario: usuario.id_usuario || usuario._id,
+        id_usuario: usuario.id_usuario,
         nombre: usuario.nombre,
         email: usuario.email,
         rol: usuario.rol,

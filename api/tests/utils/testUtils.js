@@ -848,6 +848,51 @@ const testUtils = {
     } catch (error) {
       console.error('Error eliminando reservas de prueba:', error);
     }
+  },
+
+  /**
+   * Obtiene un repartidor por su ID
+   * @param {Object} app - Instancia de la aplicación Express
+   * @param {string} adminToken - Token del administrador
+   * @param {string|number} repartidorId - ID del repartidor
+   * @returns {Object} - El repartidor
+   */
+  getRepartidorById: async (app, adminToken, repartidorId) => {
+    const res = await request(app)
+      .get(`/drivers/${repartidorId}`)
+      .set('Authorization', `Bearer ${adminToken}`);
+      
+    if (res.statusCode !== 200) {
+      throw new Error(`Error al obtener repartidor: ${JSON.stringify(res.body)}`);
+    }
+    
+    return res.body;
+  },
+
+  /**
+   * Elimina todos los repartidores de prueba
+   * @param {Object} app - Instancia de la aplicación Express
+   * @param {string} adminToken - Token del administrador
+   * @param {Array} repartidorIds - Array de IDs de repartidores a eliminar
+   */
+  cleanTestRepartidores: async (app, adminToken, repartidorIds = []) => {
+    try {
+      if (adminToken && repartidorIds.length > 0) {
+        for (const id of repartidorIds) {
+          if (id) {
+            try {
+              await request(app)
+                .delete(`/drivers/${id}`)
+                .set('Authorization', `Bearer ${adminToken}`);
+            } catch (error) {
+              console.warn(`No se pudo eliminar repartidor ${id}:`, error.message);
+            }
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error eliminando repartidores de prueba:', error);
+    }
   }
 
 };

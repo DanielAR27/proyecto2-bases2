@@ -9,6 +9,7 @@ const menuRoutes = require('./routes/menuRoutes')
 const reservationRoutes = require('./routes/reservationRoutes')
 const productRoutes = require('./routes/productRoutes')
 const pedidoRoutes = require('./routes/pedidoRoutes');
+const repartidorRoutes = require('./routes/repartidorRoutes');
 const cleanRoutes = require('./routes/cleanRoutes');
 
 require('dotenv').config();
@@ -36,6 +37,7 @@ app.use('/menus', menuRoutes);
 app.use('/reservations', reservationRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', pedidoRoutes);
+app.use('/drivers', repartidorRoutes);
 
 if (process.env.DB_TYPE === 'mongo') {
   app.use('/clean', cleanRoutes);

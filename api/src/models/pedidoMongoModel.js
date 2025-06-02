@@ -33,6 +33,10 @@ const pedidoSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  id_repartidor: {
+    type: Number,
+    required: false
+  },
   fecha_hora: {
     type: Date,
     default: Date.now

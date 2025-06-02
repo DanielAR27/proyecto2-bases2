@@ -16,6 +16,9 @@ CREATE TABLE Usuario (
     latitud DECIMAL(10, 8),
     longitud DECIMAL(11, 8),
     direccion_completa TEXT
+    -- Nuevo campo para asignar repartidor (opcional)
+    id_repartidor INT DEFAULT NULL,
+    FOREIGN KEY (id_referido) REFERENCES Usuario(id_usuario) ON DELETE SET NULL
 );
 
 CREATE TABLE Restaurante (

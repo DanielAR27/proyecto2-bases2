@@ -1,0 +1,9907 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.5 1bd436f1",
+  "osm3s": {
+    "timestamp_osm_base": "2025-05-30T22:19:44Z",
+    "timestamp_areas_base": "2025-05-20T05:45:31Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 282765910,
+  "lat": 9.7399938,
+  "lon": -84.2568453,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Los Cipreses"
+  }
+},
+{
+  "type": "node",
+  "id": 287200300,
+  "lat": 9.9303812,
+  "lon": -84.1384995,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "name": "Antojitos"
+  }
+},
+{
+  "type": "node",
+  "id": 315310781,
+  "lat": 9.9434228,
+  "lon": -84.1464061,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "brand": "Hooters",
+    "brand:wikidata": "Q1025921",
+    "cuisine": "burger",
+    "name": "Hooters"
+  }
+},
+{
+  "type": "node",
+  "id": 338084481,
+  "lat": 9.7585044,
+  "lon": -84.0489342,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rancho Tipico Coyoche"
+  }
+},
+{
+  "type": "node",
+  "id": 342044418,
+  "lat": 9.8937239,
+  "lon": -84.1878812,
+  "tags": {
+    "amenity": "restaurant",
+    "created_by": "Potlatch 0.10f",
+    "name": "Targua"
+  }
+},
+{
+  "type": "node",
+  "id": 342159042,
+  "lat": 9.9045952,
+  "lon": -84.1838443,
+  "tags": {
+    "amenity": "restaurant",
+    "created_by": "Potlatch 0.10f",
+    "name": "Buena Vista"
+  }
+},
+{
+  "type": "node",
+  "id": 343189852,
+  "lat": 9.9050494,
+  "lon": -84.1492714,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-11-03",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "internet_access:ssid": "Tiquicia",
+    "name": "Mirador Tiquicia"
+  }
+},
+{
+  "type": "node",
+  "id": 344682213,
+  "lat": 9.9439371,
+  "lon": -84.1471196,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "brand": "Outback Steakhouse",
+    "brand:wikidata": "Q1064893",
+    "cuisine": "american;steak",
+    "name": "Outback Steakhouse"
+  }
+},
+{
+  "type": "node",
+  "id": 355604162,
+  "lat": 9.9531994,
+  "lon": -84.1951520,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "american",
+    "name": "Brad's Grille Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 355604164,
+  "lat": 9.9532839,
+  "lon": -84.1952065,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Ichiban",
+    "website": "www.ichibanrestaurante.com"
+  }
+},
+{
+  "type": "node",
+  "id": 378731319,
+  "lat": 9.5653222,
+  "lon": -83.8015702,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional"
+  }
+},
+{
+  "type": "node",
+  "id": 430768293,
+  "lat": 9.8908356,
+  "lon": -84.1225824,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Valle Azul",
+    "phone": "2254-6281"
+  }
+},
+{
+  "type": "node",
+  "id": 430992177,
+  "lat": 9.9493233,
+  "lon": -84.1105123,
+  "tags": {
+    "addr:city": "Uruca",
+    "amenity": "restaurant",
+    "name": "La Fuente de los Mariscos"
+  }
+},
+{
+  "type": "node",
+  "id": 496593001,
+  "lat": 10.0117925,
+  "lon": -84.2449470,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Esquina del Pollo"
+  }
+},
+{
+  "type": "node",
+  "id": 504750742,
+  "lat": 9.9770084,
+  "lon": -83.9982214,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Lone Star"
+  }
+},
+{
+  "type": "node",
+  "id": 663087931,
+  "lat": 9.9123979,
+  "lon": -84.0234285,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Carnes Don Fernando Grill"
+  }
+},
+{
+  "type": "node",
+  "id": 765960470,
+  "lat": 9.9046029,
+  "lon": -84.1318376,
+  "tags": {
+    "addr:city": "San Antonio",
+    "amenity": "restaurant",
+    "name": "Rest. El Boyero"
+  }
+},
+{
+  "type": "node",
+  "id": 775643981,
+  "lat": 9.9304316,
+  "lon": -84.1504080,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "name": "Inka Grill"
+  }
+},
+{
+  "type": "node",
+  "id": 775643982,
+  "lat": 9.9303268,
+  "lon": -84.1465815,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "name": "Pan e Vino"
+  }
+},
+{
+  "type": "node",
+  "id": 778896244,
+  "lat": 9.8362393,
+  "lon": -84.0741701,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirados Los Portones"
+  }
+},
+{
+  "type": "node",
+  "id": 785732406,
+  "lat": 9.8369109,
+  "lon": -84.0986024,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "Tipica",
+    "name": "Ram Luna"
+  }
+},
+{
+  "type": "node",
+  "id": 792194694,
+  "lat": 9.9599721,
+  "lon": -84.1954173,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Novillo Alegre"
+  }
+},
+{
+  "type": "node",
+  "id": 812841275,
+  "lat": 9.9893668,
+  "lon": -83.9947414,
+  "tags": {
+    "amenity": "restaurant",
+    "ele": "1460.5979004",
+    "name": "Complejo los Jaules",
+    "wpt_description": "11-JUL-10 10:45:38PM"
+  }
+},
+{
+  "type": "node",
+  "id": 813081842,
+  "lat": 9.9799059,
+  "lon": -83.9827908,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante La Cuenca"
+  }
+},
+{
+  "type": "node",
+  "id": 813104833,
+  "lat": 9.9834194,
+  "lon": -83.9791327,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La choza de Ñor Lalo"
+  }
+},
+{
+  "type": "node",
+  "id": 813105331,
+  "lat": 10.0024661,
+  "lon": -83.9580057,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cabaña de Cascajal"
+  }
+},
+{
+  "type": "node",
+  "id": 813105714,
+  "lat": 9.9825413,
+  "lon": -83.9667579,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cava del Duende"
+  }
+},
+{
+  "type": "node",
+  "id": 813106984,
+  "lat": 10.0035272,
+  "lon": -83.9592839,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rest. Hacienda Rocio"
+  }
+},
+{
+  "type": "node",
+  "id": 822465350,
+  "lat": 9.9266102,
+  "lon": -84.0397711,
+  "tags": {
+    "addr:city": "San José",
+    "addr:place": "Plaza Freses",
+    "addr:suburb": "Curridabat",
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "name": "El Novillo Alegre",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 825394458,
+  "lat": 9.9437473,
+  "lon": -84.1504094,
+  "tags": {
+    "addr:city": "Escazu",
+    "amenity": "restaurant",
+    "cuisine": "spanish",
+    "location": "Multiplaza Escazu, 3 etapa",
+    "name": "Tintos y Blancos",
+    "source": "KG Ground Survey 2015",
+    "website": "https://www.tintosyblancos.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 830911825,
+  "lat": 9.8181877,
+  "lon": -84.1129129,
+  "tags": {
+    "addr:city": "Tarbaca",
+    "addr:street": "Vía 209",
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "Donde Alcides"
+  }
+},
+{
+  "type": "node",
+  "id": 857079031,
+  "lat": 9.9102795,
+  "lon": -84.0772006,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Monte Azul"
+  }
+},
+{
+  "type": "node",
+  "id": 857097996,
+  "lat": 9.9105477,
+  "lon": -84.0785929,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 862260633,
+  "lat": 9.9058454,
+  "lon": -84.0430136,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Hong Wa"
+  }
+},
+{
+  "type": "node",
+  "id": 878911419,
+  "lat": 9.8965500,
+  "lon": -84.0636800,
+  "tags": {
+    "addr:city": "Desamparados",
+    "amenity": "restaurant",
+    "name": "Rest. Kung Fu"
+  }
+},
+{
+  "type": "node",
+  "id": 878928200,
+  "lat": 9.8914191,
+  "lon": -84.0565886,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest Sien Jo"
+  }
+},
+{
+  "type": "node",
+  "id": 878929578,
+  "lat": 9.8924622,
+  "lon": -84.0490399,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rest Wong Kog"
+  }
+},
+{
+  "type": "node",
+  "id": 878939931,
+  "lat": 9.9043630,
+  "lon": -84.0447970,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rest Star Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 878954618,
+  "lat": 9.9059733,
+  "lon": -84.0566571,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Rest Nueva Ciudad"
+  }
+},
+{
+  "type": "node",
+  "id": 880315052,
+  "lat": 9.9118038,
+  "lon": -84.0689464,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Paz del Oriente",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 880321887,
+  "lat": 9.9014271,
+  "lon": -84.0684719,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mey Fung"
+  }
+},
+{
+  "type": "node",
+  "id": 880752940,
+  "lat": 9.8969671,
+  "lon": -84.0643563,
+  "tags": {
+    "addr:city": "Desamparados",
+    "amenity": "restaurant",
+    "name": "La Esquina Sabrosa",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 880753994,
+  "lat": 9.9016973,
+  "lon": -84.0601934,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Mundo Feliz"
+  }
+},
+{
+  "type": "node",
+  "id": 881755335,
+  "lat": 9.8986055,
+  "lon": -84.0677736,
+  "tags": {
+    "addr:city": "Desamparados",
+    "amenity": "restaurant",
+    "name": "Sabor Oriental",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 881762580,
+  "lat": 9.8989800,
+  "lon": -84.0560270,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "+506 22190307",
+    "cuisine": "chinese",
+    "name": "Palacio del Rey"
+  }
+},
+{
+  "type": "node",
+  "id": 881762681,
+  "lat": 9.9034970,
+  "lon": -84.0450800,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Villa Oriente"
+  }
+},
+{
+  "type": "node",
+  "id": 881774648,
+  "lat": 9.8902365,
+  "lon": -84.0402628,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rest. La Paz"
+  }
+},
+{
+  "type": "node",
+  "id": 881774974,
+  "lat": 9.8664064,
+  "lon": -84.0314491,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest.  El Atardecer"
+  }
+},
+{
+  "type": "node",
+  "id": 881776284,
+  "lat": 9.8909010,
+  "lon": -84.0475650,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest. La Quinta"
+  }
+},
+{
+  "type": "node",
+  "id": 881777339,
+  "lat": 9.8657900,
+  "lon": -84.0284560,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rancho Tipico Mano a Mano"
+  }
+},
+{
+  "type": "node",
+  "id": 881778551,
+  "lat": 9.8603500,
+  "lon": -84.0368300,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rancho de Toño"
+  }
+},
+{
+  "type": "node",
+  "id": 881781663,
+  "lat": 9.8735097,
+  "lon": -84.0352234,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest. el Escondite"
+  }
+},
+{
+  "type": "node",
+  "id": 920007584,
+  "lat": 9.9317786,
+  "lon": -84.1325410,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "T.G.I.F."
+  }
+},
+{
+  "type": "node",
+  "id": 958499344,
+  "lat": 9.9254455,
+  "lon": -84.0414113,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "Restaurante de Comida Japonés",
+    "name": "Satto"
+  }
+},
+{
+  "type": "node",
+  "id": 964938150,
+  "lat": 9.9452405,
+  "lon": -84.1255534,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Casa Linda"
+  }
+},
+{
+  "type": "node",
+  "id": 964943554,
+  "lat": 9.9479786,
+  "lon": -84.1326421,
+  "tags": {
+    "addr:city": "Pavas",
+    "amenity": "restaurant",
+    "name": "Restaurante Bahia"
+  }
+},
+{
+  "type": "node",
+  "id": 994226967,
+  "lat": 9.9602476,
+  "lon": -84.1954988,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Tasca"
+  }
+},
+{
+  "type": "node",
+  "id": 1037459124,
+  "lat": 10.1320196,
+  "lon": -84.3970118,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirador Esquivel"
+  }
+},
+{
+  "type": "node",
+  "id": 1037463929,
+  "lat": 10.1539247,
+  "lon": -84.3827150,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "Restaurante el Mirador",
+    "outdoor_seating": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 1073978645,
+  "lat": 9.8777452,
+  "lon": -84.0750576,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El boyero"
+  }
+},
+{
+  "type": "node",
+  "id": 1109437304,
+  "lat": 9.9608175,
+  "lon": -84.0454787,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "Comida China",
+    "name": "La Gran Fortuna"
+  }
+},
+{
+  "type": "node",
+  "id": 1159398144,
+  "lat": 9.8814907,
+  "lon": -84.3940229,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chicharronera Las Tejas"
+  }
+},
+{
+  "type": "node",
+  "id": 1159828464,
+  "lat": 9.8840231,
+  "lon": -84.4458824,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest. el Cruce"
+  }
+},
+{
+  "type": "node",
+  "id": 1171834322,
+  "lat": 9.8660660,
+  "lon": -84.2530110,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chicharronera los Abuelos"
+  }
+},
+{
+  "type": "node",
+  "id": 1171839575,
+  "lat": 9.8633901,
+  "lon": -84.2602147,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Marisquería Costa Azul"
+  }
+},
+{
+  "type": "node",
+  "id": 1178654499,
+  "lat": 9.8486835,
+  "lon": -84.3149400,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Sabor Oriental"
+  }
+},
+{
+  "type": "node",
+  "id": 1178672008,
+  "lat": 9.8497520,
+  "lon": -84.3288950,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirador el Zacatal"
+  }
+},
+{
+  "type": "node",
+  "id": 1215696283,
+  "lat": 10.0291604,
+  "lon": -84.0201869,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Cerro Verde"
+  }
+},
+{
+  "type": "node",
+  "id": 1215696853,
+  "lat": 10.0285945,
+  "lon": -84.0160991,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Road House Bar & Asado Gaucho"
+  }
+},
+{
+  "type": "node",
+  "id": 1215705657,
+  "lat": 10.0471264,
+  "lon": -84.0075098,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante La Fonda"
+  }
+},
+{
+  "type": "node",
+  "id": 1224521085,
+  "lat": 9.8988604,
+  "lon": -84.0552086,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "22506569",
+    "cuisine": "chinese",
+    "name": "Bien Feliz"
+  }
+},
+{
+  "type": "node",
+  "id": 1234318645,
+  "lat": 9.9591326,
+  "lon": -84.1615987,
+  "tags": {
+    "addr:city": "Pavas",
+    "amenity": "restaurant",
+    "name": "Restaurante Michelle"
+  }
+},
+{
+  "type": "node",
+  "id": 1234318802,
+  "lat": 9.9586410,
+  "lon": -84.1614447,
+  "tags": {
+    "addr:city": "Pavas",
+    "amenity": "restaurant",
+    "name": "Restaurante La  familia"
+  }
+},
+{
+  "type": "node",
+  "id": 1241549252,
+  "lat": 9.8461696,
+  "lon": -84.1001990,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Anochecer"
+  }
+},
+{
+  "type": "node",
+  "id": 1241549253,
+  "lat": 9.8255027,
+  "lon": -84.1103549,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "drive_in": "no",
+    "name": "El Cacique de la Montaña"
+  }
+},
+{
+  "type": "node",
+  "id": 1256002884,
+  "lat": 9.9311392,
+  "lon": -84.0473026,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "international",
+    "name": "Pollos a La Leña",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1256019842,
+  "lat": 9.9303126,
+  "lon": -84.0441430,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "Donde El Che",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1256051264,
+  "lat": 9.9279476,
+  "lon": -84.0429182,
+  "tags": {
+    "addr:city": "San José",
+    "addr:suburb": "Curridabat",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Emporio Gournet"
+  }
+},
+{
+  "type": "node",
+  "id": 1263015760,
+  "lat": 10.0262642,
+  "lon": -84.0240483,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Carretera Braulio Carrillo",
+    "amenity": "restaurant",
+    "name": "Restaurante Rancho Zurquí"
+  }
+},
+{
+  "type": "node",
+  "id": 1268294635,
+  "lat": 9.9492614,
+  "lon": -84.0599513,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Spaguetti House",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1272661112,
+  "lat": 9.9628065,
+  "lon": -84.0349826,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Alegria"
+  }
+},
+{
+  "type": "node",
+  "id": 1272661117,
+  "lat": 9.9624573,
+  "lon": -84.0347884,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Cartagena"
+  }
+},
+{
+  "type": "node",
+  "id": 1296490288,
+  "lat": 9.7734625,
+  "lon": -83.9884829,
+  "tags": {
+    "addr:city": "San Cristóbal",
+    "addr:street": "Carretera Interamericana Sur",
+    "amenity": "restaurant",
+    "name": "Restaurante La Casona Casa Mata"
+  }
+},
+{
+  "type": "node",
+  "id": 1296497586,
+  "lat": 9.7190494,
+  "lon": -83.9527282,
+  "tags": {
+    "addr:city": "San Cristóbal",
+    "amenity": "restaurant",
+    "name": "El Yugo"
+  }
+},
+{
+  "type": "node",
+  "id": 1296529153,
+  "lat": 9.6722364,
+  "lon": -83.9020336,
+  "tags": {
+    "addr:city": "La Cima de Dota",
+    "amenity": "restaurant",
+    "name": "Restaurante El Alcón"
+  }
+},
+{
+  "type": "node",
+  "id": 1296555706,
+  "lat": 9.6450578,
+  "lon": -83.9155397,
+  "tags": {
+    "addr:city": "La Florida de Dota",
+    "amenity": "restaurant",
+    "name": "Restaurante El Sabor del Pueblo"
+  }
+},
+{
+  "type": "node",
+  "id": 1298059211,
+  "lat": 9.8878731,
+  "lon": -84.1155572,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirador San José"
+  }
+},
+{
+  "type": "node",
+  "id": 1298059224,
+  "lat": 9.8880463,
+  "lon": -84.1161440,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirador America"
+  }
+},
+{
+  "type": "node",
+  "id": 1303830697,
+  "lat": 9.9366676,
+  "lon": -84.0935034,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "name": "Restaurante Machu Pichu"
+  }
+},
+{
+  "type": "node",
+  "id": 1303832625,
+  "lat": 9.9366650,
+  "lon": -84.0937759,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "name": "Parrillada Colombiana"
+  }
+},
+{
+  "type": "node",
+  "id": 1305952897,
+  "lat": 9.5833400,
+  "lon": -84.4118200,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Rancho Chires"
+  }
+},
+{
+  "type": "node",
+  "id": 1398287252,
+  "lat": 9.3417872,
+  "lon": -83.6730177,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Delji"
+  }
+},
+{
+  "type": "node",
+  "id": 1398306117,
+  "lat": 9.3140941,
+  "lon": -83.6634076,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Restaurante El Lechoncito"
+  }
+},
+{
+  "type": "node",
+  "id": 1402661529,
+  "lat": 9.9321520,
+  "lon": -84.1035098,
+  "tags": {
+    "addr:city": "Sabana Sur",
+    "amenity": "restaurant",
+    "name": "Sushi Bambu",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1402679268,
+  "lat": 9.9322689,
+  "lon": -84.1034988,
+  "tags": {
+    "addr:city": "Sabana Sur",
+    "amenity": "restaurant",
+    "name": "Rocket Grill"
+  }
+},
+{
+  "type": "node",
+  "id": 1440009431,
+  "lat": 9.9589548,
+  "lon": -84.0791470,
+  "tags": {
+    "addr:city": "San Juan de Tibás",
+    "amenity": "restaurant",
+    "name": "Mayra Pupusería"
+  }
+},
+{
+  "type": "node",
+  "id": 1440009498,
+  "lat": 9.9589726,
+  "lon": -84.0851924,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda El Almendro"
+  }
+},
+{
+  "type": "node",
+  "id": 1440009504,
+  "lat": 9.9598686,
+  "lon": -84.0644994,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Shalom"
+  }
+},
+{
+  "type": "node",
+  "id": 1440009514,
+  "lat": 9.9620376,
+  "lon": -84.0793026,
+  "tags": {
+    "addr:city": "San Juan de Tibás",
+    "amenity": "restaurant",
+    "name": "Soda Tikal"
+  }
+},
+{
+  "type": "node",
+  "id": 1441784412,
+  "lat": 9.6618012,
+  "lon": -84.0251937,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar y Restaurante Tachitos"
+  }
+},
+{
+  "type": "node",
+  "id": 1444078815,
+  "lat": 9.8566413,
+  "lon": -84.0952070,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza A La Leña Los Cipreses"
+  }
+},
+{
+  "type": "node",
+  "id": 1444078826,
+  "lat": 9.8716926,
+  "lon": -84.0803156,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Amigo"
+  }
+},
+{
+  "type": "node",
+  "id": 1444078827,
+  "lat": 9.8684212,
+  "lon": -84.0855251,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Restaurante Las Tejitas"
+  }
+},
+{
+  "type": "node",
+  "id": 1444078837,
+  "lat": 9.8712011,
+  "lon": -84.0801641,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Los Bozales"
+  }
+},
+{
+  "type": "node",
+  "id": 1444078838,
+  "lat": 9.8514050,
+  "lon": -84.0993108,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Mirador La Tranca"
+  }
+},
+{
+  "type": "node",
+  "id": 1471395997,
+  "lat": 9.9412397,
+  "lon": -84.1249638,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Villa Bonita",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1558339722,
+  "lat": 9.9042072,
+  "lon": -84.1375609,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Plaza España"
+  }
+},
+{
+  "type": "node",
+  "id": 1607804575,
+  "lat": 9.9529310,
+  "lon": -84.0552044,
+  "tags": {
+    "addr:city": "Moravia",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Lung Yuen"
+  }
+},
+{
+  "type": "node",
+  "id": 1725463177,
+  "lat": -1.3152100,
+  "lon": -77.8894312,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Paradero San Vicente"
+  }
+},
+{
+  "type": "node",
+  "id": 1757373698,
+  "lat": 9.6555360,
+  "lon": -84.0211757,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Casa Blanca"
+  }
+},
+{
+  "type": "node",
+  "id": 1758826141,
+  "lat": 9.2276886,
+  "lon": -83.6411501,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Restaurante Díaz"
+  }
+},
+{
+  "type": "node",
+  "id": 1761228316,
+  "lat": 9.9322440,
+  "lon": -84.1524388,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Saigon Asian Fussion Restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 1782044097,
+  "lat": 9.2276244,
+  "lon": -83.6419265,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chicken Crunch"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611525,
+  "lat": 41.6364390,
+  "lon": -0.8725711,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:housenumber": "39",
+    "addr:postcode": "50008",
+    "addr:street": "Calle del Escultor Moreto",
+    "amenity": "restaurant",
+    "name": "Mesón El Mañico",
+    "source": "Ayuntamiento de Zaragoza",
+    "was:name": "Casa serrano",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1932"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611536,
+  "lat": 41.6329840,
+  "lon": -0.8773030,
+  "tags": {
+    "addr:street": "Calle de Melilla",
+    "amenity": "restaurant",
+    "name": "Los Tres Arcos",
+    "source": "Ayuntamiento de Zaragoza;survey",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2226"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611537,
+  "lat": 41.6333456,
+  "lon": -0.8746940,
+  "tags": {
+    "addr:housenumber": "3",
+    "addr:street": "Calle de José Nebra",
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2025-02-28",
+    "name": "La prensa",
+    "opening_hours:signed": "no",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1878"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611540,
+  "lat": 41.6328167,
+  "lon": -0.8757708,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:street": "Calle Zaragoza la Vieja",
+    "amenity": "restaurant",
+    "name": "Bella ciudad",
+    "opening_hours": "Mo-Su 12:00-16:00,20:00-24:00",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2215"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611541,
+  "lat": 41.6340081,
+  "lon": -0.8766640,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Calle del Escultor Salas",
+    "amenity": "restaurant",
+    "name": "Square",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=15613"
+  }
+},
+{
+  "type": "node",
+  "id": 1788611543,
+  "lat": 41.6373430,
+  "lon": -0.8780760,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Calle de José Pellicer",
+    "amenity": "restaurant",
+    "check_date": "2023-12-29",
+    "cuisine": "pizza;barbecue",
+    "name": "Al Gusto",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1745"
+  }
+},
+{
+  "type": "node",
+  "id": 1789919584,
+  "lat": 41.6395060,
+  "lon": -0.8860178,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:housenumber": "53",
+    "addr:street": "Paseo de Sagasta",
+    "amenity": "restaurant",
+    "name": "La Trufa",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1913"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189762,
+  "lat": 41.6408826,
+  "lon": -0.8674958,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Plaza de Utrillas",
+    "amenity": "restaurant",
+    "name": "Cerveceria D'Jorge",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1937"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189769,
+  "lat": 41.6440745,
+  "lon": -0.8701398,
+  "tags": {
+    "addr:housenumber": "86-90",
+    "addr:street": "Calle Miguel Servet",
+    "amenity": "restaurant",
+    "name": "De PelÍcula",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=23201"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189788,
+  "lat": 41.6401692,
+  "lon": -0.8669803,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:street": "Plaza de Utrillas",
+    "amenity": "restaurant",
+    "name": "El Expreso",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=23188"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189789,
+  "lat": 41.6412953,
+  "lon": -0.8709093,
+  "tags": {
+    "addr:housenumber": "16, local",
+    "addr:street": "Calle de San Luis de Francia",
+    "amenity": "restaurant",
+    "name": "El Rincón de goya",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189817,
+  "lat": 41.6417554,
+  "lon": -0.8689774,
+  "tags": {
+    "addr:housenumber": "29-31",
+    "addr:street": "Calle de Monasterio de Poblet",
+    "amenity": "restaurant",
+    "name": "Feliz",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=23180"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189839,
+  "lat": 41.6421553,
+  "lon": -0.8736333,
+  "tags": {
+    "addr:housenumber": "1",
+    "addr:street": "Calle del Escultor Félix Burriel",
+    "amenity": "restaurant",
+    "name": "Karaoke",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2217"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189845,
+  "lat": 41.6434179,
+  "lon": -0.8695637,
+  "tags": {
+    "addr:housenumber": "106",
+    "addr:street": "Calle Miguel Servet",
+    "amenity": "restaurant",
+    "name": "King döner kebab",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=23256"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189848,
+  "lat": 41.6406562,
+  "lon": -0.8677952,
+  "tags": {
+    "addr:housenumber": "6",
+    "addr:street": "Plaza de Utrillas",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "La Giara",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=16473"
+  }
+},
+{
+  "type": "node",
+  "id": 1792189880,
+  "lat": 41.6417797,
+  "lon": -0.8693411,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "Plaza Pintor Aguayo",
+    "amenity": "restaurant",
+    "name": "Mesón Allueva",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2244"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237319,
+  "lat": 41.6405201,
+  "lon": -0.8845007,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:housenumber": "95",
+    "addr:postcode": "50007",
+    "addr:street": "Camino de las Torres",
+    "amenity": "restaurant",
+    "contact:phone": "+34 976 38 80 54",
+    "cuisine": "chinese",
+    "name": "Asia",
+    "source": "Ayuntamiento de Zaragoza;survey",
+    "takeaway": "yes",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2247"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237333,
+  "lat": 41.6443389,
+  "lon": -0.8757424,
+  "tags": {
+    "addr:housenumber": "28",
+    "addr:street": "Calle Lorenzo Pardo",
+    "amenity": "restaurant",
+    "name": "Bertorelli",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2221"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237346,
+  "lat": 41.6439696,
+  "lon": -0.8754286,
+  "tags": {
+    "addr:housenumber": "24",
+    "addr:street": "Calle Lorenzo Pardo",
+    "amenity": "restaurant",
+    "name": "El Gran chaparral",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2261"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237361,
+  "lat": 41.6382505,
+  "lon": -0.8787826,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:housenumber": "70",
+    "addr:street": "Avenida de Tenor Fleta",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Fortuna",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=2105"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237380,
+  "lat": 41.6385880,
+  "lon": -0.8811009,
+  "tags": {
+    "addr:housenumber": "65",
+    "addr:street": "Calle de María Moliner",
+    "amenity": "restaurant",
+    "name": "Jin jin",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=15483"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237388,
+  "lat": 41.6384149,
+  "lon": -0.8801648,
+  "tags": {
+    "addr:housenumber": "31",
+    "addr:street": "Calle de José Pellicer",
+    "amenity": "restaurant",
+    "name": "La Mar de sonia",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1800"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237391,
+  "lat": 41.6432480,
+  "lon": -0.8748584,
+  "tags": {
+    "addr:housenumber": "10",
+    "addr:street": "Calle Manuel Lorenzo Pardo",
+    "amenity": "restaurant",
+    "name": "Las Cinco torres",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=15429"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237392,
+  "lat": 41.6444461,
+  "lon": -0.8761237,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Calle Reina Fabiola",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Mei mei",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1778"
+  }
+},
+{
+  "type": "node",
+  "id": 1792237406,
+  "lat": 41.6435031,
+  "lon": -0.8750604,
+  "tags": {
+    "addr:housenumber": "16",
+    "addr:street": "Calle Manuel Lorenzo Pardo",
+    "amenity": "restaurant",
+    "name": "Río blanco",
+    "source": "Ayuntamiento de Zaragoza",
+    "website": "http://www.zaragoza.es/ciudad/turismo/es/organiza-viaje/detalle_Restaurante?id=1885"
+  }
+},
+{
+  "type": "node",
+  "id": 1813780774,
+  "lat": 9.9384683,
+  "lon": -84.1043799,
+  "tags": {
+    "addr:city": "Mata Redonda",
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Hibachi"
+  }
+},
+{
+  "type": "node",
+  "id": 1820390867,
+  "lat": 41.6404499,
+  "lon": -0.8840078,
+  "tags": {
+    "addr:city": "Zaragoza",
+    "addr:housenumber": "4",
+    "addr:postcode": "50007",
+    "addr:street": "Calle de Nuestra Señora de Sancho Abarca",
+    "amenity": "restaurant",
+    "cuisine": "barbecue;spanish;burger;regional",
+    "designation": "Bar Kaplan",
+    "name": "Kaplan",
+    "opening_hours": "Mo-Fr 09:00-16:00, 19:00-23:59; Sa 12:00-16:00, 19:00-23:59",
+    "phone": "+34 976 378 059",
+    "smoking": "no",
+    "takeaway": "yes",
+    "toilets:wheelchair": "no",
+    "website": "http://www.barkaplan.es",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 1825013935,
+  "lat": 9.9305284,
+  "lon": -84.1465871,
+  "tags": {
+    "addr:city": "San Rafael de Escazú",
+    "addr:street": "Carretera John F. Kennedy",
+    "amenity": "restaurant",
+    "name": "Spoon",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 1832571480,
+  "lat": 9.9231123,
+  "lon": -84.1358586,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Chichi's"
+  }
+},
+{
+  "type": "node",
+  "id": 1833710182,
+  "lat": 9.8972713,
+  "lon": -84.0655667,
+  "tags": {
+    "addr:city": "Desamparados",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurant Ko Wah"
+  }
+},
+{
+  "type": "node",
+  "id": 1833745677,
+  "lat": 9.9464817,
+  "lon": -84.0518831,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "amenity": "restaurant",
+    "cuisine": "fried_chicken;chicken",
+    "name": "El Pollote",
+    "opening_hours": "24/7"
+  }
+},
+{
+  "type": "node",
+  "id": 1889206146,
+  "lat": 41.6445423,
+  "lon": -0.8758968,
+  "tags": {
+    "addr:housenumber": "35",
+    "addr:postcode": "50008",
+    "addr:street": "Calle Reina Fabiola",
+    "amenity": "restaurant",
+    "cuisine": "spanish",
+    "name": "Bar Cardi"
+  }
+},
+{
+  "type": "node",
+  "id": 1893507998,
+  "lat": 9.9421865,
+  "lon": -84.1183449,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Ichiban"
+  }
+},
+{
+  "type": "node",
+  "id": 1893509770,
+  "lat": 9.9419550,
+  "lon": -84.1183965,
+  "tags": {
+    "addr:city": "Pavas",
+    "addr:street": "Calle 86",
+    "amenity": "restaurant",
+    "cuisine": "lebanese",
+    "name": "Sash Restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 1899241987,
+  "lat": -26.8006185,
+  "lon": -66.0700536,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Comedor Don Alberto"
+  }
+},
+{
+  "type": "node",
+  "id": 1901722801,
+  "lat": 9.9337531,
+  "lon": -84.0511116,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Omar Khayyam"
+  }
+},
+{
+  "type": "node",
+  "id": 1909519158,
+  "lat": 9.8380950,
+  "lon": -84.1947953,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rancho María"
+  }
+},
+{
+  "type": "node",
+  "id": 1926649175,
+  "lat": 9.9376796,
+  "lon": -84.0691825,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Snack"
+  }
+},
+{
+  "type": "node",
+  "id": 1951851672,
+  "lat": 9.9334350,
+  "lon": -84.0635432,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "cuisine": "turkish",
+    "name": "Sofia",
+    "name:es": "Sofía Mediterráneo"
+  }
+},
+{
+  "type": "node",
+  "id": 1990163644,
+  "lat": 9.9322149,
+  "lon": -84.1035003,
+  "tags": {
+    "addr:city": "Sabana Sur",
+    "amenity": "restaurant",
+    "name": "Chubbs"
+  }
+},
+{
+  "type": "node",
+  "id": 2050246692,
+  "lat": 9.9391520,
+  "lon": -84.0975807,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 42",
+    "amenity": "restaurant",
+    "cuisine": "china",
+    "name": "King's Garden"
+  }
+},
+{
+  "type": "node",
+  "id": 2074779984,
+  "lat": 10.0031111,
+  "lon": -84.3933722,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Mirador El Pueblo"
+  }
+},
+{
+  "type": "node",
+  "id": 2083404392,
+  "lat": 9.9386734,
+  "lon": -84.1428436,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 2083404396,
+  "lat": 9.9375973,
+  "lon": -84.1428316,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mekong Asia Fusion"
+  }
+},
+{
+  "type": "node",
+  "id": 2140372229,
+  "lat": 9.9107446,
+  "lon": -84.0170490,
+  "tags": {
+    "addr:city": "Sánchez",
+    "addr:street": "Calle 137",
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "brand": "Denny's",
+    "brand:wikidata": "Q1189695",
+    "brand:wikipedia": "en:Denny's",
+    "cuisine": "american",
+    "name": "Denny's Curridabat"
+  }
+},
+{
+  "type": "node",
+  "id": 2152137872,
+  "lat": 9.9279110,
+  "lon": -84.1602552,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Monastere"
+  }
+},
+{
+  "type": "node",
+  "id": 2156475450,
+  "lat": -37.5088384,
+  "lon": -61.9208923,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 2196783878,
+  "lat": 9.9367347,
+  "lon": -84.0759099,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "diet:vegetarian": "only",
+    "name": "Soda Vegetariana Susbida",
+    "source": "KG Ground Survey 2016"
+  }
+},
+{
+  "type": "node",
+  "id": 2266324886,
+  "lat": 9.9346259,
+  "lon": -84.0769791,
+  "tags": {
+    "addr": "Centro Comercial Omni",
+    "addr:city": "San José",
+    "addr:street": "Avenida 1",
+    "amenity": "restaurant",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut",
+    "opening_hours": "Su,Mo-Th 11:00-22:00; Fr-Sa 11:00-23:00",
+    "payment:american_express": "yes",
+    "payment:cash": "yes",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes",
+    "phone": "2290-9595",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 2336593642,
+  "lat": 9.9529039,
+  "lon": -84.1947588,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Pho Restaurante & Cafe",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2377933529,
+  "lat": 9.9442554,
+  "lon": -84.1462753,
+  "tags": {
+    "addr:city": "Escazú",
+    "amenity": "restaurant",
+    "name": "Samurai Fusion Restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 2416206746,
+  "lat": 9.9341448,
+  "lon": -84.1103742,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housename": "175 sur de Canal 7",
+    "addr:street": "Calle 68",
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "level": "1",
+    "name": "La Gauchada",
+    "phone": "+506.2232.6916",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 2592321988,
+  "lat": 9.9325502,
+  "lon": -84.1256431,
+  "tags": {
+    "addr:city": "San Rafael",
+    "amenity": "restaurant",
+    "cuisine": "german",
+    "name": "Tom Tom - German Food"
+  }
+},
+{
+  "type": "node",
+  "id": 2679616694,
+  "lat": -34.3632455,
+  "lon": -57.0575118,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Parador Ruta 1 y 11"
+  }
+},
+{
+  "type": "node",
+  "id": 2732941814,
+  "lat": -34.3322493,
+  "lon": -56.7289104,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "km 92,5",
+    "addr:street": "Ruta 3 General José Gervasio Artigas",
+    "amenity": "restaurant",
+    "name": "Restaurante del Parque"
+  }
+},
+{
+  "type": "node",
+  "id": 2839822027,
+  "lat": 9.1968180,
+  "lon": -83.6473628,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "El Manantial"
+  }
+},
+{
+  "type": "node",
+  "id": 2857127016,
+  "lat": 9.6443426,
+  "lon": -83.8503558,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Paraíso Quetzal Lodge"
+  }
+},
+{
+  "type": "node",
+  "id": 2976788759,
+  "lat": 9.9373805,
+  "lon": -84.0726034,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Detrás De La Casa Amarilla (Frente Al Muro De Berlín)",
+    "amenity": "restaurant",
+    "capacity": "12",
+    "cuisine": "coffee_shop",
+    "internet_access": "yes",
+    "name": "Café Miel Garage",
+    "power_supply": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3020298233,
+  "lat": 9.9399303,
+  "lon": -84.1008258,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Beirute",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3052578218,
+  "lat": 41.6457967,
+  "lon": -0.8746303,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Autentika"
+  }
+},
+{
+  "type": "node",
+  "id": 3052578452,
+  "lat": 9.9805459,
+  "lon": -83.9778912,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante La Antigua Lecheria"
+  }
+},
+{
+  "type": "node",
+  "id": 3070852904,
+  "lat": 9.9254852,
+  "lon": -84.0626343,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Las Leñitas"
+  }
+},
+{
+  "type": "node",
+  "id": 3101873993,
+  "lat": 9.9601105,
+  "lon": -84.0478416,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 3104170423,
+  "lat": 9.9388447,
+  "lon": -84.0553003,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chancay"
+  }
+},
+{
+  "type": "node",
+  "id": 3153346373,
+  "lat": 9.9337660,
+  "lon": -84.1963039,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Calle Vieja",
+    "amenity": "restaurant",
+    "name": "La Casona de Tiquicia"
+  }
+},
+{
+  "type": "node",
+  "id": 3279483615,
+  "lat": -32.2111195,
+  "lon": -58.2191482,
+  "tags": {
+    "addr:city": "San José",
+    "addr:postcode": "3283",
+    "amenity": "restaurant",
+    "name": "Menú"
+  }
+},
+{
+  "type": "node",
+  "id": 3282729808,
+  "lat": 9.8770054,
+  "lon": -84.0755835,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Espiga",
+    "opening_hours": "Mo-Th 10:00-21:00; Fr-Sa 10:00-23:00; Su 11:00-22:00",
+    "phone": "2250-7684"
+  }
+},
+{
+  "type": "node",
+  "id": 3282751279,
+  "lat": -32.2083744,
+  "lon": -58.2189135,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "SC"
+  }
+},
+{
+  "type": "node",
+  "id": 3285206188,
+  "lat": 9.9061747,
+  "lon": -84.0566410,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Antojería México Lindo",
+    "phone": "22503334"
+  }
+},
+{
+  "type": "node",
+  "id": 3303487543,
+  "lat": 9.9371936,
+  "lon": -84.0383331,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda San Bosco",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3382298255,
+  "lat": 9.7906029,
+  "lon": -84.0875258,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Rest y Pizzeria El Mirador"
+  }
+},
+{
+  "type": "node",
+  "id": 3409351024,
+  "lat": 9.9598687,
+  "lon": -84.0772533,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cazuela"
+  }
+},
+{
+  "type": "node",
+  "id": 3448132604,
+  "lat": 9.9664642,
+  "lon": -84.0223116,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "Pizzeria Cubana",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3448132623,
+  "lat": 9.9619519,
+  "lon": -84.0247464,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Sing Kwan",
+    "opening_hours": "11:00-22:30",
+    "phone": "+50622944287",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 3448132646,
+  "lat": 9.9679485,
+  "lon": -84.0147432,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "Pupusas",
+    "name": "La Migueleña"
+  }
+},
+{
+  "type": "node",
+  "id": 3448132647,
+  "lat": 9.9682071,
+  "lon": -84.0140485,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese"
+  }
+},
+{
+  "type": "node",
+  "id": 3448132668,
+  "lat": 9.9775116,
+  "lon": -84.0076432,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El molino"
+  }
+},
+{
+  "type": "node",
+  "id": 3475208526,
+  "lat": 9.9518404,
+  "lon": -84.1414859,
+  "tags": {
+    "amenity": "restaurant",
+    "delivery": "yes",
+    "name": "Restaurante La Esquina"
+  }
+},
+{
+  "type": "node",
+  "id": 3475214679,
+  "lat": 9.9516604,
+  "lon": -84.1383958,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Xarix"
+  }
+},
+{
+  "type": "node",
+  "id": 3487341482,
+  "lat": 9.9387788,
+  "lon": -84.0553950,
+  "tags": {
+    "addr:city": "San Pedro",
+    "amenity": "restaurant",
+    "branch": "Montes de Oca",
+    "cuisine": "japanese",
+    "name": "Matsuri",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3487379516,
+  "lat": 9.9386600,
+  "lon": -84.0555073,
+  "tags": {
+    "addr:city": "San Pedro",
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "name": "Tacontento",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 3497667997,
+  "lat": 9.9359421,
+  "lon": -84.1830612,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "New York Pizza",
+    "opening_hours": "Mo 12:00-21:00, Tu-We 16:00-21:00, Th-Su 12:00-21:00",
+    "phone": "+506 22828530",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website": "https://www.facebook.com/nypizza.cr"
+  }
+},
+{
+  "type": "node",
+  "id": 3499609127,
+  "lat": 9.9308089,
+  "lon": -84.1809048,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "Pizza P-Dazo",
+    "opening_hours": "Mo-We 12:00-22:00, Th-Sa 12:00-01:00, Su 12:00-22:00",
+    "phone": "+506 40343296",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3502031468,
+  "lat": 9.9310291,
+  "lon": -84.2352928,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizzarella"
+  }
+},
+{
+  "type": "node",
+  "id": 3503042060,
+  "lat": 9.9283888,
+  "lon": -84.2290675,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Vino Mundo"
+  }
+},
+{
+  "type": "node",
+  "id": 3503305124,
+  "lat": 9.9345908,
+  "lon": -84.1883418,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Papa John's",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 3505913818,
+  "lat": 9.9375601,
+  "lon": -84.1515023,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "La Fabbrica"
+  }
+},
+{
+  "type": "node",
+  "id": 3557389555,
+  "lat": 9.9344647,
+  "lon": -84.0511218,
+  "tags": {
+    "addr:city": "San Pedro",
+    "addr:street": "Calle de la Amargura",
+    "amenity": "restaurant",
+    "capacity": "50",
+    "cuisine": "regional",
+    "name": "Soda La U",
+    "opening_hours": "07:00-09:00"
+  }
+},
+{
+  "type": "node",
+  "id": 3586415827,
+  "lat": 9.9172070,
+  "lon": -84.2674914,
+  "tags": {
+    "addr:city": "El Rodeo de Mora",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "El Corral",
+    "url": "http://www.haciendaelrodeo.com/restaurante.html"
+  }
+},
+{
+  "type": "node",
+  "id": 3638260506,
+  "lat": 9.9596404,
+  "lon": -84.1259416,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Ventolero"
+  }
+},
+{
+  "type": "node",
+  "id": 3687227819,
+  "lat": 9.9331427,
+  "lon": -84.0514770,
+  "tags": {
+    "addr:city": "San Pedro",
+    "addr:postcode": "11500",
+    "addr:street": "Calle 59",
+    "amenity": "restaurant",
+    "cuisine": "asian_fusion;comida_tipica",
+    "name": "Restaurante Orien-Te y Soda Esquinita",
+    "phone": "+506 85191595",
+    "stars": "1",
+    "website": "restoriente.com",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3687252525,
+  "lat": 9.9314146,
+  "lon": -84.0741356,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 11",
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "name": "La Esquina de Buenos Aires"
+  }
+},
+{
+  "type": "node",
+  "id": 3789067130,
+  "lat": 9.8783171,
+  "lon": -84.1174892,
+  "tags": {
+    "amenity": "restaurant",
+    "building": "yes",
+    "name": "Mirador y sala de eventos Chevy 57"
+  }
+},
+{
+  "type": "node",
+  "id": 3799705809,
+  "lat": 9.4027693,
+  "lon": -83.6671886,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Talari Mountain Lodge",
+    "phone": "(506) 2771-0341"
+  }
+},
+{
+  "type": "node",
+  "id": 3816150834,
+  "lat": 9.9353398,
+  "lon": -84.0912190,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Paseo Colón",
+    "amenity": "restaurant",
+    "branch": "Paseo Colón",
+    "brand:wikipedia": "en:Subway (restaurant)",
+    "cuisine": "pizza",
+    "description": "Sede 31",
+    "level": "1",
+    "name": "Ready Pizza",
+    "source": "KG Ground Survey 2015",
+    "start_date": "2022-05-06"
+  }
+},
+{
+  "type": "node",
+  "id": 3817470971,
+  "lat": 9.9327833,
+  "lon": -84.0771369,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 2",
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "name": "Tenedor Argentino",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3817703011,
+  "lat": -32.1940885,
+  "lon": -58.2392146,
+  "tags": {
+    "addr:city": "San Jose",
+    "addr:housenumber": "158.5",
+    "addr:postcode": "3283",
+    "addr:street": "Ruta Nacional 14 José Gervasio Artigas",
+    "amenity": "restaurant",
+    "capacity": "80",
+    "cuisine": "pizza;pasta",
+    "delivery": "no",
+    "description": "Establecimiento dedicado a la plantación de mates orgánicos.Visitas guiadas.Servicio gastronómico. Atendemos excursiones.",
+    "name": "Artesanias El Palmar",
+    "opening_hours": "10:00-18:00",
+    "phone": "3447 455239",
+    "smoking": "outside",
+    "takeaway": "yes",
+    "website": "https://www.facebook.com/artesanias.elpalmar/"
+  }
+},
+{
+  "type": "node",
+  "id": 3825310165,
+  "lat": -34.3629939,
+  "lon": -57.0578577,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "internet_access": "wlan",
+    "name": "Blanco y Negro"
+  }
+},
+{
+  "type": "node",
+  "id": 3825310166,
+  "lat": -34.7668885,
+  "lon": -56.3933116,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "internet_access": "wlan",
+    "name": "La Rotonda"
+  }
+},
+{
+  "type": "node",
+  "id": 3828618862,
+  "lat": 9.9354918,
+  "lon": -84.0780016,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 1",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "L.H. Asian Buffet",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3828749895,
+  "lat": 9.9321782,
+  "lon": -84.0783403,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 4",
+    "amenity": "restaurant",
+    "diet:vegetarian": "yes",
+    "name": "Vishnu",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3835128278,
+  "lat": 9.9349357,
+  "lon": -84.0785753,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 1",
+    "amenity": "restaurant",
+    "name": "La Embajada",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 3839427664,
+  "lat": 9.8951229,
+  "lon": -84.0639926,
+  "tags": {
+    "addr:city": "Desamparados",
+    "addr:street": "Avenida 88",
+    "amenity": "restaurant",
+    "name": "Restaurante Rikubas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3843233283,
+  "lat": 9.9421126,
+  "lon": -84.1234601,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 98",
+    "amenity": "restaurant",
+    "cuisine": "chicken",
+    "name": "Pollo Leñador",
+    "phone": "2296 7291",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3843233284,
+  "lat": 9.9420468,
+  "lon": -84.1234706,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 98",
+    "amenity": "restaurant",
+    "cuisine": "venezuelan",
+    "name": "Sabor Venezolano",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3873398317,
+  "lat": 13.9171106,
+  "lon": -90.8262950,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Nautilus",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3883314221,
+  "lat": 9.7777920,
+  "lon": -83.9908073,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "outdoor_seating": "no",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3883334911,
+  "lat": 9.6676737,
+  "lon": -83.8837138,
+  "tags": {
+    "addr:city": "Copey",
+    "air_conditioning": "no",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "check_date": "2025-04-15",
+    "name": "Restaurante y Abastecedor La Selva",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "source": "KG Ground Survey 2015",
+    "toilets": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3883601666,
+  "lat": 9.3514486,
+  "lon": -83.7262332,
+  "tags": {
+    "addr:street": "Ruta Nacional 243",
+    "amenity": "restaurant",
+    "name": "Fabrica De Tamales Doña Hilda",
+    "opening_hours": "Mo-Su 06:00-18:00",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3887976081,
+  "lat": 9.9325013,
+  "lon": -84.0484353,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:phone": "(+506) 2253-1697",
+    "cuisine": "regional",
+    "internet_access": "wlan",
+    "name": "Aroma y Sabor Aleste",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3915303735,
+  "lat": 9.9353136,
+  "lon": -84.0901170,
+  "tags": {
+    "addr:street": "Paseo Colón",
+    "amenity": "restaurant",
+    "name": "Restaurante Ana",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915348180,
+  "lat": 9.9352427,
+  "lon": -84.0900059,
+  "tags": {
+    "addr:street": "Paseo Colón",
+    "amenity": "restaurant",
+    "name": "Restaurante Antonio",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915395101,
+  "lat": 9.9329649,
+  "lon": -84.0964365,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 6",
+    "amenity": "restaurant",
+    "name": "La Esquina del Sabor",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915395119,
+  "lat": 9.9326783,
+  "lon": -84.0934150,
+  "tags": {
+    "addr:street": "Avenida 6",
+    "amenity": "restaurant",
+    "name": "Delicias Don Bosco",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915443403,
+  "lat": 9.9299269,
+  "lon": -84.0843678,
+  "tags": {
+    "addr:street": "Avenida 10",
+    "amenity": "restaurant",
+    "name": "Restaurante Kingston",
+    "phone": "222 9097",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915475768,
+  "lat": 9.9297954,
+  "lon": -84.0783910,
+  "tags": {
+    "addr:street": "Avenida 10",
+    "amenity": "restaurant",
+    "name": "Soda Mary",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3915490399,
+  "lat": 9.9298127,
+  "lon": -84.0770242,
+  "tags": {
+    "addr:street": "Avenida 10",
+    "amenity": "restaurant",
+    "name": "Soda Leo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3916991500,
+  "lat": 9.9424414,
+  "lon": -84.0641245,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Caribbean"
+  }
+},
+{
+  "type": "node",
+  "id": 3917149086,
+  "lat": 9.9500984,
+  "lon": -84.0705838,
+  "tags": {
+    "addr:street": "Calle 17",
+    "amenity": "restaurant",
+    "name": "Restaurante El Encanto",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3917462717,
+  "lat": 9.9323785,
+  "lon": -84.0922330,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 6",
+    "amenity": "restaurant",
+    "name": "rbg Bar & Grill",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3917537786,
+  "lat": 9.9297150,
+  "lon": -84.0836030,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 10",
+    "amenity": "restaurant",
+    "name": "Restaurante Comilona",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3919012763,
+  "lat": 9.9487859,
+  "lon": -84.0667198,
+  "tags": {
+    "addr:city": "Calle Blancos",
+    "addr:street": "Calle 27",
+    "amenity": "restaurant",
+    "name": "Soda Beraka",
+    "phone": "2236 6687",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3919022729,
+  "lat": 9.9450382,
+  "lon": -84.0653629,
+  "tags": {
+    "addr:city": "Calle Blancos",
+    "addr:street": "Avenida 27",
+    "amenity": "restaurant",
+    "name": "Chicarroneria Don Eduardo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3927654374,
+  "lat": 9.9323976,
+  "lon": -84.0833236,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 10",
+    "amenity": "restaurant",
+    "name": "Soda Marisquería Bahía",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3929105795,
+  "lat": 9.9319934,
+  "lon": -84.1035259,
+  "tags": {
+    "addr:city": "Sabana Sur",
+    "addr:street": "Calle 54",
+    "amenity": "restaurant",
+    "name": "Pizzería Good Fellas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3929634482,
+  "lat": 9.9525350,
+  "lon": -84.1943733,
+  "tags": {
+    "addr:city": "Pozos",
+    "addr:street": "Radial San Antonio",
+    "amenity": "restaurant",
+    "brand": "Teriyaki Experience",
+    "cuisine": "japanese",
+    "name": "Teriyaki",
+    "source": "KG Ground Survey 2015",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 3930852996,
+  "lat": 9.8974751,
+  "lon": -84.0859659,
+  "tags": {
+    "addr:city": "Concepción",
+    "amenity": "restaurant",
+    "name": "Bar y Restaurante La Flecha",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3930908379,
+  "lat": 9.8922295,
+  "lon": -84.0814505,
+  "tags": {
+    "addr:city": "San Rafael Abajo",
+    "amenity": "restaurant",
+    "brand": "Musmanni",
+    "brand:wikidata": "Q19382082",
+    "name": "Musmanni",
+    "shop": "bakery",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3930908387,
+  "lat": 9.8921132,
+  "lon": -84.0812950,
+  "tags": {
+    "addr:city": "San Rafael Abajo",
+    "amenity": "restaurant",
+    "name": "Pizza Poli",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3930971171,
+  "lat": 9.8827227,
+  "lon": -84.0844485,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pollo Las Delicias",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3930993180,
+  "lat": 9.8855342,
+  "lon": -84.0839545,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Las 5 Tejitas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3930993181,
+  "lat": 9.8855949,
+  "lon": -84.0839424,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sabor & Sazón del Colo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3931128278,
+  "lat": 9.9012490,
+  "lon": -84.1009102,
+  "tags": {
+    "addr:city": "Alajuelita",
+    "addr:street": "Avenida 72",
+    "amenity": "restaurant",
+    "name": "Taqueria Cande",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3931128294,
+  "lat": 9.9027340,
+  "lon": -84.1024618,
+  "tags": {
+    "addr:city": "Alajuelita",
+    "addr:street": "Calle 50",
+    "amenity": "restaurant",
+    "name": "Titos Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3931147718,
+  "lat": 9.9068050,
+  "lon": -84.1066984,
+  "tags": {
+    "addr:city": "San Felipe",
+    "addr:street": "Calle Herrera",
+    "amenity": "restaurant",
+    "name": "Soda Tatoss",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3931418144,
+  "lat": 9.9217050,
+  "lon": -84.0726580,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Vía 209",
+    "amenity": "restaurant",
+    "name": "Soda Maggi",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3932573573,
+  "lat": 9.9088729,
+  "lon": -84.0526503,
+  "tags": {
+    "addr:city": "San Francisco de Dos Ríos",
+    "addr:street": "Vía 211",
+    "amenity": "restaurant",
+    "name": "Soda Emanuel",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3932670266,
+  "lat": 9.9020884,
+  "lon": -84.0452162,
+  "tags": {
+    "addr:city": "San Francisco de Dos Ríos",
+    "addr:street": "Vía 210",
+    "amenity": "restaurant",
+    "name": "Soda 3M",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934290657,
+  "lat": 9.9415458,
+  "lon": -84.0492811,
+  "tags": {
+    "addr:city": "San Pedro",
+    "addr:street": "Via 202",
+    "amenity": "restaurant",
+    "name": "La Paulina",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934328802,
+  "lat": 9.9216332,
+  "lon": -84.0539763,
+  "tags": {
+    "addr:city": "Zapote",
+    "addr:street": "Vía 204",
+    "amenity": "restaurant",
+    "name": "Red House Restaurante",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934648028,
+  "lat": 9.9328754,
+  "lon": -84.0688180,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida Central",
+    "amenity": "restaurant",
+    "name": "Restaurante El Único",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934844318,
+  "lat": 9.9524754,
+  "lon": -84.0482930,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Lider Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934886610,
+  "lat": 9.9503653,
+  "lon": -84.0478504,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "addr:street": "Avenida Central",
+    "amenity": "restaurant",
+    "name": "Taqueria La Mexicana",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3934910537,
+  "lat": 9.9564426,
+  "lon": -84.0408968,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "amenity": "restaurant",
+    "name": "Soda Tammy",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3939938434,
+  "lat": 9.9664038,
+  "lon": -84.0232479,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante La Gran Familia Feliz",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3940329056,
+  "lat": 9.9778608,
+  "lon": -84.0078745,
+  "tags": {
+    "addr:city": "San Isidro",
+    "addr:street": "Calle 153",
+    "amenity": "restaurant",
+    "name": "Sharin Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3940330789,
+  "lat": 9.9763799,
+  "lon": -84.0082821,
+  "tags": {
+    "amenity": "restaurant",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3940650821,
+  "lat": 9.9622782,
+  "lon": -84.0704090,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Fonta Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3940748061,
+  "lat": 9.9621917,
+  "lon": -84.0499016,
+  "tags": {
+    "addr:city": "Moravia",
+    "addr:street": "Avenida 65",
+    "amenity": "restaurant",
+    "name": "Pollo a la Leña Moravia",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3940764650,
+  "lat": 9.9564815,
+  "lon": -84.0548046,
+  "tags": {
+    "addr:city": "Moravia",
+    "addr:street": "Calle 55",
+    "amenity": "restaurant",
+    "name": "Soda La Casita de Daisy",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3941958319,
+  "lat": 9.9483666,
+  "lon": -84.0507110,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "addr:street": "Avenida Central",
+    "amenity": "restaurant",
+    "name": "Pizza Yussy",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3942395166,
+  "lat": 9.9477154,
+  "lon": -84.0927741,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 39",
+    "amenity": "restaurant",
+    "name": "Hamburger Factory",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3942472844,
+  "lat": 9.9388057,
+  "lon": -84.0831320,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 10",
+    "amenity": "restaurant",
+    "name": "Soda Yori",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3942547343,
+  "lat": 9.9252647,
+  "lon": -84.0837694,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Pollo Ranchero",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3942691287,
+  "lat": 9.9409165,
+  "lon": -84.1014409,
+  "tags": {
+    "addr:city": "Mata Redonda",
+    "addr:street": "Avenida 9",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "L'Olivo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944488105,
+  "lat": 9.9313242,
+  "lon": -84.1835196,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Avenida 2",
+    "amenity": "restaurant",
+    "name": "Quality Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944488106,
+  "lat": 9.9313229,
+  "lon": -84.1834847,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Avenida 2",
+    "amenity": "restaurant",
+    "name": "Pronto Pollo Frito",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944509511,
+  "lat": 9.9310785,
+  "lon": -84.1810976,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Calle Central",
+    "amenity": "restaurant",
+    "name": "Pollos Pigo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944577311,
+  "lat": 9.9347575,
+  "lon": -84.1884971,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Radial Santa Ana",
+    "amenity": "restaurant",
+    "name": "Studio Cafe Bar & Grill",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944577312,
+  "lat": 9.9350204,
+  "lon": -84.1883871,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Radial Santa Ana",
+    "amenity": "restaurant",
+    "name": "Bufalo Grill & Market",
+    "source": "KG Ground Survey 2015",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 3944628157,
+  "lat": 9.9531598,
+  "lon": -84.1900986,
+  "tags": {
+    "addr:city": "Pozos",
+    "amenity": "restaurant",
+    "name": "Tomato's Pizza & Wings",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944633691,
+  "lat": 9.9486693,
+  "lon": -84.1894717,
+  "tags": {
+    "addr:city": "Pozos",
+    "addr:street": "Calle Lindora",
+    "amenity": "restaurant",
+    "name": "Bites",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944633700,
+  "lat": 9.9486667,
+  "lon": -84.1908188,
+  "tags": {
+    "addr:city": "Pozos",
+    "addr:street": "Calle Lindora",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Buen Sabor",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944759396,
+  "lat": 9.8973256,
+  "lon": -84.0862432,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizzeria Heladeria El Parce",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944773234,
+  "lat": 9.8924175,
+  "lon": -84.0819449,
+  "tags": {
+    "addr:city": "San Rafael Abajo",
+    "amenity": "restaurant",
+    "name": "Restaurante Ley Tou",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944860635,
+  "lat": 9.8794360,
+  "lon": -84.0824677,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Meyka",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944861868,
+  "lat": 9.8798073,
+  "lon": -84.0835044,
+  "tags": {
+    "amenity": "restaurant",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944886914,
+  "lat": 9.9003956,
+  "lon": -84.0960291,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Prego'z Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944983462,
+  "lat": 9.9220055,
+  "lon": -84.1372359,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Gil",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3944995815,
+  "lat": 9.9187551,
+  "lon": -84.1392703,
+  "tags": {
+    "addr:city": "Escazú",
+    "addr:street": "Calle132",
+    "amenity": "restaurant",
+    "name": "Efren's",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3945066931,
+  "lat": 9.9083311,
+  "lon": -84.0511539,
+  "tags": {
+    "addr:city": "San Francisco de Dos Ríos",
+    "addr:street": "Via 211",
+    "amenity": "restaurant",
+    "name": "Ricas Pupusas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3945076503,
+  "lat": 9.9038598,
+  "lon": -84.0465922,
+  "tags": {
+    "amenity": "restaurant",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946251764,
+  "lat": 9.8990615,
+  "lon": -84.0494444,
+  "tags": {
+    "addr:city": "San Antonio",
+    "amenity": "restaurant",
+    "name": "El Cordobes #2",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946290180,
+  "lat": 9.8994899,
+  "lon": -84.0587094,
+  "tags": {
+    "addr:city": "Desamparados",
+    "amenity": "restaurant",
+    "name": "Soda La Triunfadora",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946452690,
+  "lat": 9.9391079,
+  "lon": -84.1095296,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Boulevard Ernesto Rohrmoser",
+    "amenity": "restaurant",
+    "name": "Così",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946510123,
+  "lat": 9.9211780,
+  "lon": -84.0750599,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 11",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Manu Pizza y Café",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946547789,
+  "lat": 9.9380312,
+  "lon": -84.0872452,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 20",
+    "amenity": "restaurant",
+    "name": "Bar y Restaurante",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946854177,
+  "lat": 9.9306032,
+  "lon": -84.0779923,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8",
+    "amenity": "restaurant",
+    "name": "Restaurante Li Feliz",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3946854192,
+  "lat": 9.9306906,
+  "lon": -84.0794039,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante La Moderna",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3948478371,
+  "lat": 9.9293257,
+  "lon": -84.1368853,
+  "tags": {
+    "addr:city": "San Rafael de Escazú",
+    "addr:street": "Carretera John F. Kennedy",
+    "amenity": "restaurant",
+    "name": "Sangre La",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3948821952,
+  "lat": 9.3685029,
+  "lon": -83.7055656,
+  "tags": {
+    "addr:city": "San Isidro de El General",
+    "addr:street": "Calle Central",
+    "amenity": "restaurant",
+    "name": "Restaurante Café Tico",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3948848842,
+  "lat": 9.9302103,
+  "lon": -84.1407474,
+  "tags": {
+    "addr:city": "San Rafael de Escazú",
+    "addr:street": "Carretera John F. Kennedy",
+    "amenity": "restaurant",
+    "name": "Mi Finquita",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3948859220,
+  "lat": 9.9305311,
+  "lon": -84.1476981,
+  "tags": {
+    "addr:city": "San Rafael de Escazú",
+    "addr:street": "Calle Real",
+    "amenity": "restaurant",
+    "name": "Saúl Bistro",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3948961700,
+  "lat": 9.9300116,
+  "lon": -84.0709747,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8 Simón Bolívar",
+    "amenity": "restaurant",
+    "name": "Soda Joyca",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3949018039,
+  "lat": 9.9304740,
+  "lon": -84.0781861,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8",
+    "amenity": "restaurant",
+    "name": "Mas que Patacones",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3949018042,
+  "lat": 9.9304783,
+  "lon": -84.0783261,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8",
+    "amenity": "restaurant",
+    "name": "Bufete Romero",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3949122342,
+  "lat": 9.3733550,
+  "lon": -83.7031667,
+  "tags": {
+    "addr:city": "San Isidro de El General",
+    "addr:street": "Avenida 2",
+    "amenity": "restaurant",
+    "name": "La Terraza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3954279884,
+  "lat": 9.9192194,
+  "lon": -84.0537136,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Pollo el Mas Sabrosa",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3954279904,
+  "lat": 9.9180252,
+  "lon": -84.0541534,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizzeria Polo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3969079334,
+  "lat": 9.3574963,
+  "lon": -83.6849672,
+  "tags": {
+    "addr:city": "San Isidro de El General",
+    "amenity": "restaurant",
+    "name": "Restaurante Pollos Chipica's",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3972337499,
+  "lat": 9.3587018,
+  "lon": -83.6866712,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pollos Del Valle",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3972337500,
+  "lat": 9.3586660,
+  "lon": -83.6865846,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizza",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3976085491,
+  "lat": 9.9355321,
+  "lon": -84.1099814,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Vía 104",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "La Fabbrica",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3976318479,
+  "lat": 9.9441946,
+  "lon": -84.0372358,
+  "tags": {
+    "addr:city": "Sabanilla",
+    "amenity": "restaurant",
+    "name": "Pizza Polo",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3976447858,
+  "lat": 9.9148459,
+  "lon": -84.0363699,
+  "tags": {
+    "addr:city": "Curridabat",
+    "addr:street": "Avenida 42",
+    "amenity": "restaurant",
+    "name": "Sazón Urbano",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3976641264,
+  "lat": 9.9260261,
+  "lon": -84.0638063,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mey Lei",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 3988734681,
+  "lat": 9.3758650,
+  "lon": -83.7037531,
+  "tags": {
+    "addr:street": "Calle 2",
+    "amenity": "restaurant",
+    "name": "Chovi's",
+    "source": "KG Ground Survey 2016"
+  }
+},
+{
+  "type": "node",
+  "id": 4020229589,
+  "lat": 9.9377724,
+  "lon": -84.1428020,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurente la Divina Comida"
+  }
+},
+{
+  "type": "node",
+  "id": 4025920387,
+  "lat": 9.9397129,
+  "lon": -84.1554665,
+  "tags": {
+    "addr:housenumber": "18",
+    "addr:street": "Distrito Cuatro",
+    "amenity": "restaurant",
+    "name": "Spoon",
+    "website": "https://www.spooncr.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 4040574365,
+  "lat": 13.9319604,
+  "lon": -90.7783248,
+  "tags": {
+    "addr:city": "Puerto San José",
+    "addr:street": "Carretera Puerto San José - Puerto de Iztapa",
+    "amenity": "restaurant",
+    "name": "Pinulito"
+  }
+},
+{
+  "type": "node",
+  "id": 4040803368,
+  "lat": 13.9233738,
+  "lon": -90.8201300,
+  "tags": {
+    "addr:city": "Puerto de San Jose1",
+    "addr:street": "Avenida 30 de Junio",
+    "amenity": "restaurant",
+    "name": "Pollo Frito Super Chapincito"
+  }
+},
+{
+  "type": "node",
+  "id": 4040875516,
+  "lat": 13.9214361,
+  "lon": -90.8200978,
+  "tags": {
+    "addr:city": "Puerto de San Jose",
+    "addr:street": "Avenida 30 de Junio",
+    "amenity": "restaurant",
+    "name": "Al Macarone"
+  }
+},
+{
+  "type": "node",
+  "id": 4040875533,
+  "lat": 13.9202142,
+  "lon": -90.8200840,
+  "tags": {
+    "addr:city": "Puerto de San Jose",
+    "addr:street": "Avenida 30 de Junio",
+    "amenity": "restaurant",
+    "name": "Silvicar"
+  }
+},
+{
+  "type": "node",
+  "id": 4040969223,
+  "lat": 13.9184912,
+  "lon": -90.8234631,
+  "tags": {
+    "addr:city": "Puerto de San Jose",
+    "addr:street": "Calle Principal Miramar",
+    "amenity": "restaurant",
+    "name": "Restaurante Yeni"
+  }
+},
+{
+  "type": "node",
+  "id": 4041047057,
+  "lat": 13.9186872,
+  "lon": -90.8201907,
+  "tags": {
+    "addr:city": "Puerto de San Jose",
+    "addr:street": "Calle Principal Miramar",
+    "amenity": "restaurant",
+    "name": "Comedor Heidy"
+  }
+},
+{
+  "type": "node",
+  "id": 4042922721,
+  "lat": 9.9333842,
+  "lon": -84.0542980,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Papería"
+  }
+},
+{
+  "type": "node",
+  "id": 4044386609,
+  "lat": 9.9405495,
+  "lon": -84.0107414,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Jacarana"
+  }
+},
+{
+  "type": "node",
+  "id": 4051383041,
+  "lat": 13.9249920,
+  "lon": -90.8189731,
+  "tags": {
+    "addr:city": "Puerto San Jose",
+    "addr:street": "Avenida del Comercio",
+    "amenity": "restaurant",
+    "name": "Comedor Anchorage"
+  }
+},
+{
+  "type": "node",
+  "id": 4054993013,
+  "lat": 13.9285436,
+  "lon": -90.8066346,
+  "tags": {
+    "addr:city": "Puerto de San Jose",
+    "addr:street": "Carretera Puerto San José - Puerto de Iztapa",
+    "amenity": "restaurant",
+    "name": "Refacciones Genesis"
+  }
+},
+{
+  "type": "node",
+  "id": 4081901364,
+  "lat": 10.0031536,
+  "lon": -83.9584884,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Casona de Chavela"
+  }
+},
+{
+  "type": "node",
+  "id": 4111839495,
+  "lat": -34.3390209,
+  "lon": -56.7140463,
+  "tags": {
+    "addr:street": "18 de Julio",
+    "amenity": "restaurant",
+    "name": "La Pasiva"
+  }
+},
+{
+  "type": "node",
+  "id": 4147443168,
+  "lat": 9.9338070,
+  "lon": -84.0634637,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 33",
+    "amenity": "restaurant",
+    "cuisine": "tapas",
+    "name": "Olio"
+  }
+},
+{
+  "type": "node",
+  "id": 4157101039,
+  "lat": 9.9333166,
+  "lon": -84.0635616,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Gato Negro"
+  }
+},
+{
+  "type": "node",
+  "id": 4157101042,
+  "lat": 9.9335432,
+  "lon": -84.0635088,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Luna Roja"
+  }
+},
+{
+  "type": "node",
+  "id": 4172175533,
+  "lat": 9.9335960,
+  "lon": -84.0671068,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Manos en la masa"
+  }
+},
+{
+  "type": "node",
+  "id": 4188191851,
+  "lat": 9.9326246,
+  "lon": -84.0639007,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Impar"
+  }
+},
+{
+  "type": "node",
+  "id": 4188191854,
+  "lat": 9.9335140,
+  "lon": -84.0637216,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 33",
+    "amenity": "restaurant",
+    "cuisine": "peruvian",
+    "name": "Puro Perú"
+  }
+},
+{
+  "type": "node",
+  "id": 4193091885,
+  "lat": 9.9309466,
+  "lon": -84.0382815,
+  "tags": {
+    "addr:city": "San Pedro",
+    "addr:street": "Calle 87",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Liand"
+  }
+},
+{
+  "type": "node",
+  "id": 4194135691,
+  "lat": 9.5561189,
+  "lon": -83.8057136,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Kahawa"
+  }
+},
+{
+  "type": "node",
+  "id": 4234651926,
+  "lat": 9.9375632,
+  "lon": -84.0712736,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 15",
+    "amenity": "restaurant",
+    "cuisine": "french",
+    "name": "La Terrasse",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 4234710879,
+  "lat": 9.9323321,
+  "lon": -84.0801710,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 2",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "La Terraza"
+  }
+},
+{
+  "type": "node",
+  "id": 4326345199,
+  "lat": 9.9387098,
+  "lon": -84.0762152,
+  "tags": {
+    "addr:city": "San José",
+    "addr:postcode": "10101",
+    "addr:street": "Avenida 11",
+    "amenity": "restaurant",
+    "capacity": "150",
+    "cuisine": "italian",
+    "name": "Restaurant il Gatto Pardo",
+    "opening_hours": "06:00-23:00",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4338716389,
+  "lat": 9.4576826,
+  "lon": -83.9722810,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "El Trapiche",
+    "phone": "22065346"
+  }
+},
+{
+  "type": "node",
+  "id": 4344787148,
+  "lat": 9.9524469,
+  "lon": -84.1894922,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chicharronera Irwing's"
+  }
+},
+{
+  "type": "node",
+  "id": 4353325920,
+  "lat": 9.5877821,
+  "lon": -83.7993828,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "description": "Soda",
+    "name": "Comidas tipicas Miriam",
+    "opening_hours": "Mo-Su 07:00-20:00"
+  }
+},
+{
+  "type": "node",
+  "id": 4400571033,
+  "lat": 9.9350640,
+  "lon": -84.0165621,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "restaurante Ve Wong"
+  }
+},
+{
+  "type": "node",
+  "id": 4456847590,
+  "lat": -34.3620852,
+  "lon": -57.0603970,
+  "tags": {
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name:en": "Bar & Restaurant Guido"
+  }
+},
+{
+  "type": "node",
+  "id": 4462476336,
+  "lat": 9.4339880,
+  "lon": -83.6350529,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Buona Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 4462879972,
+  "lat": 9.9146208,
+  "lon": -84.0357808,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "50",
+    "delivery": "no",
+    "name": "Soda Viey",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4465538513,
+  "lat": 9.9142765,
+  "lon": -84.0396116,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cosecha",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4472227746,
+  "lat": 9.9065424,
+  "lon": -84.0568185,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Chang Xing"
+  }
+},
+{
+  "type": "node",
+  "id": 4472240471,
+  "lat": 9.9043651,
+  "lon": -84.0576265,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Nuevo Cielo Azul"
+  }
+},
+{
+  "type": "node",
+  "id": 4472242524,
+  "lat": 9.9041456,
+  "lon": -84.0575496,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Los Amigos"
+  }
+},
+{
+  "type": "node",
+  "id": 4483043398,
+  "lat": -38.0160485,
+  "lon": -57.5747511,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 4491690642,
+  "lat": 9.9241850,
+  "lon": -84.0560884,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Majo´s"
+  }
+},
+{
+  "type": "node",
+  "id": 4505704702,
+  "lat": 9.9344036,
+  "lon": -84.0920045,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "The Corner"
+  }
+},
+{
+  "type": "node",
+  "id": 4518863147,
+  "lat": -34.6974125,
+  "lon": -56.7546480,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chico"
+  }
+},
+{
+  "type": "node",
+  "id": 4522518851,
+  "lat": 9.9193938,
+  "lon": -84.1376888,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Bodegón Gourmet"
+  }
+},
+{
+  "type": "node",
+  "id": 4522802795,
+  "lat": 9.9189203,
+  "lon": -84.1395553,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pocket Food and Drinks"
+  }
+},
+{
+  "type": "node",
+  "id": 4522802796,
+  "lat": 9.9188937,
+  "lon": -84.1395587,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Potato Place"
+  }
+},
+{
+  "type": "node",
+  "id": 4529203390,
+  "lat": 9.9218580,
+  "lon": -84.1384377,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Top Beef"
+  }
+},
+{
+  "type": "node",
+  "id": 4529203392,
+  "lat": 9.9218147,
+  "lon": -84.1374205,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Catrina"
+  }
+},
+{
+  "type": "node",
+  "id": 4540008552,
+  "lat": -34.7470939,
+  "lon": -56.4537825,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chicken",
+    "name": "Pollería del Oeste",
+    "source": "Reconocimiento cartográfico de campo 2016 por KG."
+  }
+},
+{
+  "type": "node",
+  "id": 4541336069,
+  "lat": -25.5143514,
+  "lon": -54.6427004,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Rotonda"
+  }
+},
+{
+  "type": "node",
+  "id": 4584769492,
+  "lat": 9.8997092,
+  "lon": -84.0480944,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "internet_access": "wlan",
+    "name": "Pizzería Bene Buono",
+    "name:es": "Pizzería Bene Buono",
+    "opening_hours": "Mo-Su 22:00-10:00",
+    "operator": "Axel Ruiz",
+    "phone": "70058775"
+  }
+},
+{
+  "type": "node",
+  "id": 4586374878,
+  "lat": 9.4698003,
+  "lon": -83.5915472,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Restaurante Trouts"
+  }
+},
+{
+  "type": "node",
+  "id": 4596869373,
+  "lat": 9.4659991,
+  "lon": -83.5955177,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Robino’s"
+  }
+},
+{
+  "type": "node",
+  "id": 4621244486,
+  "lat": 9.9622429,
+  "lon": -84.0704094,
+  "tags": {
+    "addr:city": "San Juan de Tibás",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/kungfucuisinecr/",
+    "contact:phone": "+506 2236 2353",
+    "cuisine": "sushi",
+    "delivery": "yes",
+    "diet:vegan": "only",
+    "name": "Kung Fu Cuisine",
+    "opening_hours": "Mo-Sa 12:00-22:00; Su 11:30-19:30"
+  }
+},
+{
+  "type": "node",
+  "id": 4621288597,
+  "lat": 9.9250888,
+  "lon": -84.0733542,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Calle 13",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/meylaiwa/",
+    "cuisine": "asian;sushi",
+    "delivery": "Mo-Fri 11:30-15:00;Mo-Fri 18:00-23:00;Sa-Su 11:00-23:00",
+    "diet:vegan": "yes",
+    "name": "Mey Lai Wa",
+    "opening_hours": "11:00-23:00",
+    "phone": "+506 2222 7345"
+  }
+},
+{
+  "type": "node",
+  "id": 4621300234,
+  "lat": 9.9618626,
+  "lon": -84.0755898,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/azukivegetariano/",
+    "delivery": "yes",
+    "diet:vegan": "yes",
+    "name": "Azuki",
+    "opening_hours": "Mo 9:30-13:30",
+    "phone": "+506 2240 8803",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 4621357387,
+  "lat": 9.9343235,
+  "lon": -84.0505788,
+  "tags": {
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/pg/elbuhovegetariano",
+    "cuisine": "international",
+    "diet:vegan": "yes",
+    "email": "elbuhovegetariano@gmail.com",
+    "name": "El Búho Vegetariano",
+    "opening_hours": "11:30-18:00",
+    "phone": "+506 2224 6293"
+  }
+},
+{
+  "type": "node",
+  "id": 4656704995,
+  "lat": -34.6171355,
+  "lon": -56.6513933,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Caimán",
+    "name:es": "El Caimán"
+  }
+},
+{
+  "type": "node",
+  "id": 4691005099,
+  "lat": 13.9187756,
+  "lon": -90.8167118,
+  "tags": {
+    "amenity": "restaurant",
+    "name:ko": "횟집"
+  }
+},
+{
+  "type": "node",
+  "id": 4691306986,
+  "lat": 9.5429407,
+  "lon": -83.8590803,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Cascadas del Savegre"
+  }
+},
+{
+  "type": "node",
+  "id": 4698307734,
+  "lat": 9.7511785,
+  "lon": -84.1426974,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda"
+  }
+},
+{
+  "type": "node",
+  "id": 4705716346,
+  "lat": 9.9348495,
+  "lon": -84.0774538,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegetarian": "yes",
+    "name": "Vishnu"
+  }
+},
+{
+  "type": "node",
+  "id": 4738406550,
+  "lat": 9.9411879,
+  "lon": -84.1186173,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "nacional",
+    "name": "La Terraza"
+  }
+},
+{
+  "type": "node",
+  "id": 4772041552,
+  "lat": 9.9549727,
+  "lon": -84.0551935,
+  "tags": {
+    "addr:city": "Moravia",
+    "addr:street": "Avenida 47A",
+    "amenity": "restaurant",
+    "capacity": "1",
+    "cuisine": "chinese",
+    "delivery": "yes",
+    "name": "Restaurante La Gaviota",
+    "opening_hours": "11:00-22:00",
+    "phone": "+506 22357309",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4789869794,
+  "lat": 9.9191835,
+  "lon": -84.1391895,
+  "tags": {
+    "addr:city": "Escazú",
+    "addr:street": "Calle132",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pepe's Pizzeria",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 4818731629,
+  "lat": 9.6565235,
+  "lon": -83.9519086,
+  "tags": {
+    "addr:city": "Jardín",
+    "addr:street": "Vía 315",
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "La Catarata",
+    "name:en": "La Catarata",
+    "phone": "+506 541 1312"
+  }
+},
+{
+  "type": "node",
+  "id": 4828031394,
+  "lat": 9.9222994,
+  "lon": -84.0433276,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "Asian Fusion Cuisine",
+    "internet_access": "yes",
+    "internet_access:type": "wifi",
+    "name": "Chopsticks",
+    "phone": "2225-2078"
+  }
+},
+{
+  "type": "node",
+  "id": 4837443286,
+  "lat": 9.6833933,
+  "lon": -84.0413452,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Lecos"
+  }
+},
+{
+  "type": "node",
+  "id": 4837443288,
+  "lat": 9.6856774,
+  "lon": -84.0391644,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chicharronera San Francisco"
+  }
+},
+{
+  "type": "node",
+  "id": 4884017676,
+  "lat": 9.9356062,
+  "lon": -84.1102128,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Buffalo Wild Wings",
+    "brand:wikidata": "Q509255",
+    "brand:wikipedia": "en:Buffalo Wild Wings",
+    "cuisine": "wings",
+    "name": "Buffalo Wild Wings",
+    "short_name": "BW3"
+  }
+},
+{
+  "type": "node",
+  "id": 4885808740,
+  "lat": 9.9495741,
+  "lon": -84.0787978,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "25",
+    "name": "Piso de Tierra"
+  }
+},
+{
+  "type": "node",
+  "id": 4887971432,
+  "lat": 9.9561941,
+  "lon": -84.0907026,
+  "tags": {
+    "addr:city": "Reinas",
+    "addr:street": "Avenida 51",
+    "amenity": "restaurant",
+    "capacity": "30",
+    "name": "Autopollo-Burguesa",
+    "opening_hours": "Mo-Sa 08:00-20:00",
+    "smoking": "outside",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4887989135,
+  "lat": 9.9402677,
+  "lon": -84.0554377,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 4888019947,
+  "lat": 9.9180846,
+  "lon": -84.1028348,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "name": "Pizzeria Manolos",
+    "opening_hours": "Mo-Su 12:00-22:00",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4888019958,
+  "lat": 9.9205673,
+  "lon": -84.0996247,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "opening_hours": "Mo-Su 11:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 4888019963,
+  "lat": 9.9176238,
+  "lon": -84.1009533,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese"
+  }
+},
+{
+  "type": "node",
+  "id": 4929489969,
+  "lat": 9.9324539,
+  "lon": -84.0677178,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Esencias Restaurante & Cafetería"
+  }
+},
+{
+  "type": "node",
+  "id": 4941167951,
+  "lat": 9.9419362,
+  "lon": -84.0431053,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Tortillas de Queso Las Cervanteñas",
+    "website": "https://es-es.facebook.com/TORTILLAS-DE-QUESO-LAS-CERVANTE%C3%91AS-300675779948863/"
+  }
+},
+{
+  "type": "node",
+  "id": 4957856233,
+  "lat": 9.9497815,
+  "lon": -84.0474192,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rostipollos"
+  }
+},
+{
+  "type": "node",
+  "id": 4958833023,
+  "lat": 16.9818088,
+  "lon": -89.8999298,
+  "tags": {
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "Restaurante San Jose"
+  }
+},
+{
+  "type": "node",
+  "id": 4981682823,
+  "lat": 9.9323672,
+  "lon": -84.0639769,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Tío Charly",
+    "name:en": "Uncle Charly"
+  }
+},
+{
+  "type": "node",
+  "id": 5003760727,
+  "lat": 9.9402889,
+  "lon": -84.0376814,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza Grill",
+    "opening_hours": "Tu-We 17:00-21:00;Th-Su 12:00-21:00",
+    "phone": "4081-8410",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5021250819,
+  "lat": 9.7126645,
+  "lon": -83.9740324,
+  "tags": {
+    "addr:city": "San Marcos",
+    "amenity": "restaurant",
+    "name": "Mirador El Jardín"
+  }
+},
+{
+  "type": "node",
+  "id": 5082294438,
+  "lat": 9.9464339,
+  "lon": -84.1210742,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "name": "Tierra Sur Restó Argentino"
+  }
+},
+{
+  "type": "node",
+  "id": 5173948992,
+  "lat": 9.9383934,
+  "lon": -84.0558250,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "name": "El Novillo Alegre",
+    "phone": "2234-5056"
+  }
+},
+{
+  "type": "node",
+  "id": 5212813222,
+  "lat": 9.9331210,
+  "lon": -84.0636053,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Santa Tere"
+  }
+},
+{
+  "type": "node",
+  "id": 5247748422,
+  "lat": 9.9283340,
+  "lon": -84.0528852,
+  "tags": {
+    "addr:street": "Avenida 14A",
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "Prosana Foods",
+    "opening_hours": "Mo-Fr 07:00-19:00; Sa 08:00-16:00",
+    "phone": "+506 2283 3510",
+    "website": "http://www.prosanafoods.com"
+  }
+},
+{
+  "type": "node",
+  "id": 5250589221,
+  "lat": 9.9160936,
+  "lon": -84.2409125,
+  "tags": {
+    "addr:postcode": "10701",
+    "amenity": "restaurant",
+    "cuisine": "argentinian",
+    "name": "Che Pizza",
+    "phone": "+50622490909",
+    "website": "https://www.facebook.com/chepizzacr/"
+  }
+},
+{
+  "type": "node",
+  "id": 5255264821,
+  "lat": 9.9565874,
+  "lon": -84.0786340,
+  "tags": {
+    "addr:street": "Calle Central",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "internet_access": "wlan",
+    "name": "Habana Pizza",
+    "opening_hours": "Tu-Su 12:00-22:00",
+    "phone": "87831497"
+  }
+},
+{
+  "type": "node",
+  "id": 5268143920,
+  "lat": -34.7263159,
+  "lon": -56.4649473,
+  "tags": {
+    "addr:city": "Ciudad del Plata",
+    "addr:street": "Ruta 1 Vieja",
+    "amenity": "restaurant",
+    "capacity": "200",
+    "cuisine": "buffet",
+    "name": "GINO",
+    "smoking": "outside",
+    "takeaway": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5278739717,
+  "lat": 9.9295564,
+  "lon": -84.1369379,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mandala Restaurante",
+    "opening_hours": "Mo, Tu 12:00-21:00; We-Sa 12:00-22:00; Su 12:00-17:00",
+    "website": "https://www.mandalacostarica.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 5284410567,
+  "lat": 9.6606211,
+  "lon": -84.0224310,
+  "tags": {
+    "amenity": "restaurant",
+    "capacity": "100",
+    "cuisine": "regional;burger;italian;fish_and_chips;chicken",
+    "delivery": "no",
+    "name": "Restaurante La Tilapia",
+    "opening_hours": "Mo-Su 11:00-24:00",
+    "outdoor_seating": "yes",
+    "smoking": "isolated",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5284584910,
+  "lat": 9.6725864,
+  "lon": -84.0243510,
+  "tags": {
+    "addr:city": "San Marcos",
+    "addr:country": "CR",
+    "addr:street": "Calle 1",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/tisusanmarcos",
+    "internet_access": "yes",
+    "name": "Tisu",
+    "opening_hours": "Mo-Su 08:00-22:00",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5290643716,
+  "lat": 9.9192853,
+  "lon": -84.1398734,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sin Domicilio Fijo Café"
+  }
+},
+{
+  "type": "node",
+  "id": 5353691421,
+  "lat": -34.3385316,
+  "lon": -56.7118403,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Roti-Parrilla"
+  }
+},
+{
+  "type": "node",
+  "id": 5393324599,
+  "lat": -34.3392972,
+  "lon": -56.7130924,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza;burger;chivito",
+    "name": "Centro Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 5444093522,
+  "lat": 9.9194391,
+  "lon": -84.1410349,
+  "tags": {
+    "amenity": "restaurant",
+    "name:en": "P&P Pupusa"
+  }
+},
+{
+  "type": "node",
+  "id": 5448956876,
+  "lat": 9.9342997,
+  "lon": -84.1103524,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "La Princesa Marina",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5486902202,
+  "lat": 9.9370450,
+  "lon": -84.0444405,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Soda Facultad de Ingeniería",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5486902203,
+  "lat": 9.9377641,
+  "lon": -84.0426911,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional;sandwich;coffee_shop",
+    "delivery": "no",
+    "name": "Soda Facultad de Ciencias Sociales",
+    "outdoor_seating": "no",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5492065221,
+  "lat": 9.9420573,
+  "lon": -84.0432042,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;steak_house;sandwich;coffee_shop",
+    "name": "El Churras-tico"
+  }
+},
+{
+  "type": "node",
+  "id": 5500195621,
+  "lat": 9.8442394,
+  "lon": -84.0998390,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Mirador Restaurante la Tranca",
+    "phone": "+506 2230 3505"
+  }
+},
+{
+  "type": "node",
+  "id": 5507170058,
+  "lat": 9.9458235,
+  "lon": -84.0531664,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "addr:street": "Avenida 29",
+    "amenity": "restaurant",
+    "name": "Bo-K-ditos"
+  }
+},
+{
+  "type": "node",
+  "id": 5606091518,
+  "lat": 10.0124709,
+  "lon": -84.2454826,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "cuisine": "spanish",
+    "name": "Toros y Tapas"
+  }
+},
+{
+  "type": "node",
+  "id": 5686519400,
+  "lat": 9.9385364,
+  "lon": -84.0689371,
+  "tags": {
+    "addr:city": "San Jose",
+    "addr:street": "Avenida 11",
+    "amenity": "restaurant",
+    "name": "Soda Emmanuel"
+  }
+},
+{
+  "type": "node",
+  "id": 5691962576,
+  "lat": 9.9449825,
+  "lon": -84.0533335,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Las Carnitas BBQ",
+    "outdoor_seating": "no",
+    "phone": "+506 40828155",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5695816728,
+  "lat": 9.9375406,
+  "lon": -84.0683994,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 19",
+    "amenity": "restaurant",
+    "name": "Soda Doña Daisy"
+  }
+},
+{
+  "type": "node",
+  "id": 5695816734,
+  "lat": 9.9374067,
+  "lon": -84.0684405,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 9",
+    "amenity": "restaurant",
+    "name": "Donde Dú"
+  }
+},
+{
+  "type": "node",
+  "id": 5696937054,
+  "lat": 9.9380978,
+  "lon": -84.0683579,
+  "tags": {
+    "addr:city": "San Jose",
+    "addr:housenumber": "506 72123463",
+    "addr:street": "Aranjuez",
+    "amenity": "restaurant",
+    "cuisine": "breakfast;burger;coffee_shop;friture;grill;local;sandwich",
+    "email": "dondejoncafeteriayrestaurante@gmail.com",
+    "internet_access": "wlan",
+    "name": "DondeJon",
+    "phone": "50672123463"
+  }
+},
+{
+  "type": "node",
+  "id": 5696937056,
+  "lat": 9.9381658,
+  "lon": -84.0685338,
+  "tags": {
+    "addr:city": "San Jose",
+    "addr:street": "Avenida 11",
+    "amenity": "restaurant",
+    "name": "Pepe's"
+  }
+},
+{
+  "type": "node",
+  "id": 5696937066,
+  "lat": 9.9374513,
+  "lon": -84.0686306,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 9",
+    "amenity": "restaurant",
+    "name": "El Campeón"
+  }
+},
+{
+  "type": "node",
+  "id": 5696937075,
+  "lat": 9.9375124,
+  "lon": -84.0687695,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 9",
+    "amenity": "restaurant",
+    "name": "Soda Sus Amigos",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5705622096,
+  "lat": 9.9621555,
+  "lon": -84.1269892,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Administrativa",
+    "opening_hours": "Mo-Fr 07:30-14:00"
+  }
+},
+{
+  "type": "node",
+  "id": 5716207322,
+  "lat": 9.9555573,
+  "lon": -84.0672470,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "peruvian;pasta;fish",
+    "email": "erasmo.42@hotmail.com",
+    "name": "Erasmo",
+    "opening_hours": "Mo-Su 09:00-23:00",
+    "outdoor_seating": "no",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "phone": "2236-0824",
+    "smoking": "no",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5736569473,
+  "lat": 41.6379995,
+  "lon": -0.8800580,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Tequeño's"
+  }
+},
+{
+  "type": "node",
+  "id": 5779886356,
+  "lat": 9.9326192,
+  "lon": -84.0484172,
+  "tags": {
+    "addr:housenumber": "21",
+    "addr:street": "Centro Comercial Calle Real",
+    "amenity": "restaurant",
+    "cuisine": "diner;breakfast;coffee_shop;local",
+    "name": "Delicias Típicas Jireh",
+    "opening_hours": "Mo-Sa 08:00-20:00; Su 08:00-17:00",
+    "phone": "2234-2224"
+  }
+},
+{
+  "type": "node",
+  "id": 5787769953,
+  "lat": 9.9377561,
+  "lon": -84.0410243,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;local",
+    "diet:vegetarian": "yes",
+    "internet_access": "wlan",
+    "name": "Restaurante y Cafetería Akènuk",
+    "name:en": "Akènuk",
+    "opening_hours": "Mo-Fr 09:00-18:00",
+    "phone": "+506 2253 9796",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5790955554,
+  "lat": -38.0118128,
+  "lon": -57.5595673,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "delivery": "yes",
+    "diet:vegan": "yes",
+    "name": "Pizza Vegana",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5796416100,
+  "lat": 9.9341106,
+  "lon": -84.1300910,
+  "tags": {
+    "addr:city": "San Rafael",
+    "addr:country": "CR",
+    "addr:street": "Avenida Central",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/tasteofindia506/",
+    "cuisine": "indian",
+    "email": "info@tasteofindia506.com",
+    "name": "Taste of India506",
+    "opening_hours": "Mo-Sa 11:00-22:00; Su 11:00-21:30",
+    "phone": "(+506) 2208 - 8879",
+    "website": "http://tasteofindia506.com/?v=7516fd43adaa"
+  }
+},
+{
+  "type": "node",
+  "id": 5799984932,
+  "lat": -32.2206005,
+  "lon": -58.2398719,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Alma Mora"
+  }
+},
+{
+  "type": "node",
+  "id": 5810269677,
+  "lat": 41.6421741,
+  "lon": -0.8742607,
+  "tags": {
+    "addr:housenumber": "7",
+    "addr:street": "Calle del Escultor Félix Burriel",
+    "amenity": "restaurant",
+    "name": "El Babuino",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 5813337148,
+  "lat": 41.6442991,
+  "lon": -0.8764846,
+  "tags": {
+    "addr:housenumber": "37",
+    "addr:street": "Calle Reina Fabiola",
+    "amenity": "restaurant",
+    "name": "Turkuaz Istanbul",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 5813340176,
+  "lat": 41.6418631,
+  "lon": -0.8733798,
+  "tags": {
+    "addr:housenumber": "58",
+    "addr:postcode": "50013",
+    "addr:street": "Avenida de San José",
+    "amenity": "restaurant",
+    "name": "Antiguo Mesón Burriel",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 5894867765,
+  "lat": 9.9338960,
+  "lon": -84.0798470,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mediterranean",
+    "diet:vegetarian": "yes",
+    "name": "Choko",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5896894230,
+  "lat": 9.9343974,
+  "lon": -84.0745662,
+  "tags": {
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Pasta Pizza",
+    "takeaway": "yes",
+    "toilets": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 5923333719,
+  "lat": 9.9375633,
+  "lon": -84.0703690,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 7B",
+    "amenity": "restaurant",
+    "name": "Soda Vindas"
+  }
+},
+{
+  "type": "node",
+  "id": 5925426291,
+  "lat": 9.9373345,
+  "lon": -84.0702384,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 7B",
+    "amenity": "restaurant",
+    "name": "Pizería Oasis"
+  }
+},
+{
+  "type": "node",
+  "id": 5935296626,
+  "lat": 9.9359867,
+  "lon": -84.0647229,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 9",
+    "amenity": "restaurant",
+    "name": "Loopers",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5970482568,
+  "lat": 9.9301089,
+  "lon": -84.0643868,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Gochita Lounge",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5991298605,
+  "lat": 9.8204458,
+  "lon": -84.1100436,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "El Galerón del Maíz",
+    "phone": "+50622308049"
+  }
+},
+{
+  "type": "node",
+  "id": 6015363941,
+  "lat": 41.6429216,
+  "lon": -0.8691207,
+  "tags": {
+    "addr:housenumber": "114",
+    "addr:street": "Calle Miguel Servet",
+    "amenity": "restaurant",
+    "name": "Antojitos",
+    "source": "survey"
+  }
+},
+{
+  "type": "node",
+  "id": 6027965776,
+  "lat": -34.6996651,
+  "lon": -56.7310633,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 6027965779,
+  "lat": -34.6941887,
+  "lon": -56.7497806,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Parador Diaz"
+  }
+},
+{
+  "type": "node",
+  "id": 6042500485,
+  "lat": 9.9349486,
+  "lon": -84.0818130,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Soda Tala"
+  }
+},
+{
+  "type": "node",
+  "id": 6058741498,
+  "lat": 9.8161939,
+  "lon": -84.0814987,
+  "tags": {
+    "addr:city": "Rosario",
+    "addr:postcode": "10309",
+    "addr:street": "Calle  a La Joya",
+    "amenity": "restaurant",
+    "name": "Comedor escolar"
+  }
+},
+{
+  "type": "node",
+  "id": 6058767510,
+  "lat": 9.8232267,
+  "lon": -84.0717971,
+  "tags": {
+    "addr:city": "Rosario",
+    "addr:postcode": "10309",
+    "addr:street": "Calle Llano Bonito",
+    "amenity": "restaurant",
+    "name": "Comedor Escolar"
+  }
+},
+{
+  "type": "node",
+  "id": 6058767517,
+  "lat": 9.8122612,
+  "lon": -84.0651050,
+  "tags": {
+    "addr:city": "San Miguel",
+    "addr:postcode": "10302",
+    "amenity": "restaurant",
+    "name": "Comedor Escolar"
+  }
+},
+{
+  "type": "node",
+  "id": 6064936086,
+  "lat": 9.9440257,
+  "lon": -84.1168021,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Oliva Verde"
+  }
+},
+{
+  "type": "node",
+  "id": 6064960131,
+  "lat": 9.9440655,
+  "lon": -84.1165629,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chef Work"
+  }
+},
+{
+  "type": "node",
+  "id": 6111673185,
+  "lat": 9.9385603,
+  "lon": -84.0681919,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Onze 47 Aranjuez",
+    "opening_hours": "Mo-Su 16:00-21:00",
+    "website": "http://hotelaranjuez.com/11-47"
+  }
+},
+{
+  "type": "node",
+  "id": 6114264252,
+  "lat": 9.9390232,
+  "lon": -84.1076652,
+  "tags": {
+    "addr:postcode": "10108",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Cherry",
+    "smoking": "outside"
+  }
+},
+{
+  "type": "node",
+  "id": 6119764550,
+  "lat": 9.9341908,
+  "lon": -84.1103604,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Tapüy"
+  }
+},
+{
+  "type": "node",
+  "id": 6119859085,
+  "lat": 9.9397358,
+  "lon": -84.1101698,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Tapia"
+  }
+},
+{
+  "type": "node",
+  "id": 6121942762,
+  "lat": 9.8504252,
+  "lon": -84.3295307,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirachos Bar Restaurante",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6122311722,
+  "lat": 9.9434415,
+  "lon": -84.1158790,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Rohrmoser",
+    "cuisine": "italian",
+    "name": "Il Padrino",
+    "website": "https://ilpadrinocr.com"
+  }
+},
+{
+  "type": "node",
+  "id": 6122311754,
+  "lat": 9.9426312,
+  "lon": -84.1181579,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Corazón Contento"
+  }
+},
+{
+  "type": "node",
+  "id": 6124322872,
+  "lat": 9.9387117,
+  "lon": -84.1098889,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "San José",
+    "cuisine": "japanese",
+    "name": "Matsuri"
+  }
+},
+{
+  "type": "node",
+  "id": 6124322874,
+  "lat": 9.9387504,
+  "lon": -84.1099331,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Boulevard Ernesto Rohrmoser",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "Pane e Vino",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 6124322875,
+  "lat": 9.9386801,
+  "lon": -84.1098529,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Boulevard Ernesto Rohrmoser",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "Bespoke Burrito",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 6131486091,
+  "lat": 9.9390723,
+  "lon": -84.1072952,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "El Dorado",
+    "smoking": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 6131814359,
+  "lat": 9.9375307,
+  "lon": -84.1132199,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Hakka Sports Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 6132736985,
+  "lat": 9.9388422,
+  "lon": -84.1092315,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Segundo Muelle"
+  }
+},
+{
+  "type": "node",
+  "id": 6137624887,
+  "lat": 9.9400974,
+  "lon": -84.1115482,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Nunc City Garden"
+  }
+},
+{
+  "type": "node",
+  "id": 6137733685,
+  "lat": 9.9395355,
+  "lon": -84.1092578,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Trufa"
+  }
+},
+{
+  "type": "node",
+  "id": 6141544935,
+  "lat": 9.9978713,
+  "lon": -84.0029434,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Rodeo",
+    "opening_hours": "Fr-Su 11:00-23:00"
+  }
+},
+{
+  "type": "node",
+  "id": 6205279585,
+  "lat": 9.6530443,
+  "lon": -83.9673986,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizzeria Las Tejas",
+    "opening_hours": "We-Fr 15:00-21:00; Sa-Su 11:30-22:00",
+    "phone": "25-41-12-37"
+  }
+},
+{
+  "type": "node",
+  "id": 6311393286,
+  "lat": 9.9273888,
+  "lon": -84.0695709,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 21 Dr. Ricardo Moreno Cañas",
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "internet_access": "wlan",
+    "name": "Okami Sushi"
+  }
+},
+{
+  "type": "node",
+  "id": 6328169686,
+  "lat": 9.9338342,
+  "lon": -84.0832556,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Casona Tipica"
+  }
+},
+{
+  "type": "node",
+  "id": 6328175989,
+  "lat": 9.9348497,
+  "lon": -84.0797770,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rice’n’smile"
+  }
+},
+{
+  "type": "node",
+  "id": 6332185185,
+  "lat": 9.9222222,
+  "lon": -84.0429461,
+  "tags": {
+    "addr:street": "Calle 77",
+    "amenity": "restaurant",
+    "name": "Dim Sum - Chopsticks",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6359342888,
+  "lat": 9.9358128,
+  "lon": -84.0786071,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Tajitos",
+    "name:en": "Chinese Restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 6359353985,
+  "lat": 9.9397307,
+  "lon": -84.0787208,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Caribbean"
+  }
+},
+{
+  "type": "node",
+  "id": 6390163641,
+  "lat": 9.9426921,
+  "lon": -84.1269210,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Pavas",
+    "cuisine": "asian",
+    "name": "Satay",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6413880287,
+  "lat": 9.9298423,
+  "lon": -84.0859447,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "tipico restaurante nuestro Ayer"
+  }
+},
+{
+  "type": "node",
+  "id": 6426619549,
+  "lat": 9.9313902,
+  "lon": -84.0679093,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bel-Air Bar y Restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 6443970787,
+  "lat": 10.0874670,
+  "lon": -84.2828808,
+  "tags": {
+    "addr:street": "Santa Gertrudis Norte",
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;diner;local;ice_cream;pasta",
+    "name": "Fraterna Domus"
+  }
+},
+{
+  "type": "node",
+  "id": 6443975285,
+  "lat": 10.0878433,
+  "lon": -84.2836732,
+  "tags": {
+    "addr:street": "Santa Gertrudis Norte",
+    "amenity": "restaurant",
+    "name": "0 Estres",
+    "name:en": "0 Estrés",
+    "name:es": "0 Estrés"
+  }
+},
+{
+  "type": "node",
+  "id": 6444262985,
+  "lat": 9.9624903,
+  "lon": -84.0818551,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sodita San Juan"
+  }
+},
+{
+  "type": "node",
+  "id": 6446628744,
+  "lat": 9.3584585,
+  "lon": -83.5013268,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "El Truchero K & G",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6473644263,
+  "lat": 9.9369491,
+  "lon": -84.0619957,
+  "tags": {
+    "amenity": "restaurant",
+    "description": "Vegetarian, vegan and raw food",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "only",
+    "name": "Mantras",
+    "phone": "+50622536717"
+  }
+},
+{
+  "type": "node",
+  "id": 6550683889,
+  "lat": 10.0891273,
+  "lon": -84.2819167,
+  "tags": {
+    "addr:street": "Santa Gertrudis Norte",
+    "amenity": "restaurant",
+    "name": "Marlon"
+  }
+},
+{
+  "type": "node",
+  "id": 6594114185,
+  "lat": 9.9358548,
+  "lon": -84.0715549,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Kula Healthy Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 6681781387,
+  "lat": 9.9330250,
+  "lon": -84.0673422,
+  "tags": {
+    "addr:street": "Calle 25",
+    "amenity": "restaurant",
+    "cuisine": "seafood;pizza;italian",
+    "internet_access": "wlan",
+    "name": "Restaurante Limoncello",
+    "name:en": "Restaurant Limoncello",
+    "name:nl": "Restaurant Limoncello",
+    "opening_hours": "Mo-Su 18:00-23:00",
+    "phone": "22576616",
+    "website": "http://www.restaurantlimoncello.com"
+  }
+},
+{
+  "type": "node",
+  "id": 6812691294,
+  "lat": 9.8890326,
+  "lon": -84.0784913,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Bei-Yuang"
+  }
+},
+{
+  "type": "node",
+  "id": 6814919378,
+  "lat": 9.9273056,
+  "lon": -84.2095158,
+  "tags": {
+    "addr:city": "Piedades",
+    "addr:street": "Vía 121",
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "WL Steakhouse",
+    "opening_hours": "Mo-Su 11:00-23:30",
+    "phone": "+506 4033 8643"
+  }
+},
+{
+  "type": "node",
+  "id": 6814934132,
+  "lat": 9.9279561,
+  "lon": -84.2186719,
+  "tags": {
+    "addr:city": "Piedades",
+    "addr:street": "Vía 121",
+    "amenity": "restaurant",
+    "cuisine": "burger;chicken",
+    "name": "soda delicias doña cristina",
+    "phone": "+506 2282 5060"
+  }
+},
+{
+  "type": "node",
+  "id": 6814934133,
+  "lat": 9.9284802,
+  "lon": -84.2175413,
+  "tags": {
+    "addr:city": "Piedades",
+    "addr:postcode": "10905",
+    "addr:street": "Vía 121",
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "chinese",
+    "name": "Shang Hai",
+    "opening_hours": "Mo-Su 11:00-23:00",
+    "phone": "+506 2282 6898"
+  }
+},
+{
+  "type": "node",
+  "id": 6818447421,
+  "lat": 9.9318451,
+  "lon": -84.0607785,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Ceviche de mi Tata",
+    "phone": "7011 3737"
+  }
+},
+{
+  "type": "node",
+  "id": 6858917985,
+  "lat": 9.9364203,
+  "lon": -84.0602365,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Tapaboca"
+  }
+},
+{
+  "type": "node",
+  "id": 6952301124,
+  "lat": 9.9364863,
+  "lon": -84.0633377,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-11-27",
+    "cuisine": "burger",
+    "name": "The Kitchen: Burger Place",
+    "name:en": "The Kitchen: Burger Place"
+  }
+},
+{
+  "type": "node",
+  "id": 6959197380,
+  "lat": 9.9142750,
+  "lon": -84.0395549,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "La Cosecha",
+    "opening_hours": "Mo-Su 11:00-22:00",
+    "phone": "22725821",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 6959201991,
+  "lat": 9.9157484,
+  "lon": -84.0393702,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:opening_hours": "2021-05-01",
+    "description": "87158784",
+    "name": "Pizza Cris Angel Curridabat",
+    "opening_hours": "Mo-Su 10:00-22:00",
+    "phone": "22729486"
+  }
+},
+{
+  "type": "node",
+  "id": 7044912081,
+  "lat": 9.4657829,
+  "lon": -83.5962004,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Roca Dura"
+  }
+},
+{
+  "type": "node",
+  "id": 7110500186,
+  "lat": 9.9300796,
+  "lon": -84.0751348,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Paseo de los Estudiantes",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "internet_access": "wlan",
+    "name": "House of Dumplings",
+    "name:en": "House of Dumplings",
+    "name:zh": "蒙逸轩分店",
+    "opening_hours": "Mo-Su 09:00-23:00",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7123728686,
+  "lat": 9.7497632,
+  "lon": -84.0416350,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mirador el Cafetal los Frailes",
+    "opening_hours": "Mo-Su 09:00-18:00",
+    "phone": "+50684422694"
+  }
+},
+{
+  "type": "node",
+  "id": 7173782685,
+  "lat": 9.9353962,
+  "lon": -84.0900096,
+  "tags": {
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "Bar-Restaurante Casa Colon"
+  }
+},
+{
+  "type": "node",
+  "id": 7201881285,
+  "lat": 9.9204632,
+  "lon": -84.1411264,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Soda pintico"
+  }
+},
+{
+  "type": "node",
+  "id": 7223220254,
+  "lat": 9.9310697,
+  "lon": -84.0456975,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Taquería Mexicana"
+  }
+},
+{
+  "type": "node",
+  "id": 7246493243,
+  "lat": 9.9560417,
+  "lon": -84.0851177,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Pilar",
+    "phone": "+506-2297-3789",
+    "website": "https://www.facebook.com/Soda-Pilar-1932398747079925/"
+  }
+},
+{
+  "type": "node",
+  "id": 7265515785,
+  "lat": 9.9336646,
+  "lon": -84.0665400,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:currency:XBT": "2024-12-19",
+    "currency:XBT": "yes",
+    "name": "El Jardín de Lolita",
+    "opening_hours": "Su-We 12:00-22:00; Th-Sa 12:00-24:00",
+    "payment:lightning": "yes",
+    "payment:onchain": "yes",
+    "phone": "8542 5623",
+    "website": "https://www.jardindelolita.com"
+  }
+},
+{
+  "type": "node",
+  "id": 7265538485,
+  "lat": 9.9352752,
+  "lon": -84.0960966,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Ban Mee Restaurante Vietnamita",
+    "opening_hours": "Mo-Sa 11:00-22:00; Su 11:00-18:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7278894395,
+  "lat": 9.9290484,
+  "lon": -84.0752317,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Paseo de los Estudiantes",
+    "amenity": "restaurant",
+    "capacity": "200",
+    "cuisine": "asian;chinese",
+    "name": "Enping",
+    "opening_hours": "Mo-Su 10:00-23:00",
+    "phone": "7182-2233",
+    "takeaway": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 7283033501,
+  "lat": 9.9281274,
+  "lon": -84.0753412,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Paseo de los Estudiantes",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Feng Wei",
+    "opening_hours": "Mo-Su 09:00-23:00",
+    "phone": "6332-2077"
+  }
+},
+{
+  "type": "node",
+  "id": 7283935954,
+  "lat": 9.9232762,
+  "lon": -84.0777414,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Avenida 22A",
+    "amenity": "restaurant",
+    "cuisine": "burger;sandwich;chicken",
+    "name": "Soda El Beisbolista",
+    "opening_hours": "Mo-Su 09:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7283935955,
+  "lat": 9.9230569,
+  "lon": -84.0779891,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Calle Rafael Chaves",
+    "amenity": "restaurant",
+    "cuisine": "burger;sandwich;chicken;Tipica",
+    "name": "Soda Rosita",
+    "opening_hours": "Mo-Su 09:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7283935962,
+  "lat": 9.9320090,
+  "lon": -84.0753229,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 7A",
+    "amenity": "restaurant",
+    "cuisine": "tipica;Nicaraguense",
+    "opening_hours": "Mo-Sa 08:00-18:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7285676775,
+  "lat": 9.9320598,
+  "lon": -84.0753178,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 7A",
+    "amenity": "restaurant",
+    "cuisine": "regional;Nicaraguense",
+    "name": "Soda El Ometepe",
+    "opening_hours": "Mo-Sa 08:00-18:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7285676779,
+  "lat": 9.9322068,
+  "lon": -84.0748325,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 9 Paseo de los Estudiantes",
+    "amenity": "restaurant",
+    "cuisine": "chinese;asian",
+    "name": "Mr. Li",
+    "opening_hours": "Mo-Su 11:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7285706102,
+  "lat": 9.9327233,
+  "lon": -84.0747782,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Avenida Libertador Juan Rafael Mora Porras",
+    "amenity": "restaurant",
+    "cuisine": "sandwich",
+    "name": "El Mercadito",
+    "opening_hours": "Mo-Su 08:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7285706111,
+  "lat": 9.9302111,
+  "lon": -84.0752566,
+  "tags": {
+    "addr:city": "Catedral",
+    "addr:street": "Paseo de los Estudiantes",
+    "amenity": "restaurant",
+    "cuisine": "chinese;coffee_shop",
+    "name": "Wikiped",
+    "opening_hours": "Mo-Su 09:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 7869248187,
+  "lat": 9.9375398,
+  "lon": -84.0746644,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Yud Food",
+    "name:en": "yud Food"
+  }
+},
+{
+  "type": "node",
+  "id": 8322590117,
+  "lat": 9.9303309,
+  "lon": -84.0746899,
+  "tags": {
+    "addr:street": "Soledad",
+    "amenity": "restaurant",
+    "name": "Ambiente"
+  }
+},
+{
+  "type": "node",
+  "id": 8377076317,
+  "lat": 9.9389605,
+  "lon": -84.0838804,
+  "tags": {
+    "addr:street": "Calle 10A",
+    "amenity": "restaurant",
+    "name": "soda María"
+  }
+},
+{
+  "type": "node",
+  "id": 8538770428,
+  "lat": 9.7256004,
+  "lon": -84.0571498,
+  "tags": {
+    "addr:city": "San Antonio",
+    "addr:street": "Vía 226",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Kalima"
+  }
+},
+{
+  "type": "node",
+  "id": 8554059051,
+  "lat": 9.6948693,
+  "lon": -83.9712279,
+  "tags": {
+    "addr:city": "Jardín",
+    "addr:street": "Vía 226",
+    "amenity": "restaurant",
+    "name": "La Cocina de Dorita"
+  }
+},
+{
+  "type": "node",
+  "id": 8554824923,
+  "lat": 9.6469947,
+  "lon": -83.9190511,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Toro Careto"
+  }
+},
+{
+  "type": "node",
+  "id": 8570460055,
+  "lat": 9.6765763,
+  "lon": -84.2785826,
+  "tags": {
+    "addr:city": "Sabanillas",
+    "addr:street": "Vía 301",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Donde Alba"
+  }
+},
+{
+  "type": "node",
+  "id": 8572860019,
+  "lat": 9.9342413,
+  "lon": -84.0630280,
+  "tags": {
+    "air_conditioning": "no",
+    "amenity": "restaurant",
+    "delivery": "yes",
+    "diet:vegan": "only",
+    "name": "Huacamole",
+    "opening_hours": "Mo-Sa 11:30-21:00; Su 12:00-18:00",
+    "outdoor_seating": "no",
+    "phone": "+506 70057073;+506 21003393",
+    "smoking": "outside",
+    "takeaway": "yes",
+    "website": "https://campsite.bio/huacamole"
+  }
+},
+{
+  "type": "node",
+  "id": 8572861720,
+  "lat": 9.9315009,
+  "lon": -84.1089366,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "MIXT"
+  }
+},
+{
+  "type": "node",
+  "id": 8573249616,
+  "lat": 9.8308945,
+  "lon": -84.1344310,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Trapiche"
+  }
+},
+{
+  "type": "node",
+  "id": 8580929518,
+  "lat": 9.9266875,
+  "lon": -84.0886612,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Soda"
+  }
+},
+{
+  "type": "node",
+  "id": 8580959517,
+  "lat": 9.9364227,
+  "lon": -84.0775987,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-01-16",
+    "name": "Soda Petronas #2",
+    "payment:mastercard": "yes",
+    "payment:visa": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8580963217,
+  "lat": 9.9308510,
+  "lon": -84.0802541,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Lima"
+  }
+},
+{
+  "type": "node",
+  "id": 8580966218,
+  "lat": 9.9302583,
+  "lon": -84.0730173,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8 Simón Bolívar",
+    "amenity": "restaurant",
+    "name": "Atsui Ramen"
+  }
+},
+{
+  "type": "node",
+  "id": 8580973117,
+  "lat": 9.9319518,
+  "lon": -84.0696816,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Kiosko"
+  }
+},
+{
+  "type": "node",
+  "id": 8583202417,
+  "lat": 9.9319798,
+  "lon": -84.0661071,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda de Barrio"
+  }
+},
+{
+  "type": "node",
+  "id": 8583254418,
+  "lat": 9.9359501,
+  "lon": -84.0620843,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lupulus Beer Shop"
+  }
+},
+{
+  "type": "node",
+  "id": 8583254419,
+  "lat": 9.9354116,
+  "lon": -84.0622033,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Ramenezco Laboratorio de Ramen"
+  }
+},
+{
+  "type": "node",
+  "id": 8583257318,
+  "lat": 9.9310542,
+  "lon": -84.0583071,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La 45 - Street Food"
+  }
+},
+{
+  "type": "node",
+  "id": 8583258417,
+  "lat": 9.9351111,
+  "lon": -84.0576923,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "hawaiian",
+    "name": "Mahalo Bowls"
+  }
+},
+{
+  "type": "node",
+  "id": 8583266517,
+  "lat": 9.9451892,
+  "lon": -84.0646484,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda y Cafetería Sal y Pimienta"
+  }
+},
+{
+  "type": "node",
+  "id": 8583267217,
+  "lat": 9.9455028,
+  "lon": -84.0648148,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Miso Restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 8583267218,
+  "lat": 9.9346479,
+  "lon": -84.0511889,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "BaoBei Chinese Urban Food"
+  }
+},
+{
+  "type": "node",
+  "id": 8583267219,
+  "lat": 9.9337194,
+  "lon": -84.0506037,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "hawaiian",
+    "name": "Maui Poke Bowls",
+    "opening_hours": "Mo-Sa 08:00-18:00",
+    "phone": "+506 7029 4157",
+    "website": "https://www.facebook.com/mauipokebowls/"
+  }
+},
+{
+  "type": "node",
+  "id": 8583268717,
+  "lat": 9.9460721,
+  "lon": -84.0543004,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda La tica"
+  }
+},
+{
+  "type": "node",
+  "id": 8583271317,
+  "lat": 9.9414547,
+  "lon": -84.0475199,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Panpaneira Pizza Garden & Café"
+  }
+},
+{
+  "type": "node",
+  "id": 8583281617,
+  "lat": 9.9318251,
+  "lon": -84.0495777,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Alicia"
+  }
+},
+{
+  "type": "node",
+  "id": 8583287719,
+  "lat": 9.9208583,
+  "lon": -84.0215450,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "korean",
+    "name": "Restaurante Kimchis"
+  }
+},
+{
+  "type": "node",
+  "id": 8583288317,
+  "lat": 9.9317452,
+  "lon": -84.0383963,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Doña Rosa"
+  }
+},
+{
+  "type": "node",
+  "id": 8583295119,
+  "lat": 9.9304873,
+  "lon": -84.1497981,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Filippo Pizza Bar"
+  }
+},
+{
+  "type": "node",
+  "id": 8583303517,
+  "lat": 9.9116298,
+  "lon": -84.0201729,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Ramen Saki"
+  }
+},
+{
+  "type": "node",
+  "id": 8583317118,
+  "lat": 9.9401483,
+  "lon": -84.1451153,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Kololo Ramen"
+  }
+},
+{
+  "type": "node",
+  "id": 8583334617,
+  "lat": 9.9516434,
+  "lon": -84.1953323,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Picnic Deli & Café"
+  }
+},
+{
+  "type": "node",
+  "id": 8591364321,
+  "lat": 9.9429899,
+  "lon": -84.0687067,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pop.Up Gastro Atelier"
+  }
+},
+{
+  "type": "node",
+  "id": 8591364423,
+  "lat": 9.9240034,
+  "lon": -84.0323939,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La planta Brew Pub Curridabat"
+  }
+},
+{
+  "type": "node",
+  "id": 8591377517,
+  "lat": 9.9219993,
+  "lon": -84.1414002,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizza Picola"
+  }
+},
+{
+  "type": "node",
+  "id": 8591397418,
+  "lat": 9.9326550,
+  "lon": -84.0623575,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lolo's"
+  }
+},
+{
+  "type": "node",
+  "id": 8591399318,
+  "lat": 9.9375107,
+  "lon": -84.0644881,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Casa Dominga"
+  }
+},
+{
+  "type": "node",
+  "id": 8622710321,
+  "lat": 9.6953410,
+  "lon": -84.0530832,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bongos"
+  }
+},
+{
+  "type": "node",
+  "id": 8627335017,
+  "lat": 9.9345604,
+  "lon": -84.0625198,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "samadhi"
+  }
+},
+{
+  "type": "node",
+  "id": 8726231118,
+  "lat": 9.9317962,
+  "lon": -84.0502782,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Gata Gastronómica"
+  }
+},
+{
+  "type": "node",
+  "id": 8726332318,
+  "lat": 9.9309576,
+  "lon": -84.0628831,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizza Kan"
+  }
+},
+{
+  "type": "node",
+  "id": 8726332319,
+  "lat": 9.9308827,
+  "lon": -84.0628712,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sana Sana"
+  }
+},
+{
+  "type": "node",
+  "id": 8726367418,
+  "lat": 9.9337265,
+  "lon": -84.0667406,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "A Dos Manos"
+  }
+},
+{
+  "type": "node",
+  "id": 8726388817,
+  "lat": 9.9374793,
+  "lon": -84.0646346,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Low Calories"
+  }
+},
+{
+  "type": "node",
+  "id": 8734529318,
+  "lat": 9.9375931,
+  "lon": -84.0683741,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Roraima"
+  }
+},
+{
+  "type": "node",
+  "id": 8777921917,
+  "lat": 10.0084674,
+  "lon": -83.9538232,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Santa Rita"
+  }
+},
+{
+  "type": "node",
+  "id": 8777942417,
+  "lat": 9.9417792,
+  "lon": -84.0204074,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "YummyLab"
+  }
+},
+{
+  "type": "node",
+  "id": 8784188117,
+  "lat": 9.9341334,
+  "lon": -84.1865017,
+  "tags": {
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "burger",
+    "name": "MAD Burger and Beer",
+    "phone": "+506 6099 8393"
+  }
+},
+{
+  "type": "node",
+  "id": 8784188717,
+  "lat": 9.9346143,
+  "lon": -84.1866614,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Killer Buns"
+  }
+},
+{
+  "type": "node",
+  "id": 8784188918,
+  "lat": 9.9574290,
+  "lon": -84.2041707,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Lenguine's Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 8784194617,
+  "lat": 9.9334495,
+  "lon": -84.1506032,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Gallo Rojo"
+  }
+},
+{
+  "type": "node",
+  "id": 8784196417,
+  "lat": 9.9463493,
+  "lon": -84.1497704,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "THE BUTCHER meat bar"
+  }
+},
+{
+  "type": "node",
+  "id": 8784202117,
+  "lat": 9.9368247,
+  "lon": -84.1432240,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Filippo Restaurant & Cafe"
+  }
+},
+{
+  "type": "node",
+  "id": 8784210218,
+  "lat": 9.9472665,
+  "lon": -84.1264643,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante TNT"
+  }
+},
+{
+  "type": "node",
+  "id": 8784211317,
+  "lat": 9.9306523,
+  "lon": -84.1326859,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Porta Via Pizzeria Napoletana"
+  }
+},
+{
+  "type": "node",
+  "id": 8784234817,
+  "lat": 9.9556636,
+  "lon": -84.0784258,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Golden Sugar"
+  }
+},
+{
+  "type": "node",
+  "id": 8784234818,
+  "lat": 9.9133736,
+  "lon": -84.0658551,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda La Negra"
+  }
+},
+{
+  "type": "node",
+  "id": 8784236617,
+  "lat": 9.9260421,
+  "lon": -84.0758261,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Doña María"
+  }
+},
+{
+  "type": "node",
+  "id": 8784296418,
+  "lat": 9.9606726,
+  "lon": -84.0480802,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Vicky"
+  }
+},
+{
+  "type": "node",
+  "id": 8784301717,
+  "lat": 9.9485727,
+  "lon": -84.0517975,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Doña María"
+  }
+},
+{
+  "type": "node",
+  "id": 8784315917,
+  "lat": 9.9280829,
+  "lon": -84.0790167,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La 22 Gastronomía"
+  }
+},
+{
+  "type": "node",
+  "id": 8784333017,
+  "lat": 9.9340625,
+  "lon": -84.0691650,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Amor de Barrio"
+  }
+},
+{
+  "type": "node",
+  "id": 8784342121,
+  "lat": 9.9372653,
+  "lon": -84.0615314,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizzería y Galería El Volpino"
+  }
+},
+{
+  "type": "node",
+  "id": 8784342723,
+  "lat": 9.9325007,
+  "lon": -84.0639432,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sikwa Restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 8810180307,
+  "lat": 9.9317707,
+  "lon": -84.1861589,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:housenumber": "ave 2",
+    "addr:postcode": "10901",
+    "addr:street": "calle 12",
+    "amenity": "restaurant",
+    "cuisine": "pizza;burger",
+    "name": "pal horno",
+    "opening_hours": "24/7",
+    "phone": "+506 63115825"
+  }
+},
+{
+  "type": "node",
+  "id": 8869089902,
+  "lat": 9.9510724,
+  "lon": -84.0596934,
+  "tags": {
+    "addr:city": "Calle Blancos",
+    "addr:street": "Calle 47",
+    "amenity": "restaurant",
+    "name": "Pizzería Rivera"
+  }
+},
+{
+  "type": "node",
+  "id": 8882014903,
+  "lat": 9.9349874,
+  "lon": -84.2209059,
+  "tags": {
+    "addr:city": "Piedades",
+    "addr:street": "Radial Colón",
+    "amenity": "restaurant",
+    "cuisine": "regional;seafood;steak_house",
+    "internet_access": "yes",
+    "name": "La Oveja Negra Restaurante",
+    "phone": "+50622033060"
+  }
+},
+{
+  "type": "node",
+  "id": 9061353317,
+  "lat": 9.9344731,
+  "lon": -84.1783926,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;pizza",
+    "name": "Dark Kitchens"
+  }
+},
+{
+  "type": "node",
+  "id": 9068030117,
+  "lat": 9.9322058,
+  "lon": -84.0666889,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Kataleya #2"
+  }
+},
+{
+  "type": "node",
+  "id": 9098267417,
+  "lat": 9.9049077,
+  "lon": -84.1355742,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "La Casona D'Toño",
+    "name:en": "La Casona de Toño",
+    "phone": "22896633"
+  }
+},
+{
+  "type": "node",
+  "id": 9106510317,
+  "lat": 9.3206980,
+  "lon": -83.8311106,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Bol'i Monchi's",
+    "phone": "89250842"
+  }
+},
+{
+  "type": "node",
+  "id": 9125296511,
+  "lat": 9.9343339,
+  "lon": -84.0840881,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Bonafide"
+  }
+},
+{
+  "type": "node",
+  "id": 9125365129,
+  "lat": 9.9348048,
+  "lon": -84.0848952,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Centro de Comidas Costa Rica"
+  }
+},
+{
+  "type": "node",
+  "id": 9163641336,
+  "lat": 9.9335372,
+  "lon": -84.0728244,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "peruvian",
+    "name": "Rincón Cusqueño"
+  }
+},
+{
+  "type": "node",
+  "id": 9163641337,
+  "lat": 9.9325092,
+  "lon": -84.0730113,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 2 Libertador Juan Rafael Mora Porras",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Sapore Trattoria"
+  }
+},
+{
+  "type": "node",
+  "id": 9163641342,
+  "lat": 9.9329413,
+  "lon": -84.0738520,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "colombian",
+    "name": "Pan y Sabores"
+  }
+},
+{
+  "type": "node",
+  "id": 9163647364,
+  "lat": 9.9336651,
+  "lon": -84.0741288,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cuchara de Juanita"
+  }
+},
+{
+  "type": "node",
+  "id": 9163647405,
+  "lat": 9.9335227,
+  "lon": -84.0743509,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Doña Mary"
+  }
+},
+{
+  "type": "node",
+  "id": 9163647409,
+  "lat": 9.9335033,
+  "lon": -84.0740692,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chucherrería Manolo"
+  }
+},
+{
+  "type": "node",
+  "id": 9163676910,
+  "lat": 9.9337502,
+  "lon": -84.0751292,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-01-08",
+    "email": "elpatio@balmoral.co.cr",
+    "name": "El Patio del Balmoral",
+    "opening_hours": "06:30-21:00",
+    "website": "https://www.balmoral.co.cr/restaurants/"
+  }
+},
+{
+  "type": "node",
+  "id": 9163677418,
+  "lat": 9.9322709,
+  "lon": -84.0731555,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 2 Libertador Juan Rafael Mora Porras",
+    "amenity": "restaurant",
+    "name": "Soda Valery"
+  }
+},
+{
+  "type": "node",
+  "id": 9163714961,
+  "lat": 9.9338329,
+  "lon": -84.0761065,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Spoon"
+  }
+},
+{
+  "type": "node",
+  "id": 9163714978,
+  "lat": 9.9336570,
+  "lon": -84.0758227,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Chinamo de Zapote"
+  }
+},
+{
+  "type": "node",
+  "id": 9163723642,
+  "lat": 9.9331455,
+  "lon": -84.0779720,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Casa Creole"
+  }
+},
+{
+  "type": "node",
+  "id": 9166058934,
+  "lat": 9.9339387,
+  "lon": -84.0789202,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "brand:wikipedia": "en:Pizza Hut",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9166102659,
+  "lat": 9.9339619,
+  "lon": -84.0791800,
+  "tags": {
+    "amenity": "restaurant",
+    "building:levels": "2",
+    "name": "Spoon"
+  }
+},
+{
+  "type": "node",
+  "id": 9166144924,
+  "lat": 9.9344980,
+  "lon": -84.0832627,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Celestial Pan & Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 9170451631,
+  "lat": 9.7977905,
+  "lon": -84.1256497,
+  "tags": {
+    "addr:city": "Vuelta de Jorco",
+    "addr:street": "Vía 209",
+    "amenity": "restaurant",
+    "name": "La Viagra"
+  }
+},
+{
+  "type": "node",
+  "id": 9170641232,
+  "lat": 9.9342814,
+  "lon": -84.0822171,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "tortilla",
+    "name": "La Tortillería San Cristóbal"
+  }
+},
+{
+  "type": "node",
+  "id": 9235650046,
+  "lat": 10.9577240,
+  "lon": -85.1499234,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar Rest. El Brete"
+  }
+},
+{
+  "type": "node",
+  "id": 9238784729,
+  "lat": 9.9571884,
+  "lon": -84.1961532,
+  "tags": {
+    "addr:city": "Pozos",
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "brand": "Johnny Rockets",
+    "brand:wikidata": "Q1051593",
+    "cuisine": "burger",
+    "name": "Johnny Rockets",
+    "not:brand:wikidata": "Q1051593",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9268983962,
+  "lat": 9.9603033,
+  "lon": -84.1290583,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "brand:wikipedia": "en:Pizza Hut",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9327953177,
+  "lat": 9.9400511,
+  "lon": -84.1116185,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "Mocapan"
+  }
+},
+{
+  "type": "node",
+  "id": 9351227117,
+  "lat": 9.2962624,
+  "lon": -83.7837570,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "arab;mediterranean",
+    "name": "Amor"
+  }
+},
+{
+  "type": "node",
+  "id": 9365018450,
+  "lat": 9.9098361,
+  "lon": -84.0980042,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "15 de Setiembre de Hatillo",
+    "cuisine": "pizza",
+    "description": "Sede 23",
+    "name": "Ready Pizza",
+    "start_date": "2021-12-20"
+  }
+},
+{
+  "type": "node",
+  "id": 9365928487,
+  "lat": 9.9397991,
+  "lon": -84.1454214,
+  "tags": {
+    "addr:city": "San Rafael",
+    "addr:housenumber": "Mercado Gastronómico El Mestizo",
+    "addr:postcode": "10203",
+    "addr:street": "Autopista Próspero Fernández",
+    "amenity": "restaurant",
+    "cuisine": "european",
+    "diet:healthy": "yes",
+    "name": "Tredlo",
+    "phone": "+50663700410"
+  }
+},
+{
+  "type": "node",
+  "id": 9382950314,
+  "lat": 9.9342392,
+  "lon": -84.0630544,
+  "tags": {
+    "addr:city": "San José",
+    "addr:postcode": "11506",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/GiaPastries",
+    "diet:vegan": "only",
+    "email": "giapastries@gmail.com",
+    "name": "Gia Vegan Pastries",
+    "phone": "+506 8711 0495"
+  }
+},
+{
+  "type": "node",
+  "id": 9382959397,
+  "lat": 9.9306672,
+  "lon": -84.0721045,
+  "tags": {
+    "addr:city": "San José",
+    "addr:postcode": "10101",
+    "addr:street": "Calle 15 Miguel Hidalgo y Costilla",
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Fresco",
+    "opening_hours": "We-Sa 10:00-18:00; Su 11:00-16:00",
+    "phone": "+506 7244 0092"
+  }
+},
+{
+  "type": "node",
+  "id": 9391070118,
+  "lat": 6.1937586,
+  "lon": -75.2873541,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Alto del Chocho"
+  }
+},
+{
+  "type": "node",
+  "id": 9451534635,
+  "lat": 9.9207777,
+  "lon": -84.2409547,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Fenway"
+  }
+},
+{
+  "type": "node",
+  "id": 9467249892,
+  "lat": 9.9410891,
+  "lon": -84.1180134,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:vegan": "only",
+    "name": "Earthly Kitchen"
+  }
+},
+{
+  "type": "node",
+  "id": 9586661609,
+  "lat": 9.8438727,
+  "lon": -84.3141220,
+  "tags": {
+    "addr:city": "Santiago",
+    "amenity": "restaurant",
+    "branch": "Puriscal",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "brand:wikipedia": "en:Pizza Hut",
+    "cuisine": "pizza",
+    "description": "Camión de comida",
+    "name": "Pizza Hut",
+    "phone": "2290 9595",
+    "website": "https://pizzahutcr.com"
+  }
+},
+{
+  "type": "node",
+  "id": 9599819036,
+  "lat": 9.7505413,
+  "lon": -84.0536170,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza;coffee_shop;burger",
+    "name": "Rincón de las Delicias",
+    "opening_hours": "Tu-Su 09:00-21:00",
+    "phone": "+506 63896646"
+  }
+},
+{
+  "type": "node",
+  "id": 9643953898,
+  "lat": 9.9225283,
+  "lon": -84.0690769,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizzería Maná"
+  }
+},
+{
+  "type": "node",
+  "id": 9656520917,
+  "lat": 9.9332079,
+  "lon": -84.2282175,
+  "tags": {
+    "addr:street": "Del Río Plaza, Santa Ana",
+    "amenity": "restaurant",
+    "contact:facebook": "Rodriguez1steakhouseII",
+    "cuisine": "barbecue;burger;grill;steak_house",
+    "email": "losrodriguezsteakhouse@gmail.com",
+    "name": "Los Rodriguez",
+    "opening_hours": "Su 12:00-20:00; Tu 12:00-15:00, 18:00-20:00; We-Sa 12:00-15:00, 18:00-22:00",
+    "phone": "+506 4703 0769"
+  }
+},
+{
+  "type": "node",
+  "id": 9668670514,
+  "lat": 9.9434546,
+  "lon": -84.0760218,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "steak_house",
+    "name": "Jr. Ribs"
+  }
+},
+{
+  "type": "node",
+  "id": 9671213417,
+  "lat": 9.9247105,
+  "lon": -84.2407644,
+  "tags": {
+    "addr:street": "Radial Colón",
+    "amenity": "restaurant",
+    "contact:facebook": "blinchikruso",
+    "cuisine": "russian",
+    "name": "Blinchik Ruso",
+    "opening_hours": "Mo-Su 12:00-20:00",
+    "phone": "+50688340404"
+  }
+},
+{
+  "type": "node",
+  "id": 9703868317,
+  "lat": 9.9334431,
+  "lon": -84.1168620,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "breakfast;italian;sandwich",
+    "diet:vegan": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Mixt"
+  }
+},
+{
+  "type": "node",
+  "id": 9705630958,
+  "lat": 9.4648019,
+  "lon": -83.5991847,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Descanso"
+  }
+},
+{
+  "type": "node",
+  "id": 9739928034,
+  "lat": 9.9448907,
+  "lon": -84.1164044,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian;korean",
+    "name": "Little Seoul"
+  }
+},
+{
+  "type": "node",
+  "id": 9791145317,
+  "lat": 9.9322264,
+  "lon": -84.0658414,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "La California",
+    "cuisine": "pizza",
+    "description": "Sede 34",
+    "indoor_seating": "yes",
+    "name": "Ready Pizza",
+    "outdoor_seating": "no",
+    "start_date": "2022-06-10"
+  }
+},
+{
+  "type": "node",
+  "id": 9791145318,
+  "lat": 9.9322532,
+  "lon": -84.0729730,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 2 Libertador Juan Rafael Mora Porras",
+    "amenity": "restaurant",
+    "branch": "Central San José",
+    "cuisine": "pizza",
+    "description": "Sede 10",
+    "name": "Ready Pizza",
+    "start_date": "2020-07-25"
+  }
+},
+{
+  "type": "node",
+  "id": 9802439662,
+  "lat": 9.9774338,
+  "lon": -84.0069806,
+  "tags": {
+    "addr:city": "San Isidro",
+    "addr:housenumber": "DIAGONAL A LA CARNICERIA LA CENTRAL",
+    "addr:postcode": "11101",
+    "addr:street": "Avenida 95",
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "diet:meat": "yes",
+    "name": "Soda Malex",
+    "opening_hours": "11 00 -22 50",
+    "phone": "506 22926736",
+    "takeaway": "only"
+  }
+},
+{
+  "type": "node",
+  "id": 9820721317,
+  "lat": 9.9335186,
+  "lon": -84.0613228,
+  "tags": {
+    "amenity": "restaurant",
+    "indoor_seating": "yes",
+    "name": "La Trattoria",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9842751900,
+  "lat": 9.3740061,
+  "lon": -83.7115936,
+  "tags": {
+    "addr:city": "San Isidor del General",
+    "addr:postcode": "11901",
+    "addr:street": "Calle Moya",
+    "amenity": "restaurant",
+    "name": "Restaurante El Tenedor"
+  }
+},
+{
+  "type": "node",
+  "id": 9862559323,
+  "lat": 9.9539516,
+  "lon": -84.1939103,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza Foti's"
+  }
+},
+{
+  "type": "node",
+  "id": 9862592283,
+  "lat": 9.9574789,
+  "lon": -84.1962430,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "brand": "Olive Garden",
+    "brand:wikidata": "Q3045312",
+    "cuisine": "italian",
+    "name": "Olive Garden"
+  }
+},
+{
+  "type": "node",
+  "id": 9862592293,
+  "lat": 9.9576280,
+  "lon": -84.1966115,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "name": "La Fonda Azteca"
+  }
+},
+{
+  "type": "node",
+  "id": 9862592303,
+  "lat": 9.9575087,
+  "lon": -84.1963578,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Nación Sushi",
+    "office": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9863113340,
+  "lat": 9.9510902,
+  "lon": -84.1941311,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "cuisine": "chinese",
+    "name": "Canton"
+  }
+},
+{
+  "type": "node",
+  "id": 9869468981,
+  "lat": 9.9088573,
+  "lon": -84.0852785,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 9869468985,
+  "lat": 9.9088313,
+  "lon": -84.0851319,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Satay San Sebastián"
+  }
+},
+{
+  "type": "node",
+  "id": 9875680179,
+  "lat": 9.9320597,
+  "lon": -84.1829323,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "cuisine": "pizza",
+    "name": "Pizza Express",
+    "not:brand:wikidata": "Q662845"
+  }
+},
+{
+  "type": "node",
+  "id": 9878291744,
+  "lat": 9.9107370,
+  "lon": -84.0179500,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Pinares",
+    "cuisine": "japanese",
+    "name": "Matsuri"
+  }
+},
+{
+  "type": "node",
+  "id": 9923360035,
+  "lat": 9.9303659,
+  "lon": -84.1034799,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "vietnamese",
+    "name": "Pho Yummy"
+  }
+},
+{
+  "type": "node",
+  "id": 9923473819,
+  "lat": 9.9511316,
+  "lon": -84.1962114,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "cuisine": "steak_house;argentinian",
+    "name": "El Novillo Alegre"
+  }
+},
+{
+  "type": "node",
+  "id": 9928411049,
+  "lat": 9.9083582,
+  "lon": -84.0176340,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Ayarco",
+    "cuisine": "japanese",
+    "name": "Matsuri"
+  }
+},
+{
+  "type": "node",
+  "id": 9928411050,
+  "lat": 9.9217369,
+  "lon": -84.0443074,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "cuisine": "japanese",
+    "name": "Matsuri"
+  }
+},
+{
+  "type": "node",
+  "id": 9930591552,
+  "lat": 9.8913139,
+  "lon": -84.0638155,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Gravilias",
+    "cuisine": "pizza",
+    "description": "Sede 11",
+    "name": "Ready Pizza",
+    "start_date": "2020-10-23"
+  }
+},
+{
+  "type": "node",
+  "id": 9930796507,
+  "lat": 9.9311462,
+  "lon": -84.1840495,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "cuisine": "pizza",
+    "description": "Sede 13",
+    "name": "Ready Pizza",
+    "start_date": "2021-01-03"
+  }
+},
+{
+  "type": "node",
+  "id": 9977539166,
+  "lat": 9.2577720,
+  "lon": -83.5565796,
+  "tags": {
+    "addr:city": "San Pedro",
+    "amenity": "restaurant",
+    "name": "Bar y Restaurante Colochos"
+  }
+},
+{
+  "type": "node",
+  "id": 10017082277,
+  "lat": 9.9372141,
+  "lon": -84.0769487,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "presidente roosevelt",
+    "addr:postcode": "10101",
+    "addr:street": "Avenida 7 Presidente Roosevelt",
+    "amenity": "restaurant",
+    "cuisine": "peruvian;international;seafood",
+    "name": "Peruvian Point",
+    "phone": "+50663115825"
+  }
+},
+{
+  "type": "node",
+  "id": 10017096074,
+  "lat": 9.9371983,
+  "lon": -84.0768808,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "av. 7",
+    "addr:postcode": "10101",
+    "addr:street": "Avenida 7 Presidente Roosevelt",
+    "amenity": "restaurant",
+    "cuisine": "pizza;chinese;italian;international;regional",
+    "name": "Restaurante Sabor Real de la Abuela",
+    "opening_hours": "24/7",
+    "phone": "+50663115825",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10050061832,
+  "lat": 9.9380485,
+  "lon": -84.0873713,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "venezualan",
+    "name": "El Canon de las Guaras",
+    "phone": "47013423"
+  }
+},
+{
+  "type": "node",
+  "id": 10077730564,
+  "lat": 9.9327358,
+  "lon": -84.0730024,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Nena"
+  }
+},
+{
+  "type": "node",
+  "id": 10078597429,
+  "lat": 9.9315072,
+  "lon": -84.0681176,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "peruvian",
+    "name": "Valcina Cocina Peruana"
+  }
+},
+{
+  "type": "node",
+  "id": 10140528634,
+  "lat": 9.9128008,
+  "lon": -84.0691631,
+  "tags": {
+    "addr:city": "Parque de la Paz",
+    "addr:street": "Calle 21",
+    "amenity": "restaurant",
+    "contact:facebook": "https://www.facebook.com/VeganNoise",
+    "diet:vegan": "only",
+    "name": "Vegan Noise",
+    "opening_hours": "Tu-Su 12:00-21:30",
+    "phone": "+506 6071 7075"
+  }
+},
+{
+  "type": "node",
+  "id": 10152520723,
+  "lat": 9.9328875,
+  "lon": -84.1799647,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Reception"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695173,
+  "lat": 9.9345421,
+  "lon": -84.1866455,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Mahi-Mahi",
+    "phone": "+506 8471 0552"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695174,
+  "lat": 9.9346002,
+  "lon": -84.1865315,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Piccola Italia",
+    "phone": "+506 4030 0238"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695175,
+  "lat": 9.9343334,
+  "lon": -84.1864201,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "spanish",
+    "name": "3 Croquetas",
+    "phone": "+506 7164 6995"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695176,
+  "lat": 9.9343096,
+  "lon": -84.1864885,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Boca e Jarro",
+    "phone": "+506 4034 9045"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695177,
+  "lat": 9.9341881,
+  "lon": -84.1865180,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "caribbean",
+    "name": "Ackee Caribbean + Fusion",
+    "phone": "+506 8302 6446"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695178,
+  "lat": 9.9342040,
+  "lon": -84.1864456,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "name": "Distrito Federal",
+    "phone": "+506 7104 3098;+506 4034 9025"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695179,
+  "lat": 9.9345117,
+  "lon": -84.1865449,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mediterranean",
+    "name": "Sardi Cucina Mediterranea",
+    "phone": "+506 8745 4509"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695180,
+  "lat": 9.9343942,
+  "lon": -84.1865073,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cantinita",
+    "phone": "+506 4030 1818"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695181,
+  "lat": 9.9342766,
+  "lon": -84.1863973,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "peruvian;brazilian",
+    "name": "Inca Samba",
+    "phone": "+506 8792 4892"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695182,
+  "lat": 9.9344021,
+  "lon": -84.1864537,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Nachos El Circo"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695183,
+  "lat": 9.9344549,
+  "lon": -84.1865274,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Logan’s Lobster"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695184,
+  "lat": 9.9345250,
+  "lon": -84.1867085,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Sie7e Food & Drinks"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695185,
+  "lat": 9.9345950,
+  "lon": -84.1867527,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "indian",
+    "name": "Rasoi"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695186,
+  "lat": 9.9342079,
+  "lon": -84.1863719,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Carne Al Fuego by Chef Rafael"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695187,
+  "lat": 9.9345170,
+  "lon": -84.1867608,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pollo Al Fuego by Chef Rafael"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695188,
+  "lat": 9.9345765,
+  "lon": -84.1868359,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "korean",
+    "name": "Kimchis"
+  }
+},
+{
+  "type": "node",
+  "id": 10160695189,
+  "lat": 9.9346333,
+  "lon": -84.1865918,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Empanatta"
+  }
+},
+{
+  "type": "node",
+  "id": 10174957878,
+  "lat": 9.9206902,
+  "lon": -84.0202449,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "brand": "Olive Garden",
+    "brand:wikidata": "Q3045312",
+    "cuisine": "italian",
+    "name": "Olive Garden"
+  }
+},
+{
+  "type": "node",
+  "id": 10208813141,
+  "lat": 9.9447321,
+  "lon": -84.0352298,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "description": "Ubicación exacta no definida aún. Sede 48",
+    "name": "Ready Pizza Sabanilla"
+  }
+},
+{
+  "type": "node",
+  "id": 10266412426,
+  "lat": 9.9353650,
+  "lon": -84.0656077,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2024-09-22",
+    "delivery": "yes",
+    "diet:gluten_free": "only",
+    "diet:vegan": "only",
+    "name": "Sopitas",
+    "opening_hours": "Mo,Sa 11:30-19:00; Tu,Su 11:30-19:30; We-Fr 11:30-21:00",
+    "takeaway": "yes",
+    "website": "https://sopitas.ola.click/"
+  }
+},
+{
+  "type": "node",
+  "id": 10267843275,
+  "lat": 9.9440774,
+  "lon": -84.1511705,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Escazú",
+    "name": "Ta'Bueno"
+  }
+},
+{
+  "type": "node",
+  "id": 10267843276,
+  "lat": 9.9439641,
+  "lon": -84.1511954,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Esscazú",
+    "name": "Señor Parrilla"
+  }
+},
+{
+  "type": "node",
+  "id": 10267843277,
+  "lat": 9.9439285,
+  "lon": -84.1511773,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Multiplaza Escazú",
+    "cuisine": "japanese",
+    "name": "Teriyaki"
+  }
+},
+{
+  "type": "node",
+  "id": 10267843282,
+  "lat": 9.9436680,
+  "lon": -84.1511711,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Multiplaza Escazú",
+    "cuisine": "japanese",
+    "name": "Satay"
+  }
+},
+{
+  "type": "node",
+  "id": 10267843284,
+  "lat": 9.9435826,
+  "lon": -84.1509581,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Multiplaza Escazú",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 10270444116,
+  "lat": 9.4653652,
+  "lon": -83.6007314,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Cafeteria Jardines Secretos"
+  }
+},
+{
+  "type": "node",
+  "id": 10270750012,
+  "lat": 9.9284968,
+  "lon": -84.2413851,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Mora",
+    "cuisine": "pizza",
+    "name": "Pizzería Artesanal Alloro"
+  }
+},
+{
+  "type": "node",
+  "id": 10294392954,
+  "lat": 6.1939018,
+  "lon": -75.2875965,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Sabrosura"
+  }
+},
+{
+  "type": "node",
+  "id": 10301071798,
+  "lat": 9.9367981,
+  "lon": -84.0798341,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "av 5",
+    "addr:postcode": "10101",
+    "addr:street": "Avenida Mauro Fernández",
+    "amenity": "restaurant",
+    "cuisine": "pizza;pasta;reposteria",
+    "name": "pizzeria pizza club cr",
+    "opening_hours": "07:00-21:00",
+    "phone": "+506 63115825"
+  }
+},
+{
+  "type": "node",
+  "id": 10524189985,
+  "lat": 9.9347012,
+  "lon": -84.0636052,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-01-09",
+    "cuisine": "asian",
+    "name": "Mr. Wu"
+  }
+},
+{
+  "type": "node",
+  "id": 10537733860,
+  "lat": 9.9188422,
+  "lon": -84.1934925,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-01-10",
+    "name": "La Burra"
+  }
+},
+{
+  "type": "node",
+  "id": 10567895361,
+  "lat": 9.6842898,
+  "lon": -84.0419221,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Victor's café"
+  }
+},
+{
+  "type": "node",
+  "id": 10676412555,
+  "lat": 9.9730728,
+  "lon": -84.0166139,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "El Rincón de los Abuelos"
+  }
+},
+{
+  "type": "node",
+  "id": 10685469406,
+  "lat": 9.9618599,
+  "lon": -84.0473262,
+  "tags": {
+    "addr:city": "Moravia",
+    "addr:housenumber": "102",
+    "addr:postcode": "11401",
+    "addr:street": "Avenida 65",
+    "amenity": "restaurant",
+    "name": "El Chante Sport",
+    "phone": "63368586"
+  }
+},
+{
+  "type": "node",
+  "id": 10688354705,
+  "lat": -7.3342304,
+  "lon": -79.4892138,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Miraflores"
+  }
+},
+{
+  "type": "node",
+  "id": 10724183828,
+  "lat": 9.3903905,
+  "lon": -83.6844124,
+  "tags": {
+    "addr:city": "San Isidro de El General",
+    "addr:street": "Vía 242",
+    "amenity": "restaurant",
+    "name": "Amaretto"
+  }
+},
+{
+  "type": "node",
+  "id": 10769176555,
+  "lat": 9.9315765,
+  "lon": -84.0443244,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Marcis"
+  }
+},
+{
+  "type": "node",
+  "id": 10769219184,
+  "lat": 9.9622432,
+  "lon": -84.0221590,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pizzeria Piolín"
+  }
+},
+{
+  "type": "node",
+  "id": 10769219185,
+  "lat": 9.9621781,
+  "lon": -84.0210147,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante  Marisquería el delfín",
+    "phone": "22923310"
+  }
+},
+{
+  "type": "node",
+  "id": 10769279374,
+  "lat": 9.9774099,
+  "lon": -84.0064628,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "burger;coffee_shop;sandwich",
+    "name": "Delicias Solamavi"
+  }
+},
+{
+  "type": "node",
+  "id": 10769279380,
+  "lat": 9.9704355,
+  "lon": -83.9978552,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda la Torre"
+  }
+},
+{
+  "type": "node",
+  "id": 10769279383,
+  "lat": 9.9714987,
+  "lon": -83.9975280,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Wings Kingdom"
+  }
+},
+{
+  "type": "node",
+  "id": 10769279391,
+  "lat": 9.9755930,
+  "lon": -84.0180986,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Sharon's"
+  }
+},
+{
+  "type": "node",
+  "id": 10769279392,
+  "lat": 9.9756565,
+  "lon": -84.0084587,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Ready's Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 10773910097,
+  "lat": 9.9361296,
+  "lon": -84.0401262,
+  "tags": {
+    "addr:city": "Vargas Araya",
+    "addr:postcode": "11501",
+    "addr:street": "Avenida 15",
+    "amenity": "restaurant",
+    "cuisine": "seafood;burger;fish;pasta",
+    "name": "Océano"
+  }
+},
+{
+  "type": "node",
+  "id": 10783305555,
+  "lat": 9.9640963,
+  "lon": -84.0232669,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Richie's pizza",
+    "phone": "22292829"
+  }
+},
+{
+  "type": "node",
+  "id": 10783376947,
+  "lat": 9.9686125,
+  "lon": -84.0174414,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Chispy Churros"
+  }
+},
+{
+  "type": "node",
+  "id": 10788847245,
+  "lat": 9.8474674,
+  "lon": -84.3168458,
+  "tags": {
+    "addr:city": "Santiago",
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Pizza Suarez"
+  }
+},
+{
+  "type": "node",
+  "id": 10788868562,
+  "lat": 9.8473730,
+  "lon": -84.3165052,
+  "tags": {
+    "addr:city": "Santiago",
+    "amenity": "restaurant",
+    "name": "Encuentros Cocina de Autor"
+  }
+},
+{
+  "type": "node",
+  "id": 10790698678,
+  "lat": 9.8545982,
+  "lon": -84.0968449,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bar y Restaurante El Ranchito"
+  }
+},
+{
+  "type": "node",
+  "id": 10790698694,
+  "lat": 9.8492532,
+  "lon": -84.0892495,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Hacienda Salitrillos"
+  }
+},
+{
+  "type": "node",
+  "id": 10790744213,
+  "lat": 9.8679349,
+  "lon": -84.0864551,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Restaurante Buena Vista"
+  }
+},
+{
+  "type": "node",
+  "id": 10793747691,
+  "lat": 9.9342849,
+  "lon": -84.1300052,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Johnny Rockets",
+    "brand:wikidata": "Q1051593",
+    "cuisine": "burger",
+    "name": "Johnny Rockets",
+    "opening_hours": "Mo-Su 11:00-21:00",
+    "website": "https://johnnyrockets.co.cr/"
+  }
+},
+{
+  "type": "node",
+  "id": 10793747693,
+  "lat": 9.9338348,
+  "lon": -84.1294352,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Olive Garden",
+    "brand:wikidata": "Q3045312",
+    "cuisine": "italian",
+    "name": "Olive Garden",
+    "opening_hours": "Mo-Su 11:00-22:00",
+    "website": "https://olivegarden.cr/"
+  }
+},
+{
+  "type": "node",
+  "id": 10793747694,
+  "lat": 9.9340443,
+  "lon": -84.1301038,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "name": "Nación Sushi",
+    "opening_hours": "Mo-Su 11:30-23:00",
+    "phone": "2208 8888",
+    "website": "https://nacionsushi.com/cr/"
+  }
+},
+{
+  "type": "node",
+  "id": 10793814451,
+  "lat": 9.9341614,
+  "lon": -84.0786776,
+  "tags": {
+    "amenity": "restaurant",
+    "brand": "Johnny Rockets",
+    "brand:wikidata": "Q1051593",
+    "cuisine": "burger",
+    "name": "Johnny Rockets",
+    "website": "https://johnnyrockets.co.cr/"
+  }
+},
+{
+  "type": "node",
+  "id": 10793990002,
+  "lat": 9.4049052,
+  "lon": -83.6707260,
+  "tags": {
+    "addr:postcode": "11904",
+    "amenity": "restaurant",
+    "cuisine": "local",
+    "name": "Atojos del Maiz",
+    "opening_hours": "We-Mo 08:00-19:00",
+    "phone": "27724381"
+  }
+},
+{
+  "type": "node",
+  "id": 10793990003,
+  "lat": 9.9331972,
+  "lon": -84.0543958,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "colombian",
+    "name": "Caprichos San Pedro",
+    "opening_hours": "Mo-Su 11:00-22:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10798211041,
+  "lat": 9.9376689,
+  "lon": -84.0410693,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "fish;fish_and_chips;sandwich",
+    "name": "Fish and Patacón"
+  }
+},
+{
+  "type": "node",
+  "id": 10798248379,
+  "lat": 9.9385763,
+  "lon": -84.0333138,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chinese"
+  }
+},
+{
+  "type": "node",
+  "id": 10800509917,
+  "lat": 9.6544969,
+  "lon": -83.9698328,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Las Parra"
+  }
+},
+{
+  "type": "node",
+  "id": 10827518427,
+  "lat": 9.9189701,
+  "lon": -84.0476961,
+  "tags": {
+    "addr:city": "Curridabat",
+    "addr:street": "Vía 215",
+    "amenity": "restaurant",
+    "name": "Invictus Restaurant & Lounge"
+  }
+},
+{
+  "type": "node",
+  "id": 10828162885,
+  "lat": 9.9408547,
+  "lon": -84.1219692,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Vía 104",
+    "amenity": "restaurant",
+    "name": "Winner's",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 10831228457,
+  "lat": 9.9440447,
+  "lon": -84.1509698,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "The Crew"
+  }
+},
+{
+  "type": "node",
+  "id": 10846828818,
+  "lat": 9.9468908,
+  "lon": -84.0549391,
+  "tags": {
+    "addr:city": "Guadalupe",
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Indio Comido",
+    "opening_hours": "Mo-Su 10:00-21:00"
+  }
+},
+{
+  "type": "node",
+  "id": 10869907221,
+  "lat": 9.8747633,
+  "lon": -84.1222653,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "description:en": "Local farm resturant with covered view porch. No road access, all supplies are brought up by horse or water buffalo.",
+    "name": "Comidas Finca Lajas Donde Toño",
+    "operator": "Toño",
+    "outdoor_seating": "yes",
+    "reservation": "no",
+    "smoking": "outside",
+    "takeaway": "no",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 10871873956,
+  "lat": 9.9363206,
+  "lon": -84.0798200,
+  "tags": {
+    "addr:housenumber": "2",
+    "addr:street": "calle, costa rica",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "pizza club cr",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "phone": "+50661335825"
+  }
+},
+{
+  "type": "node",
+  "id": 10871887348,
+  "lat": 9.9363099,
+  "lon": -84.0798060,
+  "tags": {
+    "addr:city": "Merced",
+    "addr:housenumber": "2",
+    "addr:postcode": "10101",
+    "addr:street": "Calle 2 Juan Rafael Mora Porras",
+    "amenity": "restaurant",
+    "cuisine": "international;regional;coffee_shop",
+    "name": "sabor real de la abuela",
+    "opening_hours": "Mo-Su 09:00-21:00",
+    "phone": "+50661335825"
+  }
+},
+{
+  "type": "node",
+  "id": 10874441237,
+  "lat": 9.9377669,
+  "lon": -84.0713199,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 15",
+    "amenity": "restaurant",
+    "name": "La Esquinita de La Abuela",
+    "smoking": "no",
+    "toilets": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10879222434,
+  "lat": 9.9369928,
+  "lon": -84.0759041,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 7 Presidente Roosevelt",
+    "amenity": "restaurant",
+    "cuisine": "egipcia",
+    "name": "Al Masri Restaurante"
+  }
+},
+{
+  "type": "node",
+  "id": 10879320078,
+  "lat": 9.9370671,
+  "lon": -84.0762910,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 7 Presidente Roosevelt",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Taberna Restaurante Poás",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 10880126154,
+  "lat": 9.9360550,
+  "lon": -84.0779840,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 1",
+    "amenity": "restaurant",
+    "name": "Yud Fad #1",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 10881745897,
+  "lat": 9.9346507,
+  "lon": -84.0759268,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 1",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "Lung Mun",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 10884176286,
+  "lat": 9.9342434,
+  "lon": -84.0724797,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Pataconería"
+  }
+},
+{
+  "type": "node",
+  "id": 10884222882,
+  "lat": 9.9335510,
+  "lon": -84.0729443,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "0133",
+    "addr:street": "Avenida Central",
+    "amenity": "restaurant",
+    "check_date": "2023-01-08",
+    "cuisine": "korean",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "name": "Fritos",
+    "source": "KG Ground Survey 2015",
+    "website": "https://m.facebook.com/pages/Restaurante-Wong/169458653108914"
+  }
+},
+{
+  "type": "node",
+  "id": 10884410098,
+  "lat": 9.9333512,
+  "lon": -84.0692221,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Nepería"
+  }
+},
+{
+  "type": "node",
+  "id": 10884410102,
+  "lat": 9.9338801,
+  "lon": -84.0692016,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 1",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Pastas Frescas",
+    "source": "KG Ground Survey 2014"
+  }
+},
+{
+  "type": "node",
+  "id": 10886854421,
+  "lat": 9.9291547,
+  "lon": -84.0643186,
+  "tags": {
+    "addr:city": "San José",
+    "amenity": "restaurant",
+    "cuisine": "regional",
+    "name": "Soda El Típico"
+  }
+},
+{
+  "type": "node",
+  "id": 10891851928,
+  "lat": 9.9303203,
+  "lon": -84.0654988,
+  "tags": {
+    "addr:city": "San José",
+    "addr:housenumber": "0095",
+    "addr:street": "Avenida 8 Omar Dengo",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Il Ritorno",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 10895056085,
+  "lat": -34.7675855,
+  "lon": -58.3270347,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 10902397069,
+  "lat": 9.9288208,
+  "lon": -84.0711717,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Gusticos"
+  }
+},
+{
+  "type": "node",
+  "id": 10903737779,
+  "lat": 9.9300144,
+  "lon": -84.0707319,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8 Simón Bolívar",
+    "amenity": "restaurant",
+    "name": "Soda Tacos Tumbras",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 10903737785,
+  "lat": 9.9300137,
+  "lon": -84.0706988,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8 Simón Bolívar",
+    "amenity": "restaurant",
+    "name": "Empanadas El Frontón",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 10904172482,
+  "lat": 9.9300212,
+  "lon": -84.0714112,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 8 Simón Bolívar",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Restaurante Alpino",
+    "name:it": "Ristorante Alpino"
+  }
+},
+{
+  "type": "node",
+  "id": 10925258012,
+  "lat": 9.8785356,
+  "lon": -84.0693109,
+  "tags": {
+    "addr:city": "San Miguel",
+    "addr:street": "Calle Lomas",
+    "amenity": "restaurant",
+    "name": "Rancho Las Lomas"
+  }
+},
+{
+  "type": "node",
+  "id": 10943427305,
+  "lat": 9.9299314,
+  "lon": -84.0837649,
+  "tags": {
+    "amenity": "restaurant",
+    "internet_access": "wlan",
+    "name": "Restaurante Chavelona"
+  }
+},
+{
+  "type": "node",
+  "id": 11024061527,
+  "lat": 9.6844174,
+  "lon": -84.0422734,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pollo Crack"
+  }
+},
+{
+  "type": "node",
+  "id": 11033560159,
+  "lat": 9.9047753,
+  "lon": -84.1299612,
+  "tags": {
+    "addr:city": "San Antonio",
+    "addr:street": "Calle Palo Campana",
+    "amenity": "restaurant",
+    "name": "Feróz"
+  }
+},
+{
+  "type": "node",
+  "id": 11072363813,
+  "lat": 9.9401787,
+  "lon": -84.0555558,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Montes de Oca",
+    "cuisine": "italian",
+    "name": "Pane e Vino"
+  }
+},
+{
+  "type": "node",
+  "id": 11072363814,
+  "lat": 9.9403474,
+  "lon": -84.0555371,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Montes de Oca",
+    "cuisine": "italian",
+    "name": "Così"
+  }
+},
+{
+  "type": "node",
+  "id": 11077340136,
+  "lat": 9.3785423,
+  "lon": -83.6874338,
+  "tags": {
+    "amenity": "restaurant",
+    "bar": "yes",
+    "cuisine": "steak_house",
+    "delivery": "yes",
+    "diet:meat": "yes",
+    "name": "Mulas BBQ",
+    "outdoor_seating": "yes",
+    "payment:app": "yes",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "takeaway": "yes",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "node",
+  "id": 11168001277,
+  "lat": 9.9574264,
+  "lon": -84.0657570,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;traditional;burger",
+    "name": "Cibus Restaurante y Cafeteria",
+    "opening_hours": "Mo-Su 07:00-21:00",
+    "phone": "+50689524287",
+    "website": "https://www.instagram.com/cibus506/"
+  }
+},
+{
+  "type": "node",
+  "id": 11176371738,
+  "lat": 9.8723473,
+  "lon": -84.5251162,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Turrubara"
+  }
+},
+{
+  "type": "node",
+  "id": 11180302038,
+  "lat": 9.9207518,
+  "lon": -84.0199688,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "cuisine": "chinese",
+    "name": "P. F. Changs"
+  }
+},
+{
+  "type": "node",
+  "id": 11180302039,
+  "lat": 9.9203219,
+  "lon": -84.0205417,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "cuisine": "sushi",
+    "name": "Nación Sushi"
+  }
+},
+{
+  "type": "node",
+  "id": 11191666139,
+  "lat": 9.9301571,
+  "lon": -84.0061415,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Granadilla",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 11229994741,
+  "lat": 9.9415090,
+  "lon": -84.1226239,
+  "tags": {
+    "addr:city": "Pavas",
+    "addr:street": "Vía 104",
+    "amenity": "restaurant",
+    "name": "Finca el Corral",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 11232798623,
+  "lat": 9.9482857,
+  "lon": -84.1100330,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 68A",
+    "amenity": "restaurant",
+    "branch": "San José",
+    "brand": "Denny's",
+    "brand:wikidata": "Q1189695",
+    "brand:wikipedia": "en:Denny's",
+    "cuisine": "american",
+    "name": "Denny's San José"
+  }
+},
+{
+  "type": "node",
+  "id": 11232829329,
+  "lat": 9.9475249,
+  "lon": -84.1094678,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Gallera"
+  }
+},
+{
+  "type": "node",
+  "id": 11238726130,
+  "lat": 9.9435491,
+  "lon": -84.0157506,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Fiesta"
+  }
+},
+{
+  "type": "node",
+  "id": 11271872430,
+  "lat": 9.9347886,
+  "lon": -84.0697635,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Pizza Oliva"
+  }
+},
+{
+  "type": "node",
+  "id": 11276479224,
+  "lat": 9.9318023,
+  "lon": -84.1506060,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Escazú",
+    "cuisine": "pizza",
+    "name": "Picola Pizza"
+  }
+},
+{
+  "type": "node",
+  "id": 11280453560,
+  "lat": 9.9577951,
+  "lon": -84.1107645,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Jeanina"
+  }
+},
+{
+  "type": "node",
+  "id": 11285190122,
+  "lat": 9.9302702,
+  "lon": -84.0731535,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "FAM Burger"
+  }
+},
+{
+  "type": "node",
+  "id": 11285250075,
+  "lat": 9.9272776,
+  "lon": -84.0752717,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Reina del Sur"
+  }
+},
+{
+  "type": "node",
+  "id": 11288966822,
+  "lat": 9.9277617,
+  "lon": -84.0757205,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Avenida 14",
+    "amenity": "restaurant",
+    "name": "Deliciosas Bocas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 11289638615,
+  "lat": 9.9275458,
+  "lon": -84.0755581,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle 9",
+    "amenity": "restaurant",
+    "name": "Centro de Hamburguesas",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 11300667669,
+  "lat": 9.9152193,
+  "lon": -84.2413216,
+  "tags": {
+    "amenity": "restaurant",
+    "name:en": "Soda Lino"
+  }
+},
+{
+  "type": "node",
+  "id": 11300667769,
+  "lat": 9.9320633,
+  "lon": -84.0832983,
+  "tags": {
+    "amenity": "restaurant",
+    "name:en": "soda"
+  }
+},
+{
+  "type": "node",
+  "id": 11303344737,
+  "lat": 9.9301340,
+  "lon": -84.0734590,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "korean",
+    "name": "Meet Korean"
+  }
+},
+{
+  "type": "node",
+  "id": 11303344739,
+  "lat": 9.9301343,
+  "lon": -84.0733295,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Shakti"
+  }
+},
+{
+  "type": "node",
+  "id": 11308099197,
+  "lat": 9.9956644,
+  "lon": -83.9239868,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2023-11-02",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "level": "0",
+    "payment:cash": "yes",
+    "payment:credit_cards": "yes",
+    "payment:debit_cards": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11364946856,
+  "lat": 9.3999326,
+  "lon": -83.7140417,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Banderas"
+  }
+},
+{
+  "type": "node",
+  "id": 11365026833,
+  "lat": 9.3963282,
+  "lon": -83.7153293,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Los Pinos"
+  }
+},
+{
+  "type": "node",
+  "id": 11386805149,
+  "lat": 9.5507638,
+  "lon": -83.8081553,
+  "tags": {
+    "air_conditioning": "yes",
+    "amenity": "restaurant",
+    "diet:vegan": "no",
+    "diet:vegetarian": "yes",
+    "indoor_seating": "yes",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "name": "Las Bromelias",
+    "operator": "Savegre Mountain Lodge",
+    "outdoor_seating": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11409953135,
+  "lat": 9.9115420,
+  "lon": -84.1106509,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Alajuelita",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 11409953138,
+  "lat": 9.9113280,
+  "lon": -84.1103259,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "asian",
+    "name": "Satay Hungry"
+  }
+},
+{
+  "type": "node",
+  "id": 11415279488,
+  "lat": 9.9387377,
+  "lon": -84.1104266,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop;bakery;breakfast",
+    "name": "Franco",
+    "opening_hours": "Mo-Fr 07:00-21:00, Sa 08:00-21:00, Su 08:00-19:00",
+    "phone": "86181414",
+    "website": "https://franco.cr/"
+  }
+},
+{
+  "type": "node",
+  "id": 11447400343,
+  "lat": 9.9311961,
+  "lon": -84.1809013,
+  "tags": {
+    "addr:city": "Santa Ana",
+    "addr:street": "Avenida 2",
+    "amenity": "restaurant",
+    "name": "El Coco Bar & Restaurante",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 11540837828,
+  "lat": 9.3757470,
+  "lon": -83.7072403,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "seafood",
+    "name": "Rey del Mar",
+    "toilets": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11729901981,
+  "lat": 9.3683075,
+  "lon": -83.7017181,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Ceviche El Rio"
+  }
+},
+{
+  "type": "node",
+  "id": 11844554514,
+  "lat": 10.9554449,
+  "lon": -85.1334994,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Pa Picar"
+  }
+},
+{
+  "type": "node",
+  "id": 11844554515,
+  "lat": 10.9561330,
+  "lon": -85.1331356,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Éxito"
+  }
+},
+{
+  "type": "node",
+  "id": 11948162186,
+  "lat": 10.0262253,
+  "lon": -84.0222216,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Calle Santa Elena",
+    "amenity": "restaurant",
+    "cuisine": "italian",
+    "name": "Trattoria Il - Gusto Toscano"
+  }
+},
+{
+  "type": "node",
+  "id": 11948525006,
+  "lat": 41.6393209,
+  "lon": -0.8859667,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2024-05-31",
+    "name": "Hamburgo's 3"
+  }
+},
+{
+  "type": "node",
+  "id": 11948525007,
+  "lat": 41.6394100,
+  "lon": -0.8859995,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2024-05-31",
+    "name": "La Petaca"
+  }
+},
+{
+  "type": "node",
+  "id": 11988834304,
+  "lat": 41.6335372,
+  "lon": -0.8753486,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date": "2025-01-05",
+    "cuisine": "pizza",
+    "name": "Pizzería Maestro",
+    "phone": "+34 876 04 22 78"
+  }
+},
+{
+  "type": "node",
+  "id": 12024621084,
+  "lat": 9.9108099,
+  "lon": -84.0179850,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Curridabat",
+    "brand": "bb.q Chicken",
+    "brand:wikidata": "Q87716489",
+    "cuisine": "korean;chicken",
+    "name": "bb.q Chicken"
+  }
+},
+{
+  "type": "node",
+  "id": 12024638869,
+  "lat": 9.9342072,
+  "lon": -84.1300355,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Escazú",
+    "brand": "bb.q Chicken",
+    "brand:wikidata": "Q87716489",
+    "cuisine": "korean;chicken",
+    "name": "bb.q Chicken"
+  }
+},
+{
+  "type": "node",
+  "id": 12044341860,
+  "lat": 9.9327076,
+  "lon": -84.0517869,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "El Candil"
+  }
+},
+{
+  "type": "node",
+  "id": 12044341862,
+  "lat": 9.9324957,
+  "lon": -84.0518514,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Patio U"
+  }
+},
+{
+  "type": "node",
+  "id": 12044580062,
+  "lat": 9.9322122,
+  "lon": -84.0503320,
+  "tags": {
+    "addr:street": "Vía 2",
+    "amenity": "restaurant",
+    "diet:vegan": "yes",
+    "name": "Neshuma",
+    "source": "KG Ground Survey 2015 Costa Rica"
+  }
+},
+{
+  "type": "node",
+  "id": 12044580064,
+  "lat": 9.9321982,
+  "lon": -84.0504267,
+  "tags": {
+    "addr:street": "Vía 2",
+    "amenity": "restaurant",
+    "cuisine": "burger",
+    "name": "Tico Burguesas",
+    "source": "KG Ground Survey 2015 Costa Rica"
+  }
+},
+{
+  "type": "node",
+  "id": 12044761696,
+  "lat": 9.9436841,
+  "lon": -84.0395677,
+  "tags": {
+    "addr:city": "San Pedro",
+    "amenity": "restaurant",
+    "branch": "San Pedro Norte",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "brand:wikipedia": "en:Pizza Hut",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 12063995674,
+  "lat": 9.6617163,
+  "lon": -84.0214732,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Big Burguer"
+  }
+},
+{
+  "type": "node",
+  "id": 12070237711,
+  "lat": 9.9293451,
+  "lon": -84.1338461,
+  "tags": {
+    "addr:city": "San Rafael de Escazú",
+    "addr:street": "Carretera John F. Kennedy",
+    "amenity": "restaurant",
+    "name": "Persian Grill",
+    "phone": "2228 2798",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 12075563123,
+  "lat": 9.9398707,
+  "lon": -84.1456060,
+  "tags": {
+    "addr:city": "San Rafael",
+    "addr:housenumber": "Plaza Tempo",
+    "addr:postcode": "10203",
+    "addr:street": "Autopista Próspero Fernández",
+    "amenity": "restaurant",
+    "name": "Mercado Gastronómico El Mestizo"
+  }
+},
+{
+  "type": "node",
+  "id": 12091183647,
+  "lat": 9.9440346,
+  "lon": -84.1509436,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Matapalo",
+    "brand": "bb.q Chicken",
+    "brand:wikidata": "Q87716489",
+    "cuisine": "korean;chicken",
+    "name": "bb.q Chicken"
+  }
+},
+{
+  "type": "node",
+  "id": 12100608001,
+  "lat": 9.9432768,
+  "lon": -84.1497210,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "mexican",
+    "name": "Santo Katrin"
+  }
+},
+{
+  "type": "node",
+  "id": 12105441394,
+  "lat": 16.9779060,
+  "lon": -89.9048865,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Playa Azul"
+  }
+},
+{
+  "type": "node",
+  "id": 12134606600,
+  "lat": 9.9096528,
+  "lon": -84.0944115,
+  "tags": {
+    "amenity": "restaurant",
+    "diet:healthy": "yes",
+    "name": "Blend"
+  }
+},
+{
+  "type": "node",
+  "id": 12134695003,
+  "lat": 9.9097708,
+  "lon": -84.0942169,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "sushi;peruvian",
+    "diet:fish": "yes",
+    "name": "Mirai Sushi & Cevichería"
+  }
+},
+{
+  "type": "node",
+  "id": 12134695011,
+  "lat": 9.9096324,
+  "lon": -84.0941570,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "traditional",
+    "level": "2",
+    "name": "La Choza de Tita"
+  }
+},
+{
+  "type": "node",
+  "id": 12154124643,
+  "lat": 9.9533819,
+  "lon": -84.1953227,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Santa Ana",
+    "brand": "bb.q Chicken",
+    "brand:wikidata": "Q87716489",
+    "cuisine": "korean;chicken",
+    "name": "bb.q Chicken"
+  }
+},
+{
+  "type": "node",
+  "id": 12353217777,
+  "lat": 9.9120444,
+  "lon": -84.0202059,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza",
+    "name": "Woods Pizza & Beer Garden Pinares"
+  }
+},
+{
+  "type": "node",
+  "id": 12353217783,
+  "lat": 9.9126167,
+  "lon": -84.0218668,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Bread House Pinares"
+  }
+},
+{
+  "type": "node",
+  "id": 12353217792,
+  "lat": 9.9123263,
+  "lon": -84.0188519,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Rostipollos Pinares"
+  }
+},
+{
+  "type": "node",
+  "id": 12368834823,
+  "lat": 9.9687299,
+  "lon": -84.0342136,
+  "tags": {
+    "amenity": "restaurant",
+    "branch": "Patalillo",
+    "brand": "Pizza Hut",
+    "brand:wikidata": "Q191615",
+    "cuisine": "pizza",
+    "name": "Pizza Hut"
+  }
+},
+{
+  "type": "node",
+  "id": 12441164416,
+  "lat": 9.2870058,
+  "lon": -83.8087170,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:currency:XBT": "2024-12-21",
+    "currency:XBT": "yes",
+    "name": "Fika Bar & Restaurant",
+    "payment:lightning": "yes",
+    "payment:onchain": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12441164420,
+  "lat": 9.3008810,
+  "lon": -83.7811571,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:currency:XBT": "2024-12-21",
+    "currency:XBT": "yes",
+    "payment:lightning": "yes",
+    "payment:onchain": "yes",
+    "phone": "+50670644890",
+    "website": "https://www.instagram.com/oroverde_ecomercado?igsh=MXdoN3FwdGM4dWR5Ng=="
+  }
+},
+{
+  "type": "node",
+  "id": 12441164422,
+  "lat": 9.3671326,
+  "lon": -83.7063982,
+  "tags": {
+    "amenity": "restaurant",
+    "check_date:currency:XBT": "2024-12-22",
+    "cuisine": "mexican",
+    "currency:XBT": "yes",
+    "name": "Aztecas",
+    "payment:lightning": "yes",
+    "payment:onchain": "yes",
+    "phone": "+50627713387",
+    "website": "https://www.facebook.com/Restaurante-Aztecas-comida-Mexicana-1753776611352237/"
+  }
+},
+{
+  "type": "node",
+  "id": 12453454877,
+  "lat": 9.9333480,
+  "lon": -84.1944471,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "coffee_shop",
+    "name": "Blackbird",
+    "operator": "Blackbird",
+    "outdoor_seating": "yes",
+    "toilets": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12459616516,
+  "lat": 9.9323005,
+  "lon": -84.1786006,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pasta;peruvian",
+    "name": "Mumis",
+    "operator": "Mumis"
+  }
+},
+{
+  "type": "node",
+  "id": 12489783901,
+  "lat": 9.9373247,
+  "lon": -84.0722737,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Mareli's kitchen"
+  }
+},
+{
+  "type": "node",
+  "id": 12492458486,
+  "lat": 9.9432475,
+  "lon": -84.1847105,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Angie"
+  }
+},
+{
+  "type": "node",
+  "id": 12492458487,
+  "lat": 9.9431814,
+  "lon": -84.1848491,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Tortillita de Angie"
+  }
+},
+{
+  "type": "node",
+  "id": 12492680154,
+  "lat": 9.9434021,
+  "lon": -84.1836678,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Soda Ana"
+  }
+},
+{
+  "type": "node",
+  "id": 12493109001,
+  "lat": 9.7158146,
+  "lon": -83.9490223,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Perla Verde"
+  }
+},
+{
+  "type": "node",
+  "id": 12536919371,
+  "lat": 9.9333881,
+  "lon": -84.1799040,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Empanadas Doña Barbara",
+    "operator": "Empanadas Doña Barbara",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12536975411,
+  "lat": 9.9336734,
+  "lon": -84.1899813,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Cuchara de Tita"
+  }
+},
+{
+  "type": "node",
+  "id": 12536975412,
+  "lat": 9.9336794,
+  "lon": -84.1899221,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "La Rotonda"
+  }
+},
+{
+  "type": "node",
+  "id": 12538019590,
+  "lat": 9.9337578,
+  "lon": -84.1779399,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Per Tutti"
+  }
+},
+{
+  "type": "node",
+  "id": 12538019591,
+  "lat": 9.9337730,
+  "lon": -84.1770460,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Fiorentin",
+    "operator": "Abocatto"
+  }
+},
+{
+  "type": "node",
+  "id": 12538079714,
+  "lat": 9.9308233,
+  "lon": -84.1784487,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Arborea"
+  }
+},
+{
+  "type": "node",
+  "id": 12705781189,
+  "lat": 9.9223012,
+  "lon": -84.0727018,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Vía 209",
+    "amenity": "restaurant",
+    "name": "Taqueria Costa Mex",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 12739829577,
+  "lat": 9.9185809,
+  "lon": -84.0564339,
+  "tags": {
+    "addr:city": "Zapote",
+    "amenity": "restaurant",
+    "cuisine": "ceviche",
+    "name": "La Tavichería",
+    "phone": "+50672308305"
+  }
+},
+{
+  "type": "node",
+  "id": 12763427101,
+  "lat": 9.9440873,
+  "lon": -84.1460043,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "japanese",
+    "internet_access": "wlan",
+    "name": "HIKARI Sushi",
+    "opening_hours": "Mo-Su 09:00-22:00",
+    "self_service": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 12784435862,
+  "lat": 9.8952721,
+  "lon": -84.0644565,
+  "tags": {
+    "addr:city": "Desamparados",
+    "addr:street": "Avenida 88",
+    "amenity": "restaurant",
+    "name": "El Sabor Mexicano",
+    "source": "KG Ground Survey 2015"
+  }
+},
+{
+  "type": "node",
+  "id": 12815519267,
+  "lat": 9.9189424,
+  "lon": -84.0714062,
+  "tags": {
+    "addr:city": "San José",
+    "addr:street": "Vía 209",
+    "amenity": "restaurant",
+    "cuisine": "chinese",
+    "name": "El Campeón"
+  }
+},
+{
+  "type": "node",
+  "id": 12834664476,
+  "lat": 9.9392372,
+  "lon": -84.1544978,
+  "tags": {
+    "addr:city": "Guachipelin Escazú",
+    "addr:housenumber": "Plaza Las Palmas, local #8",
+    "addr:postcode": "10203",
+    "addr:street": "Calle Guachipelines",
+    "amenity": "restaurant",
+    "cuisine": "sandwich;delicatessen",
+    "diet:chicken": "yes",
+    "diet:local": "yes",
+    "diet:meat": "yes",
+    "name": "The Pink Pork",
+    "phone": "+506 22152295",
+    "website": "https://www.thepinkpork.com/"
+  }
+},
+{
+  "type": "node",
+  "id": 12834760674,
+  "lat": 9.3328870,
+  "lon": -83.7330174,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "pizza;burger;sandwich;chicken;american;seafood;barbecue;fish_and_chips;pasta;breakfast;juice;dessert;salad;pastry;fries;diner",
+    "diet:chicken": "yes",
+    "diet:vegetarian": "yes",
+    "name": "Valle Encantado"
+  }
+},
+{
+  "type": "node",
+  "id": 12843459101,
+  "lat": 9.6984990,
+  "lon": -83.9416349,
+  "tags": {
+    "amenity": "restaurant",
+    "name": "Restaurante Típico La Chonta"
+  }
+},
+{
+  "type": "node",
+  "id": 12843462001,
+  "lat": 9.6759371,
+  "lon": -83.9333824,
+  "tags": {
+    "amenity": "restaurant"
+  }
+},
+{
+  "type": "node",
+  "id": 12854585501,
+  "lat": 9.9265857,
+  "lon": -84.0397237,
+  "tags": {
+    "amenity": "restaurant",
+    "cuisine": "chicken;korean",
+    "name": "Han",
+    "name:ko": "한",
+    "outdoor_seating": "yes"
+  }
+}
+
+  ]
+}
