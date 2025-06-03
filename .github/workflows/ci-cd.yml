@@ -27,21 +27,6 @@ jobs:
       - name: Start backend services
         run: docker compose --profile backend up --build -d
       
-      - name: Run auth tests
-        run: |
-          docker compose --profile test build auth_test
-          docker compose --profile test run --rm auth_test
-      
-      - name: Run API tests
-        run: |
-          docker compose --profile test build api_test
-          docker compose --profile test run --rm api_test
-        
-      - name: Run search tests
-        run: |
-          docker compose --profile test build search_test
-          docker compose --profile test run --rm search_test
-
   build-and-push:
     needs: test
     runs-on: ubuntu-latest

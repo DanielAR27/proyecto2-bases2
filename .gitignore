@@ -3,6 +3,7 @@ api/node_modules/
 auth_service/node_modules/
 pruebas/node_modules/
 search_service/node_modules/
+analytics_service/node_modules/
 
 # Logs
 *.log
@@ -19,6 +20,7 @@ yarn-error.log*
 api/coverage/
 auth_service/coverage/
 search_service/coverage/
+analytics_service/coverage/
 
 # Misc
 .DS_Store

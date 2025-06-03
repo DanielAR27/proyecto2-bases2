@@ -332,9 +332,9 @@ router.put('/:id/assign', authMiddleware, pedidoController.assignDriver);
  *             properties:
  *               estado:
  *                 type: string
- *                 enum: [pendiente, en preparacion, listo, en camino, entregado, cancelado]
+ *                 enum: [pendiente, en preparacion, listo, entregado]
  *                 description: Nuevo estado del pedido
- *                 example: "en camino"
+ *                 example: "en preparacion"
  *     responses:
  *       200:
  *         description: Estado del pedido actualizado correctamente

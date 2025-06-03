@@ -259,7 +259,7 @@ async assignDriver(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al asignar repartidor.', details: error.message });
+    res.status(500).json({ error: 'Error al asignar repartidor.'});
   }
 },
 
@@ -268,15 +268,6 @@ async assignDriver(req, res) {
     try {
       const { id } = req.params;
       const { estado } = req.body;
-
-      const estadosValidos = ['pendiente', 'en preparacion', 'listo', 'en camino', 'entregado', 'cancelado'];
-      
-      if (!estado || !estadosValidos.includes(estado)) {
-        return res.status(400).json({ 
-          error: 'Estado inválido.',
-          estadosValidos 
-        });
-      }
 
       const pedidoActualizado = await PedidoDAO.updateDeliveryStatus(id, estado);
       
@@ -298,7 +289,7 @@ async assignDriver(req, res) {
       });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al actualizar estado del pedido.', details: error.message });
+      res.status(500).json({ error: 'Error al actualizar estado del pedido.'});
     }
   },
 

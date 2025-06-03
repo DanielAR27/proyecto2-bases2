@@ -49,6 +49,20 @@ services:
     networks:
       - app_network
 
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    environment:
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
+      - NEO4J_PLUGINS=["apoc"]
+    ports:
+      - "${NEO4J_HTTP_PORT}:7474"  # Browser web
+      - "${NEO4J_PORT}:7687"       # Bolt protocol
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - app_network
+
   # AUTH SERVICE - INSTANCIA 1
   auth_service1:
     build: ./auth_service
@@ -298,6 +312,62 @@ services:
     networks:
       - app_network
 
+  # ANALYTICS SERVICE - INSTANCIA 1
+  analytics_service1:
+    build: ./analytics_service
+    container_name: analytics_service1
+    profiles:
+      - backend
+      - test
+    restart: always
+    ports:
+      - "${ANALYTICS_PORT}:${ANALYTICS_PORT}"
+    depends_on:
+      - auth_service1
+      - api1
+      - neo4j
+      - redis
+    environment:
+      - API_URL=${API_URL}
+      - AUTH_SERVICE_URL=${AUTH_SERVICE_URL}
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - ANALYTICS_PORT=${ANALYTICS_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - app_network
+
+  # ANALYTICS SERVICE - INSTANCIA 2
+  analytics_service2:
+    build: ./analytics_service
+    container_name: analytics_service2
+    profiles:
+      - backend
+      - test
+    restart: always
+    expose:
+      - "${ANALYTICS_PORT}"
+    depends_on:
+      - auth_service1
+      - api1
+      - neo4j
+      - redis
+    environment:
+      - API_URL=${API_URL}
+      - AUTH_SERVICE_URL=${AUTH_SERVICE_URL}
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - ANALYTICS_PORT=${ANALYTICS_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - app_network
+    
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_container
@@ -508,6 +578,7 @@ volumes:
   mongors2n2-data:
   mongors2n3-data:
   elastic_data:
+  neo4j_data: 
 
 networks:
   app_network:

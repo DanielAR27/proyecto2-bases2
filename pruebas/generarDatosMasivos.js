@@ -397,9 +397,7 @@ const crearDatosMasivos = async (opciones = {}) => {
           tipo: faker.helpers.arrayElement(['en restaurante', 'para recoger', 'domicilio']),
           productos: productosFormateados
         };
-
-        console.log(`🔍 DEBUG - Creando pedido para usuario ${user.nombre}:`, JSON.stringify(pedidoData, null, 2));
-
+        
         await axios.post(`${API}/orders`, {
           id_usuario: user.id,
           id_restaurante: productosPedido[0].id_restaurante,

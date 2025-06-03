@@ -42,7 +42,8 @@ C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
 |   ├── server.js
 ├── pruebas
 |   ├── generarDatos.js
-|   ├── menuPrueba.JS
+|   ├── generarDatosMasivos.js
+|   ├── menuPrueba.js
 |   ├── package-lock.json
 |   ├── package.json
 ├── search_service

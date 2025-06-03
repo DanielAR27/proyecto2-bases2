@@ -200,7 +200,15 @@ router.post('/login', authController.login);
 *                       type: integer
 *                       example: 1748901257
 *       401:
-*         description: Token inválido o expirado
+*         description: Token inválido o no proporcionado
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Token inválido o expirado."
 */
 router.get('/verify', authController.verifyToken);
 
