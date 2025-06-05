@@ -17,7 +17,16 @@ const ReservationDAO = {
       return result.rows[0];
     } else if (dbType === 'mongo') {
       const reserva = new ReservationModelMongo({ id_usuario, id_restaurante, fecha_hora, estado });
-      return await reserva.save();
+      const savedReservation = await reserva.save();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_reserva: savedReservation.id_reserva,
+        id_usuario: savedReservation.id_usuario,
+        id_restaurante: savedReservation.id_restaurante,
+        fecha_hora: savedReservation.fecha_hora,
+        estado: savedReservation.estado
+      };
     }
   },
 
@@ -25,11 +34,24 @@ const ReservationDAO = {
   async getAllReservations() {
     if (dbType === 'postgres') {
       const result = await pool.query(
-        `SELECT id_reserva, id_usuario, id_restaurante, fecha_hora, estado FROM Reserva`
+        `SELECT id_reserva, id_usuario, id_restaurante, fecha_hora, estado 
+         FROM Reserva 
+         ORDER BY id_reserva`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await ReservationModelMongo.find({}, 'id_reserva id_usuario id_restaurante fecha_hora estado').lean();
+      const reservations = await ReservationModelMongo.find({})
+        .sort({ id_reserva: 1 })
+        .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return reservations.map(reservation => ({
+        id_reserva: reservation.id_reserva,
+        id_usuario: reservation.id_usuario,
+        id_restaurante: reservation.id_restaurante,
+        fecha_hora: reservation.fecha_hora,
+        estado: reservation.estado
+      }));
     }
   },
 
@@ -44,7 +66,18 @@ const ReservationDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await ReservationModelMongo.findOne({ id_reserva }).lean();
+      const reservation = await ReservationModelMongo.findOne({ id_reserva }).lean();
+      
+      if (!reservation) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_reserva: reservation.id_reserva,
+        id_usuario: reservation.id_usuario,
+        id_restaurante: reservation.id_restaurante,
+        fecha_hora: reservation.fecha_hora,
+        estado: reservation.estado
+      };
     }
   },
 
@@ -60,11 +93,22 @@ const ReservationDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await ReservationModelMongo.findOneAndUpdate(
+      const reservation = await ReservationModelMongo.findOneAndUpdate(
         { id_reserva },
         { fecha_hora, estado },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!reservation) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_reserva: reservation.id_reserva,
+        id_usuario: reservation.id_usuario,
+        id_restaurante: reservation.id_restaurante,
+        fecha_hora: reservation.fecha_hora,
+        estado: reservation.estado
+      };
     }
   },
 
@@ -79,7 +123,8 @@ const ReservationDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await ReservationModelMongo.findOneAndDelete({ id_reserva });
+      const resultado = await ReservationModelMongo.findOneAndDelete({ id_reserva });
+      return resultado !== null;
     }
   },
 };

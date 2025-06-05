@@ -17,7 +17,15 @@ const MenuDAO = {
       return result.rows[0];
     } else if (dbType === 'mongo') {
       const menu = new MenuModelMongo({ id_restaurante, nombre, descripcion });
-      return await menu.save();
+      const savedMenu = await menu.save();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_menu: savedMenu.id_menu,
+        id_restaurante: savedMenu.id_restaurante,
+        nombre: savedMenu.nombre,
+        descripcion: savedMenu.descripcion
+      };
     }
   },
 
@@ -25,11 +33,23 @@ const MenuDAO = {
   async getAllMenus() {
     if (dbType === 'postgres') {
       const result = await pool.query(
-        `SELECT id_menu, id_restaurante, nombre, descripcion FROM Menu`
+        `SELECT id_menu, id_restaurante, nombre, descripcion 
+         FROM Menu 
+         ORDER BY id_menu`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await MenuModelMongo.find({}, 'id_menu id_restaurante nombre descripcion').lean();
+      const menus = await MenuModelMongo.find({})
+        .sort({ id_menu: 1 })
+        .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return menus.map(menu => ({
+        id_menu: menu.id_menu,
+        id_restaurante: menu.id_restaurante,
+        nombre: menu.nombre,
+        descripcion: menu.descripcion
+      }));
     }
   },
 
@@ -44,7 +64,17 @@ const MenuDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await MenuModelMongo.findOne({ id_menu }).lean();
+      const menu = await MenuModelMongo.findOne({ id_menu }).lean();
+      
+      if (!menu) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_menu: menu.id_menu,
+        id_restaurante: menu.id_restaurante,
+        nombre: menu.nombre,
+        descripcion: menu.descripcion
+      };
     }
   },
 
@@ -60,11 +90,21 @@ const MenuDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await MenuModelMongo.findOneAndUpdate(
+      const menu = await MenuModelMongo.findOneAndUpdate(
         { id_menu },
         { nombre, descripcion },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!menu) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_menu: menu.id_menu,
+        id_restaurante: menu.id_restaurante,
+        nombre: menu.nombre,
+        descripcion: menu.descripcion
+      };
     }
   },
 
@@ -79,7 +119,8 @@ const MenuDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await MenuModelMongo.findOneAndDelete({ id_menu });
+      const resultado = await MenuModelMongo.findOneAndDelete({ id_menu });
+      return resultado !== null;
     }
   },
 };

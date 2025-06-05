@@ -23,7 +23,19 @@ const RepartidorDAO = {
         telefono, 
         vehiculo 
       });
-      return await repartidor.save();
+      const savedRepartidor = await repartidor.save();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_repartidor: savedRepartidor.id_repartidor,
+        nombre: savedRepartidor.nombre,
+        telefono: savedRepartidor.telefono,
+        vehiculo: savedRepartidor.vehiculo,
+        latitud_actual: savedRepartidor.latitud_actual || null,
+        longitud_actual: savedRepartidor.longitud_actual || null,
+        estado: savedRepartidor.estado,
+        fecha_registro: savedRepartidor.fecha_registro
+      };
     }
   },
 
@@ -37,10 +49,21 @@ const RepartidorDAO = {
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.find({})
-        .select('id_repartidor nombre telefono vehiculo latitud_actual longitud_actual estado fecha_registro')
+      const repartidores = await RepartidorModelMongo.find({})
         .sort({ fecha_registro: -1 })
         .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return repartidores.map(repartidor => ({
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual || null,
+        longitud_actual: repartidor.longitud_actual || null,
+        estado: repartidor.estado,
+        fecha_registro: repartidor.fecha_registro
+      }));
     }
   },
 
@@ -50,13 +73,27 @@ const RepartidorDAO = {
       const result = await pool.query(
         `SELECT id_repartidor, nombre, telefono, vehiculo, latitud_actual, longitud_actual, estado
          FROM Repartidor 
-         WHERE estado = 'disponible'`
+         WHERE estado = 'disponible'
+         ORDER BY nombre`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.find({
+      const repartidores = await RepartidorModelMongo.find({
         estado: 'disponible'
-      }).lean();
+      })
+      .sort({ nombre: 1 })
+      .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return repartidores.map(repartidor => ({
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual || null,
+        longitud_actual: repartidor.longitud_actual || null,
+        estado: repartidor.estado
+      }));
     }
   },
 
@@ -68,15 +105,29 @@ const RepartidorDAO = {
          FROM Repartidor 
          WHERE estado = 'disponible' 
          AND latitud_actual IS NOT NULL 
-         AND longitud_actual IS NOT NULL`
+         AND longitud_actual IS NOT NULL
+         ORDER BY nombre`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.find({
+      const repartidores = await RepartidorModelMongo.find({
         estado: 'disponible',
         latitud_actual: { $exists: true, $ne: null },
         longitud_actual: { $exists: true, $ne: null }
-      }).lean();
+      })
+      .sort({ nombre: 1 })
+      .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return repartidores.map(repartidor => ({
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual,
+        longitud_actual: repartidor.longitud_actual,
+        estado: repartidor.estado
+      }));
     }
   },
 
@@ -84,10 +135,11 @@ const RepartidorDAO = {
   async getUsersAssignedToDriver(id_repartidor) {
     if (dbType === 'postgres') {
       const result = await pool.query(
-        `SELECT DISTINCT u.id_usuario, u.latitud, u.longitud
+        `SELECT DISTINCT u.id_usuario, u.nombre, u.email, u.rol, u.latitud, u.longitud, u.direccion_completa, u.id_referido
         FROM Pedido p
         JOIN Usuario u ON p.id_usuario = u.id_usuario
-        WHERE p.id_repartidor = $1 AND p.estado != 'entregado'`,
+        WHERE p.id_repartidor = $1 AND p.estado != 'entregado'
+        ORDER BY u.nombre`,
         [id_repartidor]
       );
       return result.rows;
@@ -96,14 +148,26 @@ const RepartidorDAO = {
       const pedidos = await PedidoModelMongo.find({
         id_repartidor: parseInt(id_repartidor),
         estado: { $ne: 'entregado' }
-      }).distinct('id_usuario'); // ← Cambiado a id_usuario
+      }).distinct('id_usuario');
       
-      // Obtener usuarios con sus ubicaciones
+      // Obtener usuarios con toda su información
       const usuarios = await UserModelMongo.find({
-        id_usuario: { $in: pedidos } // ← Cambiado a id_usuario
-      }).select('id_usuario latitud longitud').lean(); // ← Corregido el typo
+        id_usuario: { $in: pedidos }
+      })
+      .sort({ nombre: 1 })
+      .lean();
       
-      return usuarios;
+      // Retornar en formato consistente con PostgreSQL
+      return usuarios.map(user => ({
+        id_usuario: user.id_usuario,
+        nombre: user.nombre,
+        email: user.email,
+        rol: user.rol,
+        latitud: user.latitud || null,
+        longitud: user.longitud || null,
+        direccion_completa: user.direccion_completa || null,
+        id_referido: user.id_referido || null
+      }));
     }
   },
 
@@ -118,9 +182,21 @@ const RepartidorDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      // Intentar buscar por id_repartidor primero
-      let repartidor = await RepartidorModelMongo.findOne({ id_repartidor }).lean();
-      return repartidor;
+      const repartidor = await RepartidorModelMongo.findOne({ id_repartidor }).lean();
+      
+      if (!repartidor) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual || null,
+        longitud_actual: repartidor.longitud_actual || null,
+        estado: repartidor.estado,
+        fecha_registro: repartidor.fecha_registro
+      };
     }
   },
 
@@ -136,11 +212,25 @@ const RepartidorDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.findOneAndUpdate(
+      const repartidor = await RepartidorModelMongo.findOneAndUpdate(
         { id_repartidor },
         { nombre, telefono, vehiculo },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!repartidor) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual || null,
+        longitud_actual: repartidor.longitud_actual || null,
+        estado: repartidor.estado,
+        fecha_registro: repartidor.fecha_registro
+      };
     }
   },
 
@@ -156,11 +246,24 @@ const RepartidorDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.findOneAndUpdate(
+      const repartidor = await RepartidorModelMongo.findOneAndUpdate(
         { id_repartidor },
         { latitud_actual, longitud_actual },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!repartidor) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual,
+        longitud_actual: repartidor.longitud_actual,
+        estado: repartidor.estado
+      };
     }
   },
 
@@ -176,11 +279,24 @@ const RepartidorDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.findOneAndUpdate(
+      const repartidor = await RepartidorModelMongo.findOneAndUpdate(
         { id_repartidor },
         { estado },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!repartidor) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_repartidor: repartidor.id_repartidor,
+        nombre: repartidor.nombre,
+        telefono: repartidor.telefono,
+        vehiculo: repartidor.vehiculo,
+        latitud_actual: repartidor.latitud_actual || null,
+        longitud_actual: repartidor.longitud_actual || null,
+        estado: repartidor.estado
+      };
     }
   },
 
@@ -195,7 +311,8 @@ const RepartidorDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await RepartidorModelMongo.findOneAndDelete({ id_repartidor });
+      const resultado = await RepartidorModelMongo.findOneAndDelete({ id_repartidor });
+      return resultado !== null;
     }
   }
 };

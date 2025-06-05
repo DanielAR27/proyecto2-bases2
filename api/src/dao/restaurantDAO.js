@@ -17,7 +17,15 @@ const RestaurantDAO = {
       return result.rows[0];
     } else if (dbType === 'mongo') {
       const restaurant = new RestaurantModelMongo({ nombre, direccion, id_admin });
-      return await restaurant.save();
+      const savedRestaurant = await restaurant.save();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_restaurante: savedRestaurant.id_restaurante,
+        nombre: savedRestaurant.nombre,
+        direccion: savedRestaurant.direccion,
+        id_admin: savedRestaurant.id_admin
+      };
     }
   },
 
@@ -26,11 +34,22 @@ const RestaurantDAO = {
     if (dbType === 'postgres') {
       const result = await pool.query(
         `SELECT id_restaurante, nombre, direccion, id_admin
-         FROM Restaurante`
+         FROM Restaurante
+         ORDER BY id_restaurante`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.find({}, 'id_restaurante nombre direccion id_admin').lean();
+      const restaurants = await RestaurantModelMongo.find({})
+        .sort({ id_restaurante: 1 })
+        .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return restaurants.map(restaurant => ({
+        id_restaurante: restaurant.id_restaurante,
+        nombre: restaurant.nombre,
+        direccion: restaurant.direccion,
+        id_admin: restaurant.id_admin
+      }));
     }
   },
 
@@ -41,14 +60,27 @@ const RestaurantDAO = {
         `SELECT id_restaurante, nombre, direccion, id_admin, latitud, longitud
          FROM Restaurante 
          WHERE latitud IS NOT NULL 
-         AND longitud IS NOT NULL`
+         AND longitud IS NOT NULL
+         ORDER BY id_restaurante`
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.find({
+      const restaurants = await RestaurantModelMongo.find({
         latitud: { $exists: true, $ne: null },
         longitud: { $exists: true, $ne: null }
-      }).lean();
+      })
+      .sort({ id_restaurante: 1 })
+      .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return restaurants.map(restaurant => ({
+        id_restaurante: restaurant.id_restaurante,
+        nombre: restaurant.nombre,
+        direccion: restaurant.direccion,
+        id_admin: restaurant.id_admin,
+        latitud: restaurant.latitud,
+        longitud: restaurant.longitud
+      }));
     }
   },
 
@@ -63,7 +95,19 @@ const RestaurantDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.findOne({ id_restaurante }).lean();
+      const restaurant = await RestaurantModelMongo.findOne({ id_restaurante }).lean();
+      
+      if (!restaurant) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_restaurante: restaurant.id_restaurante,
+        nombre: restaurant.nombre,
+        direccion: restaurant.direccion,
+        id_admin: restaurant.id_admin,
+        latitud: restaurant.latitud || null,
+        longitud: restaurant.longitud || null
+      };
     }
   },
 
@@ -79,11 +123,21 @@ const RestaurantDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.findOneAndUpdate(
+      const restaurant = await RestaurantModelMongo.findOneAndUpdate(
         { id_restaurante },
         { nombre, direccion },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!restaurant) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_restaurante: restaurant.id_restaurante,
+        nombre: restaurant.nombre,
+        direccion: restaurant.direccion,
+        id_admin: restaurant.id_admin
+      };
     }
   },
 
@@ -98,7 +152,8 @@ const RestaurantDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.findOneAndDelete({ id_restaurante });
+      const resultado = await RestaurantModelMongo.findOneAndDelete({ id_restaurante });
+      return resultado !== null;
     }
   },
 
@@ -114,11 +169,23 @@ const RestaurantDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await RestaurantModelMongo.findOneAndUpdate(
+      const restaurant = await RestaurantModelMongo.findOneAndUpdate(
         { id_restaurante },
         { latitud, longitud },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!restaurant) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_restaurante: restaurant.id_restaurante,
+        nombre: restaurant.nombre,
+        direccion: restaurant.direccion,
+        id_admin: restaurant.id_admin,
+        latitud: restaurant.latitud,
+        longitud: restaurant.longitud
+      };
     }
   }
 };

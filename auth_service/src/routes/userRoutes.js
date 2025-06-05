@@ -65,106 +65,315 @@ const router = express.Router();
 *                 error:
 *                   type: string
 *                   example: "Token inválido o expirado."
+*       500:
+*         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
 */
 router.get('/me', verificarToken, userController.getMe);
 
 /**
- * @swagger
- * /users/location:
- *   get:
- *     summary: Obtener todos los usuarios con ubicación geográfica
- *     description: Endpoint para ETL y análisis OLAP. Solo accesible por administradores.
- *     tags: [Usuarios]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: Lista de usuarios con ubicación obtenida exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "Usuarios con ubicación obtenidos correctamente."
- *                 total:
- *                   type: integer
- *                   example: 25
- *                 usuarios:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id_usuario:
- *                         type: integer
- *                       nombre:
- *                         type: string
- *                       email:
- *                         type: string
- *                       rol:
- *                         type: string
- *                       latitud:
- *                         type: number
- *                         format: float
- *                       longitud:
- *                         type: number
- *                         format: float
- *                       direccion_completa:
- *                         type: string
- *                       fecha_registro:
- *                         type: string
- *                         format: date-time
- *                   example:
- *                     - id_usuario: 1
- *                       nombre: "Juan Pérez"
- *                       email: "juan@example.com"
- *                       rol: "cliente"
- *                       latitud: 9.9341
- *                       longitud: -84.0877
- *                       direccion_completa: "Cartago, Costa Rica"
- *                       fecha_registro: "2025-01-15T10:30:00Z"
- *                     - id_usuario: 2
- *                       nombre: "María Gómez"
- *                       email: "maria@example.com"
- *                       rol: "cliente"
- *                       latitud: 10.0167
- *                       longitud: -84.2167
- *                       direccion_completa: "Alajuela, Costa Rica"
- *                       fecha_registro: "2025-01-16T14:45:00Z"
- *                     - "..."
- *       401:
- *         description: Token inválido o no proporcionado
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Token inválido o expirado."
- *       403:
- *         description: No autorizado - requiere rol de administrador
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "No tiene permisos para acceder a esta información."
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Error en el servidor."
- */
+* @swagger
+* /users/location:
+*   get:
+*     summary: Obtener todos los usuarios con ubicación geográfica
+*     description: Endpoint para ETL y análisis OLAP. Solo accesible por administradores.
+*     tags: [Usuarios]
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: Lista de usuarios con ubicación obtenida exitosamente
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 message:
+*                   type: string
+*                   example: "Usuarios con ubicación obtenidos correctamente."
+*                 total:
+*                   type: integer
+*                   example: 25
+*                 usuarios:
+*                   type: array
+*                   items:
+*                     type: object
+*                     properties:
+*                       id_usuario:
+*                         type: integer
+*                       nombre:
+*                         type: string
+*                       email:
+*                         type: string
+*                       rol:
+*                         type: string
+*                       latitud:
+*                         type: number
+*                         format: float
+*                       longitud:
+*                         type: number
+*                         format: float
+*                       direccion_completa:
+*                         type: string
+*                       fecha_registro:
+*                         type: string
+*                         format: date-time
+*                   example:
+*                     - id_usuario: 1
+*                       nombre: "Juan Pérez"
+*                       email: "juan@example.com"
+*                       rol: "cliente"
+*                       latitud: 9.9341
+*                       longitud: -84.0877
+*                       direccion_completa: "Cartago, Costa Rica"
+*                       fecha_registro: "2025-01-15T10:30:00Z"
+*                     - id_usuario: 2
+*                       nombre: "María Gómez"
+*                       email: "maria@example.com"
+*                       rol: "cliente"
+*                       latitud: 10.0167
+*                       longitud: -84.2167
+*                       direccion_completa: "Alajuela, Costa Rica"
+*                       fecha_registro: "2025-01-16T14:45:00Z"
+*                     - "..."
+*       401:
+*         description: Token inválido o no proporcionado
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Token inválido o expirado."
+*       403:
+*         description: No autorizado - requiere rol de administrador
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "No tiene permisos para acceder a esta información."
+*       500:
+*         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
+*/
 router.get('/location', verificarToken, userController.getAllUsersWithLocation);
+
+/**
+* @swagger
+* /users/referrers:
+*   get:
+*     summary: Obtener todos los usuarios que tienen un referido
+*     description: Endpoint para análisis de referidos. Solo accesible por administradores.
+*     tags: [Usuarios]
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: Lista de usuarios con referido obtenida exitosamente
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 message:
+*                   type: string
+*                   example: "Usuarios con referido obtenidos correctamente."
+*                 total:
+*                   type: integer
+*                   example: 15
+*                 usuarios:
+*                   type: array
+*                   items:
+*                     type: object
+*                     properties:
+*                       id_usuario:
+*                         type: integer
+*                       nombre:
+*                         type: string
+*                       email:
+*                         type: string
+*                       rol:
+*                         type: string
+*                       latitud:
+*                         type: number
+*                         format: float
+*                         nullable: true
+*                       longitud:
+*                         type: number
+*                         format: float
+*                         nullable: true
+*                       direccion_completa:
+*                         type: string
+*                         nullable: true
+*                       fecha_registro:
+*                         type: string
+*                         format: date-time
+*                       id_referido:
+*                         type: integer
+*                   example:
+*                     - id_usuario: 3
+*                       nombre: "Carlos López"
+*                       email: "carlos@example.com"
+*                       rol: "cliente"
+*                       latitud: 9.9341
+*                       longitud: -84.0877
+*                       direccion_completa: "Cartago, Costa Rica"
+*                       fecha_registro: "2025-01-20T09:15:00Z"
+*                       id_referido: 1
+*                     - id_usuario: 5
+*                       nombre: "Ana Rodríguez"
+*                       email: "ana@example.com"
+*                       rol: "cliente"
+*                       latitud: null
+*                       longitud: null
+*                       direccion_completa: null
+*                       fecha_registro: "2025-01-22T16:30:00Z"
+*                       id_referido: 2
+*                     - "..."
+*       401:
+*         description: Token inválido o no proporcionado
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Token inválido o expirado."
+*       403:
+*         description: No autorizado - requiere rol de administrador
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "No tiene permisos para acceder a esta información."
+*       500:
+*         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
+*/
+router.get('/referrers', verificarToken, userController.getAllUsersWithReferrer);
+
+/**
+* @swagger
+* /users/{id}:
+*   get:
+*     summary: Obtener información de un usuario por ID
+*     tags: [Usuarios]
+*     security:
+*       - bearerAuth: []
+*     parameters:
+*       - in: path
+*         name: id
+*         required: true
+*         schema:
+*           type: string
+*         description: ID del usuario a consultar
+*     responses:
+*       200:
+*         description: Información del usuario.
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 id_usuario:
+*                    type: integer
+*                    example: 5
+*                 nombre:
+*                    type: string
+*                    example: "Juan"
+*                 email:
+*                    type: string
+*                    example: "juan@gmail.com"
+*                 rol:
+*                    type: string
+*                    example: "cliente"
+*                 latitud:
+*                     type: number
+*                     nullable: true
+*                     example: 9.9341
+*                 longitud:
+*                     type: number
+*                     nullable: true
+*                     example: -84.0877
+*                 direccion_completa:
+*                     type: string
+*                     nullable: true
+*                     example: "Cartago, Costa Rica"
+*                 id_referido:
+*                     type: integer
+*                     nullable: true
+*                     example: null
+*       401:
+*         description: Token inválido o no proporcionado
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Token inválido o expirado."
+*       403:
+*         description: No autorizado para ver este usuario
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "No tiene permisos para ver este usuario."
+*       404:
+*         description: Usuario no encontrado
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Usuario no encontrado."
+*       500:
+*         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
+*/
+router.get('/:id', verificarToken, userController.getUserById);
 
 /**
 * @swagger
@@ -452,6 +661,14 @@ router.delete('/:id', verificarToken, userController.deleteUser);
 *                   example: "Usuario no encontrado."
 *       500:
 *         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
 */
 router.put('/:id/location', verificarToken, userController.updateUserLocation);
 

@@ -171,7 +171,7 @@ const repartidorController = {
     const usuarios = await RepartidorDAO.getUsersAssignedToDriver(id);
 
     const responseData = {
-      message: 'Usuarios asignados obtenidos correctamente.',
+      message: 'Usuarios asignados al repartidor obtenidos correctamente.',
       total: usuarios.length,
       usuarios: usuarios
     };

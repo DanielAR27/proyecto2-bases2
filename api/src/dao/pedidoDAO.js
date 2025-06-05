@@ -25,7 +25,7 @@ const PedidoDAO = {
           const detalleResult = await client.query(
             `INSERT INTO Detalle_Pedido (id_pedido, id_producto, cantidad, subtotal)
              VALUES ($1, $2, $3, $4)
-             RETURNING id_detalle, id_producto, cantidad, subtotal`,
+             RETURNING id_producto, cantidad, subtotal`,
             [pedido.id_pedido, id_producto, cantidad, subtotal]
           );
           
@@ -51,9 +51,27 @@ const PedidoDAO = {
         id_restaurante,
         estado,
         tipo,
-        detalles
+        detalles: detalles.map(detalle => ({
+          ...detalle,
+          subtotal: parseFloat(detalle.subtotal)
+        }))
       });
-      return await pedido.save();
+      const savedPedido = await pedido.save();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_pedido: savedPedido.id_pedido,
+        id_usuario: savedPedido.id_usuario,
+        id_restaurante: savedPedido.id_restaurante,
+        estado: savedPedido.estado,
+        tipo: savedPedido.tipo,
+        fecha_hora: savedPedido.fecha_hora,
+        detalles: savedPedido.detalles.map(detalle => ({
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
+          subtotal: parseFloat(detalle.subtotal)
+        }))
+      };
     }
   },
 
@@ -77,14 +95,33 @@ const PedidoDAO = {
         
         // Convertir subtotal a número en cada detalle
         pedido.detalles = detallesResult.rows.map(detalle => ({
-          ...detalle,
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
           subtotal: parseFloat(detalle.subtotal)
         }));
       }
       
       return pedidos;
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.find().lean();
+      const pedidos = await PedidoModelMongo.find()
+        .sort({ fecha_hora: -1 })
+        .lean();
+      
+      // Retornar en formato consistente con PostgreSQL
+      return pedidos.map(pedido => ({
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor || null,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora,
+        detalles: pedido.detalles ? pedido.detalles.map(detalle => ({
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
+          subtotal: parseFloat(detalle.subtotal)
+        })) : []
+      }));
     }
   },
 
@@ -105,13 +142,32 @@ const PedidoDAO = {
       
       // Convertir subtotal a número en cada detalle
       const detallesConvertidos = detalles.rows.map(detalle => ({
-        ...detalle,
+        id_producto: detalle.id_producto,
+        cantidad: detalle.cantidad,
         subtotal: parseFloat(detalle.subtotal)
       }));
 
       return { ...pedido.rows[0], detalles: detallesConvertidos };
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.findOne({ id_pedido }).lean();
+      const pedido = await PedidoModelMongo.findOne({ id_pedido }).lean();
+      
+      if (!pedido) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor || null,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora,
+        detalles: pedido.detalles ? pedido.detalles.map(detalle => ({
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
+          subtotal: parseFloat(detalle.subtotal)
+        })) : []
+      };
     }
   },
 
@@ -124,7 +180,8 @@ const PedidoDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.findOneAndDelete({ id_pedido });
+      const resultado = await PedidoModelMongo.findOneAndDelete({ id_pedido });
+      return resultado !== null;
     }
   },
 
@@ -140,11 +197,24 @@ const PedidoDAO = {
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.findOneAndUpdate(
+      const pedido = await PedidoModelMongo.findOneAndUpdate(
         { id_pedido },
         { id_repartidor },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!pedido) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora
+      };
     }
   },
 
@@ -170,17 +240,36 @@ const PedidoDAO = {
         );
         
         pedido.detalles = detallesResult.rows.map(detalle => ({
-          ...detalle,
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
           subtotal: parseFloat(detalle.subtotal)
         }));
       }
       
       return pedidos;
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.find({ 
+      const pedidos = await PedidoModelMongo.find({ 
         id_repartidor,
         estado: { $in: ['pendiente', 'en preparacion', 'listo'] }
-      }, { _id: 0, __v: 0 } ).lean();
+      })
+      .sort({ fecha_hora: 1 })
+      .lean();
+
+      // Retornar en formato consistente con PostgreSQL
+      return pedidos.map(pedido => ({
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora,
+        detalles: pedido.detalles ? pedido.detalles.map(detalle => ({
+          id_producto: detalle.id_producto,
+          cantidad: detalle.cantidad,
+          subtotal: parseFloat(detalle.subtotal)
+        })) : []
+      }));
     }
   },
 
@@ -195,10 +284,26 @@ const PedidoDAO = {
       );
       return result.rows;
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.find({
-        id_repartidor: { $exists: false },
+      const pedidos = await PedidoModelMongo.find({
+        $or: [
+          { id_repartidor: { $exists: false } },
+          { id_repartidor: null }
+        ],
         estado: 'pendiente'
-      }).lean();
+      })
+      .sort({ fecha_hora: 1 })
+      .lean();
+
+      // Retornar en formato consistente con PostgreSQL
+      return pedidos.map(pedido => ({
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor || null,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora
+      }));
     }
   },
 
@@ -209,16 +314,29 @@ const PedidoDAO = {
         `UPDATE Pedido 
          SET estado = $1
          WHERE id_pedido = $2
-         RETURNING id_pedido, id_repartidor, estado`,
+         RETURNING id_pedido, id_usuario, id_restaurante, id_repartidor, estado, tipo, fecha_hora`,
         [estado, id_pedido]
       );
       return result.rows[0];
     } else if (dbType === 'mongo') {
-      return await PedidoModelMongo.findOneAndUpdate(
+      const pedido = await PedidoModelMongo.findOneAndUpdate(
         { id_pedido },
         { estado },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!pedido) return null;
+      
+      // Retornar en formato consistente con PostgreSQL
+      return {
+        id_pedido: pedido.id_pedido,
+        id_usuario: pedido.id_usuario,
+        id_restaurante: pedido.id_restaurante,
+        id_repartidor: pedido.id_repartidor || null,
+        estado: pedido.estado,
+        tipo: pedido.tipo,
+        fecha_hora: pedido.fecha_hora
+      };
     }
   }
 };

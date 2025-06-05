@@ -37,6 +37,43 @@ const userController = {
     }
   },
 
+  // Obtener usuario por ID
+  getUserById: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const cacheKey = `user:${id}`;
+      
+      // Verificar permisos: solo admins o el mismo usuario pueden ver los datos
+      if (req.usuario.rol !== 'administrador' && req.usuario.id_usuario !== parseInt(id)) {
+        return res.status(403).json({ error: 'No tiene permisos para ver este usuario.' });
+      }
+
+      // Intentar obtener de caché
+      const cachedData = await redisClient.get(cacheKey);
+      
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
+      }
+
+      const usuario = await UserDAO.findById(id);
+      if (!usuario) {
+        return res.status(404).json({ error: 'Usuario no encontrado.' });
+      }
+
+      // Guardar en caché (expira en 5 minutos)
+      await redisClient.set(cacheKey, JSON.stringify(usuario), {
+        EX: 300
+      });
+
+      res.json(usuario);
+    } catch (error) {
+      /* istanbul ignore next*/
+      console.error(error);
+      /* istanbul ignore next*/
+      res.status(500).json({ error: 'Error en el servidor.' });
+    }
+  },
+
   // Obtener todos los usuarios con ubicación (para ETL y análisis)
   getAllUsersWithLocation: async (req, res) => {
     try {
@@ -59,6 +96,44 @@ const userController = {
       // CREAR EL OBJETO COMPLETO PARA GUARDAR EN CACHÉ
       const responseData = {
         message: 'Usuarios con ubicación obtenidos correctamente.',
+        total: usuarios.length,
+        usuarios: usuarios
+      };
+
+      // Guardar el objeto completo en caché (expira en 10 minutos)
+      await redisClient.set(cacheKey, JSON.stringify(responseData), {
+        EX: 600
+      });
+
+      res.json(responseData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en el servidor.' });
+    }
+  },
+
+  // Obtener todos los usuarios que tienen referido (para análisis de referidos)
+  getAllUsersWithReferrer: async (req, res) => {
+    try {
+      // Solo administradores pueden acceder a esta información
+      if (req.usuario.rol !== 'administrador') {
+        return res.status(403).json({ error: 'No tiene permisos para acceder a esta información.' });
+      }
+
+      const cacheKey = 'users:referrers:all';
+      
+      // Intentar obtener de caché (expira en 10 minutos por ser datos para análisis)
+      const cachedData = await redisClient.get(cacheKey);
+      
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
+      }
+
+      const usuarios = await UserDAO.getAllUsersWithReferrer();
+
+      // CREAR EL OBJETO COMPLETO PARA GUARDAR EN CACHÉ
+      const responseData = {
+        message: 'Usuarios con referido obtenidos correctamente.',
         total: usuarios.length,
         usuarios: usuarios
       };

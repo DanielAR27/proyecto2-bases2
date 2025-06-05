@@ -21,11 +21,21 @@ const ProductDAO = {
       const producto = new ProductModelMongo({
         nombre,
         categoria,
-        descripcion,
+        descripcion: descripcion || 'Producto sin descripción',
         precio,
         id_menu
       });
-      return await producto.save();
+      const savedProduct = await producto.save();
+      
+      // Retornar en el mismo formato y orden que PostgreSQL
+      return {
+        id_producto: savedProduct.id_producto,
+        nombre: savedProduct.nombre,
+        categoria: savedProduct.categoria,
+        descripcion: savedProduct.descripcion,
+        precio: parseFloat(savedProduct.precio),
+        id_menu: savedProduct.id_menu
+      };
     }
   },
 
@@ -33,14 +43,31 @@ const ProductDAO = {
   async getAllProducts() {
     if (dbType === 'postgres') {
       const result = await pool.query(
-        `SELECT id_producto, nombre, categoria, descripcion, precio, id_menu FROM Producto`
+        `SELECT id_producto, nombre, categoria, descripcion, precio, id_menu 
+         FROM Producto 
+         ORDER BY id_producto`
       );
       return result.rows.map(producto => ({
-        ...producto,
-        precio: parseFloat(producto.precio)
+        id_producto: producto.id_producto,
+        nombre: producto.nombre,
+        categoria: producto.categoria,
+        descripcion: producto.descripcion,
+        precio: parseFloat(producto.precio),
+        id_menu: producto.id_menu
       }));
     } else if (dbType === 'mongo') {
-      return await ProductModelMongo.find({}, 'id_producto nombre categoria descripcion precio id_menu').lean();
+      const productos = await ProductModelMongo.find({})
+        .sort({ id_producto: 1 })
+        .lean();
+      
+      return productos.map(producto => ({
+        id_producto: producto.id_producto,
+        nombre: producto.nombre,
+        categoria: producto.categoria,
+        descripcion: producto.descripcion,
+        precio: parseFloat(producto.precio),
+        id_menu: producto.id_menu
+      }));
     }
   },
 
@@ -55,11 +82,30 @@ const ProductDAO = {
       );
       const producto = result.rows[0];
       if (producto) {
-        producto.precio = parseFloat(producto.precio);
+        return {
+          id_producto: producto.id_producto,
+          nombre: producto.nombre,
+          categoria: producto.categoria,
+          descripcion: producto.descripcion,
+          precio: parseFloat(producto.precio),
+          id_menu: producto.id_menu
+        };
       }
-      return producto;
+      return null;
     } else if (dbType === 'mongo') {
-      return await ProductModelMongo.findOne({ id_producto }).lean();
+      const producto = await ProductModelMongo.findOne({ id_producto }).lean();
+      
+      if (!producto) return null;
+      
+      // Retornar en el mismo formato y orden que PostgreSQL
+      return {
+        id_producto: producto.id_producto,
+        nombre: producto.nombre,
+        categoria: producto.categoria,
+        descripcion: producto.descripcion,
+        precio: parseFloat(producto.precio),
+        id_menu: producto.id_menu
+      };
     }
   },
 
@@ -75,15 +121,34 @@ const ProductDAO = {
       );
       const producto = result.rows[0];
       if (producto) {
-        producto.precio = parseFloat(producto.precio);
+        return {
+          id_producto: producto.id_producto,
+          nombre: producto.nombre,
+          categoria: producto.categoria,
+          descripcion: producto.descripcion,
+          precio: parseFloat(producto.precio),
+          id_menu: producto.id_menu
+        };
       }
-      return producto;
+      return null;
     } else if (dbType === 'mongo') {
-      return await ProductModelMongo.findOneAndUpdate(
+      const producto = await ProductModelMongo.findOneAndUpdate(
         { id_producto },
         { nombre, categoria, descripcion, precio },
         { new: true, runValidators: true }
       ).lean();
+      
+      if (!producto) return null;
+      
+      // Retornar en el mismo formato y orden que PostgreSQL
+      return {
+        id_producto: producto.id_producto,
+        nombre: producto.nombre,
+        categoria: producto.categoria,
+        descripcion: producto.descripcion,
+        precio: parseFloat(producto.precio),
+        id_menu: producto.id_menu
+      };
     }
   },
 
@@ -98,7 +163,8 @@ const ProductDAO = {
       );
       return result.rowCount > 0;
     } else if (dbType === 'mongo') {
-      return await ProductModelMongo.findOneAndDelete({ id_producto });
+      const resultado = await ProductModelMongo.findOneAndDelete({ id_producto });
+      return resultado !== null;
     }
   },
 };

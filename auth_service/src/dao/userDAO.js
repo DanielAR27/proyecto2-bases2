@@ -71,6 +71,37 @@ const UserDAO = {
     }
   },
 
+  // Obtener todos los usuarios que tienen un id_referido
+  async getAllUsersWithReferrer() {
+    if (dbType === 'postgres') {
+      const result = await pool.query(
+        `SELECT id_usuario, nombre, email, rol, latitud, longitud, direccion_completa, fecha_registro, id_referido
+        FROM Usuario 
+        WHERE id_referido IS NOT NULL
+        ORDER BY fecha_registro DESC`
+      );
+      return result.rows;
+    } else if (dbType === 'mongo') {
+      const users = await UserModelMongo.find({
+        id_referido: { $exists: true, $ne: null }
+      })
+      .sort({ fecha_registro: -1 })
+      .lean();
+
+      return users.map(user => ({
+        id_usuario: user.id_usuario,
+        nombre: user.nombre,
+        email: user.email,
+        rol: user.rol,
+        latitud: user.latitud || null,
+        longitud: user.longitud || null,
+        direccion_completa: user.direccion_completa || null,
+        fecha_registro: user.fecha_registro,
+        id_referido: user.id_referido
+      }));
+    }
+  },
+
   // Buscar usuario por ID
   async findById(id_usuario) {
     if (dbType === 'postgres') {
