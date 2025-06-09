@@ -9,11 +9,11 @@ const API = 'http://localhost/api';
 // Configuración para datos masivos
 const CONFIG = {
   TOTAL_USERS: 100,
-  MAX_RESTAURANTS: 50, // null = todos los restaurantes del JSON, número = límite específico
-  MENUS_PER_RESTAURANT: 3,
-  PRODUCTS_PER_MENU: 8,
+  MAX_RESTAURANTS: 10, //50 // null = todos los restaurantes del JSON, número = límite específico
+  MENUS_PER_RESTAURANT: 2, //3
+  PRODUCTS_PER_MENU: 3, // 8
   RESERVATIONS_PER_USER: 3,
-  ORDERS_PER_USER: 5,
+  ORDERS_PER_USER: 6, // 5
   TOTAL_REPARTIDORES: 15
 };
 
@@ -72,10 +72,10 @@ const vehiculos_repartidor = [
   'Motocicleta Kawasaki 250cc', 'Auto compacto', 'Moto eléctrica'
 ];
 
-// Coordenadas de Costa Rica (San José y alrededores)
+// Coordenadas de Costa Rica 
 const coordenadas_costa_rica = {
-  min_lat: 9.85, max_lat: 10.05,
-  min_lng: -84.15, max_lng: -83.95
+  min_lat: 9.7, max_lat: 10.5,
+  min_lng: -85.0, max_lng: -83.6
 };
 
 const crearDatosMasivos = async (opciones = {}) => {
@@ -183,59 +183,68 @@ const crearDatosMasivos = async (opciones = {}) => {
     console.log(`Creando ${config.usuarios} usuarios...`);
     const usuarios = [];
     for (let i = 0; i < config.usuarios; i++) {
-      const nombre = faker.person.fullName();
-      const email = generarEmailDesdeNombre(nombre);
+    const nombre = faker.person.fullName();
+    const email = generarEmailDesdeNombre(nombre);
 
-      await axios.post(`${AUTH_API}/auth/register`, {
-        nombre,
-        email,
-        contrasena: '123456',
-        rol: 'cliente'
+    // Determinar si este usuario tiene referido (70% de probabilidad después de los primeros 10)
+    let id_referido = null;
+    if (usuarios.length >= 10 && Math.random() < 0.7) {
+      const posibleReferente = faker.helpers.arrayElement(usuarios);
+      id_referido = posibleReferente.id;
+    }
+
+    await axios.post(`${AUTH_API}/auth/register`, {
+      nombre,
+      email,
+      contrasena: '123456',
+      rol: 'cliente',
+      id_referido
+    });
+
+    const login = await axios.post(`${AUTH_API}/auth/login`, {
+      email,
+      contrasena: '123456'
+    });
+
+    usuarios.push({
+      id: login.data.usuario.id_usuario,
+      token: login.data.token,
+      email,
+      nombre,
+      id_referido
+    });
+
+    // Asignar ubicación aleatoria al usuario dentro de Costa Rica
+    const latitud_usuario = faker.number.float({
+      min: coordenadas_costa_rica.min_lat,
+      max: coordenadas_costa_rica.max_lat,
+      fractionDigits: 6
+    });
+    
+    const longitud_usuario = faker.number.float({
+      min: coordenadas_costa_rica.min_lng,
+      max: coordenadas_costa_rica.max_lng,
+      fractionDigits: 6
+    });
+
+    // Generar dirección realista para el usuario
+    const direccion_usuario = generarDireccionCostaRica();
+
+    try {
+      await axios.put(`${AUTH_API}/users/${login.data.usuario.id_usuario}/location`, {
+        latitud: latitud_usuario,
+        longitud: longitud_usuario,
+        direccion: direccion_usuario
+      }, {
+        headers: { Authorization: `Bearer ${login.data.token}` }
       });
+    } catch (locationError) {
+      console.log(`⚠️ No se pudo asignar ubicación al usuario ${nombre}: endpoint no disponible`);
+    }
 
-      const login = await axios.post(`${AUTH_API}/auth/login`, {
-        email,
-        contrasena: '123456'
-      });
-
-      usuarios.push({
-        id: login.data.usuario.id_usuario,
-        token: login.data.token,
-        email,
-        nombre
-      });
-
-      // Asignar ubicación aleatoria al usuario dentro de Costa Rica
-      const latitud_usuario = faker.number.float({
-        min: coordenadas_costa_rica.min_lat,
-        max: coordenadas_costa_rica.max_lat,
-        fractionDigits: 6
-      });
-      
-      const longitud_usuario = faker.number.float({
-        min: coordenadas_costa_rica.min_lng,
-        max: coordenadas_costa_rica.max_lng,
-        fractionDigits: 6
-      });
-
-      // Generar dirección realista para el usuario
-      const direccion_usuario = generarDireccionCostaRica();
-
-      try {
-        await axios.put(`${AUTH_API}/users/${login.data.usuario.id_usuario}/location`, {
-          latitud: latitud_usuario,
-          longitud: longitud_usuario,
-          direccion: direccion_usuario
-        }, {
-          headers: { Authorization: `Bearer ${login.data.token}` }
-        });
-      } catch (locationError) {
-        console.log(`⚠️ No se pudo asignar ubicación al usuario ${nombre}: endpoint no disponible`);
-      }
-
-      if ((i + 1) % 20 === 0) {
-        console.log(`  Usuarios creados: ${i + 1}/${config.usuarios}`);
-      }
+    if ((i + 1) % 20 === 0) {
+      console.log(`  Usuarios creados: ${i + 1}/${config.usuarios}`);
+    }
     }
 
     // Crear restaurantes con menús y productos
@@ -365,16 +374,46 @@ const crearDatosMasivos = async (opciones = {}) => {
       // Crear reservaciones
       for (let r = 0; r < config.reservacionesPorUsuario; r++) {
         const id_restaurante = faker.helpers.arrayElement(restaurantes);
-        const fechaFutura = faker.date.future({ years: 0.5 });
         
-        await axios.post(`${API}/reservations`, {
+        // Crear reserva inicial
+        const reserva = await axios.post(`${API}/reservations`, {
           id_usuario: user.id,
           id_restaurante,
-          fecha_hora: fechaFutura.toISOString(),
-          estado: faker.helpers.arrayElement(['pendiente', 'confirmada', 'cancelada'])
+          fecha_hora: new Date().toISOString(), // Fecha temporal
+          estado: 'pendiente' // Estado temporal
         }, {
           headers: { Authorization: `Bearer ${user.token}` }
         });
+
+        // Actualizar con fecha del rango de 1 año
+        const fechaReserva = faker.date.between({
+          from: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // 1 año atrás
+          to: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)    // 1 año adelante
+        });
+
+        const id_reserva = reserva.data.reserva.id_reserva; // Ajustar según tu API
+
+        // Determinar estado basado en la fecha
+        let estadoReserva;
+        const ahora = new Date();
+        if (fechaReserva < ahora) {
+          // Reservas pasadas
+          estadoReserva = faker.helpers.arrayElement(['confirmada', 'cancelada', 'confirmada']);
+        } else {
+          // Reservas futuras
+          estadoReserva = faker.helpers.arrayElement(['pendiente', 'confirmada']);
+        }
+
+        try {
+          await axios.put(`${API}/reservations/${id_reserva}`, {
+            fecha_hora: fechaReserva.toISOString(),
+            estado: estadoReserva
+          }, {
+            headers: { Authorization: `Bearer ${user.token}` }
+          });
+        } catch (error) {
+          console.log(`⚠️ Error actualizando reserva ${id_reserva}:`, error.response?.data || error.message);
+        }
         
         reservacionesCreadas++;
       }
@@ -383,7 +422,7 @@ const crearDatosMasivos = async (opciones = {}) => {
       for (let o = 0; o < config.pedidosPorUsuario; o++) {
         const productosPedido = faker.helpers.arrayElements(
           productosGlobales, 
-          faker.number.int({ min: 1, max: 4 })
+          faker.number.int({ min: 2, max: 6 })
         );
 
         const productosFormateados = productosPedido.map(p => ({
@@ -391,14 +430,8 @@ const crearDatosMasivos = async (opciones = {}) => {
           cantidad: faker.number.int({ min: 1, max: 3 })
         }));
 
-        const pedidoData = {
-          id_usuario: user.id,
-          id_restaurante: productosPedido[0].id_restaurante,
-          tipo: faker.helpers.arrayElement(['en restaurante', 'para recoger', 'domicilio']),
-          productos: productosFormateados
-        };
-        
-        await axios.post(`${API}/orders`, {
+        // Crear pedido inicial
+        const pedido = await axios.post(`${API}/orders`, {
           id_usuario: user.id,
           id_restaurante: productosPedido[0].id_restaurante,
           tipo: faker.helpers.arrayElement(['en restaurante', 'para recoger']),
@@ -406,6 +439,38 @@ const crearDatosMasivos = async (opciones = {}) => {
         }, {
           headers: { Authorization: `Bearer ${user.token}` }
         });
+
+        // Actualizar con fecha del rango de 1 año
+        const fechaPedido = faker.date.between({
+          from: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // 1 año atrás
+          to: new Date() // Hasta hoy
+        });
+
+        const id_pedido = pedido.data.pedido.id_pedido; // Ajustar según tu API
+
+        // Determinar estado basado en la fecha para más realismo
+        let estadoPedido;
+        const ahora = new Date();
+        const diferenciaDias = (ahora - fechaPedido) / (1000 * 60 * 60 * 24);
+
+        if (diferenciaDias > 7) {
+          estadoPedido = faker.helpers.arrayElement(['entregado', 'entregado', 'entregado']);
+        } else if (diferenciaDias > 1) {
+          estadoPedido = faker.helpers.arrayElement(['entregado', 'en preparacion', 'listo']);
+        } else {
+          estadoPedido = faker.helpers.arrayElement(['pendiente', 'en preparacion', 'listo']);
+        }
+
+        try {
+          await axios.put(`${API}/orders/${id_pedido}`, {
+            estado: estadoPedido,
+            fecha_hora: fechaPedido.toISOString() // Ajustar campo según tu API
+          }, {
+            headers: { Authorization: `Bearer ${user.token}` }
+          });
+        } catch (error) {
+          console.log(`⚠️ Error actualizando pedido ${id_pedido}:`, error.response?.data || error.message);
+        }
         
         pedidosCreados++;
       }
