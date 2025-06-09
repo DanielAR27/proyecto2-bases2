@@ -263,42 +263,78 @@ const pedidoController = {
     }
   },
 
-  // Actualizar estado (invalida múltiples cachés)
-  async updateDeliveryStatus(req, res) {
+  // Actualizar pedido (estado, tipo y/o fecha_hora opcionales)
+  async updateDelivery(req, res) {
     try {
       const { id } = req.params;
-      const { estado } = req.body;
+      const { estado, tipo, fecha_hora } = req.body;
 
-      const estadosValidos = ['pendiente', 'en preparacion', 'listo', 'en camino', 'entregado', 'cancelado'];
-      
-      if (!estado || !estadosValidos.includes(estado)) {
+      // Validar que al menos un campo venga para actualizar
+      if (!estado && !tipo && !fecha_hora) {
         return res.status(400).json({ 
-          error: 'Estado inválido.',
-          estadosValidos 
+          error: 'Se debe proporcionar al menos un campo para actualizar: estado, tipo o fecha_hora.' 
         });
       }
 
-      const pedidoActualizado = await PedidoDAO.updateDeliveryStatus(id, estado);
-      
+      // Validar estado si viene
+      if (estado) {
+        const estadosValidos = ['pendiente', 'en preparacion', 'listo', 'entregado'];
+        if (!estadosValidos.includes(estado)) {
+          return res.status(400).json({
+            error: 'Estado inválido.',
+            estadosValidos
+          });
+        }
+      }
+
+      // Validar tipo si viene
+      if (tipo) {
+        const tiposValidos = ['en restaurante', 'para recoger'];
+        if (!tiposValidos.includes(tipo)) {
+          return res.status(400).json({
+            error: 'Tipo inválido.',
+            tiposValidos
+          });
+        }
+      }
+
+      // Validar formato de fecha si viene
+      if (fecha_hora) {
+        const fechaValida = new Date(fecha_hora);
+        if (isNaN(fechaValida.getTime())) {
+          return res.status(400).json({
+            error: 'Formato de fecha inválido. Use formato ISO: YYYY-MM-DDTHH:MM:SSZ'
+          });
+        }
+      }
+
+      const pedidoActualizado = await PedidoDAO.updateDelivery(parseInt(id), { estado, tipo, fecha_hora });
+
       if (!pedidoActualizado) {
         return res.status(404).json({ error: 'Pedido no encontrado.' });
       }
 
       // Invalidar cachés relacionados
-      await Promise.all([
-        redisClient.del(`pedido:${id}`),
-        redisClient.del('pedidos:all'),
-        redisClient.del('pedidos:unassigned'),
-        redisClient.del(`pedidos:driver:${pedidoActualizado.id_repartidor}`)
-      ]);
+      if (redisClient && redisClient.isOpen) {
+        try {
+          await redisClient.del('pedidos:all');
+          await redisClient.del('pedidos:unassigned');
+          if (pedidoActualizado.id_repartidor) {
+            await redisClient.del(`pedidos:driver:${pedidoActualizado.id_repartidor}`);
+          }
+          await redisClient.del(`pedido:${id}`);
+        } catch (cacheError) {
+          console.error('Error al invalidar caché:', cacheError);
+        }
+      }
 
       res.json({
-        message: 'Estado del pedido actualizado correctamente.',
+        message: 'Pedido actualizado correctamente.',
         pedido: pedidoActualizado
       });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al actualizar estado del pedido.', details: error.message });
+      console.error('Error al actualizar pedido:', error);
+      res.status(500).json({ error: 'Error al actualizar pedido.' });
     }
   }
 };

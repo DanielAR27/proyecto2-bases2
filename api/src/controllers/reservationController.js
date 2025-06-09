@@ -102,7 +102,7 @@ const reservationController = {
     }
   },
 
-  // Actualizar reserva
+  // Actualizar reserva (fecha_hora y/o estado opcionales)
   async updateReservation(req, res) {
     try {
       const { id } = req.params;
@@ -110,6 +110,34 @@ const reservationController = {
 
       if (!req.usuario) {
         return res.status(401).json({ error: 'Token requerido.' });
+      }
+
+      // Validar que al menos un campo venga para actualizar
+      if (!fecha_hora && !estado) {
+        return res.status(400).json({ 
+          error: 'Se debe proporcionar al menos un campo para actualizar: fecha_hora o estado.' 
+        });
+      }
+
+      // Validar estado si viene
+      if (estado) {
+        const estadosValidos = ['pendiente', 'confirmada', 'cancelada'];
+        if (!estadosValidos.includes(estado)) {
+          return res.status(400).json({
+            error: 'Estado inválido.',
+            estadosValidos
+          });
+        }
+      }
+
+      // Validar formato de fecha si viene
+      if (fecha_hora) {
+        const fechaValida = new Date(fecha_hora);
+        if (isNaN(fechaValida.getTime())) {
+          return res.status(400).json({
+            error: 'Formato de fecha inválido. Use formato ISO: YYYY-MM-DDTHH:MM:SSZ'
+          });
+        }
       }
 
       const reserva = await ReservationDAO.findById(id);
@@ -123,15 +151,26 @@ const reservationController = {
 
       const actualizada = await ReservationDAO.updateReservation(id, { fecha_hora, estado });
 
-      // Invalidar caché individual y la lista
-      await redisClient.del(`reserva:${id}`);
-      await redisClient.del('reservas:all');
+      if (!actualizada) {
+        return res.status(400).json({ error: 'No se pudo actualizar la reserva.' });
+      }
 
-      res.json({ message: 'Reserva actualizada.', reserva: actualizada });
+      // Invalidar cachés relacionados
+      if (redisClient && redisClient.isOpen) {
+        try {
+          await redisClient.del(`reserva:${id}`);
+          await redisClient.del('reservas:all');
+        } catch (cacheError) {
+          console.error('Error al invalidar caché:', cacheError);
+        }
+      }
+
+      res.json({ 
+        message: 'Reserva actualizada correctamente.', 
+        reserva: actualizada 
+      });
     } catch (error) {
-      /* istanbul ignore next */
-      console.error(error);
-      /* istanbul ignore next */
+      console.error('Error al actualizar reserva:', error);
       res.status(500).json({ error: 'Error al actualizar la reserva.' });
     }
   },
@@ -167,7 +206,7 @@ const reservationController = {
       /* istanbul ignore next */
       res.status(500).json({ error: 'Error al eliminar la reserva.' });
     }
-  },
+  }
 };
 
 module.exports = reservationController;

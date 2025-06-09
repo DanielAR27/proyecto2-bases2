@@ -307,21 +307,73 @@ const PedidoDAO = {
     }
   },
 
-  // Actualizar estado de entrega
-  async updateDeliveryStatus(id_pedido, estado) {
+
+  // Actualizar pedido (estado, tipo y/o fecha_hora opcionales) - CORREGIDO
+  async updateDelivery(id_pedido, { estado = null, tipo = null, fecha_hora = null }) {
     if (dbType === 'postgres') {
+      // Construir la query dinámicamente
+      const fields = [];
+      const values = [];
+      let paramCount = 1;
+
+      if (estado !== null) {
+        fields.push(`estado = $${paramCount}`);
+        values.push(estado);
+        paramCount++;
+      }
+
+      if (tipo !== null) {
+        fields.push(`tipo = $${paramCount}`);
+        values.push(tipo);
+        paramCount++;
+      }
+
+      if (fecha_hora !== null) {
+        fields.push(`fecha_hora = $${paramCount}`);
+        values.push(fecha_hora);
+        paramCount++;
+      }
+
+      // Si no hay campos para actualizar, retornar null
+      if (fields.length === 0) {
+        return null;
+      }
+
+      values.push(id_pedido);
+      
       const result = await pool.query(
         `UPDATE Pedido 
-         SET estado = $1
-         WHERE id_pedido = $2
-         RETURNING id_pedido, id_usuario, id_restaurante, id_repartidor, estado, tipo, fecha_hora`,
-        [estado, id_pedido]
+        SET ${fields.join(', ')}
+        WHERE id_pedido = $${paramCount}
+        RETURNING id_pedido, id_usuario, id_restaurante, id_repartidor, estado, tipo, fecha_hora`,
+        values
       );
+
       return result.rows[0];
+  
     } else if (dbType === 'mongo') {
+      const updateFields = {};
+      
+      if (estado !== null) {
+        updateFields.estado = estado;
+      }
+      
+      if (tipo !== null) {
+        updateFields.tipo = tipo;
+      }
+      
+      if (fecha_hora !== null) {
+        updateFields.fecha_hora = new Date(fecha_hora);
+      }
+
+      // Si no hay campos para actualizar, retornar null
+      if (Object.keys(updateFields).length === 0) {
+        return null;
+      }
+
       const pedido = await PedidoModelMongo.findOneAndUpdate(
         { id_pedido },
-        { estado },
+        updateFields,
         { new: true, runValidators: true }
       ).lean();
       

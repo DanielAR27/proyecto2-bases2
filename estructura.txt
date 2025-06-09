@@ -1,66 +1,86 @@
 
 C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
-├── api
-|   ├── src
-|   |   ├── config
-|   |   ├── controllers
-|   |   ├── dao
-|   |   ├── db
-|   |   ├── middlewares
-|   |   ├── models
-|   |   ├── routes
+├── api/
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── dao/
+|   |   ├── db/
+|   |   ├── middlewares/
+|   |   ├── models/
+|   |   ├── routes/
 |   |   ├── app.js
-|   ├── swagger
-|   ├── tests
-|   |   ├── integration
-|   |   ├── unit
-|   |   ├── utils
+|   ├── swagger/
+|   ├── tests/
+|   |   ├── integration/
+|   |   ├── unit/
+|   |   ├── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
 |   ├── package.json
 |   ├── server.js
-├── auth_service
-|   ├── src
-|   |   ├── config
-|   |   ├── controllers
-|   |   ├── dao
-|   |   ├── db
-|   |   ├── middlewares
-|   |   ├── models
-|   |   ├── routes
+├── graph_service/
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── middlewares/
+|   |   ├── routes/
+|   |   ├── services/ (Neo4J y Redis)
 |   |   ├── app.js
-|   ├── swagger
-|   ├── tests
-|   |   ├── integration
-|   |   ├── unit
-|   |   ├── utils
+|   ├── swagger/
+|   ├── dockerfile
+|   ├── package-lock.json
+|   ├── package.json
+|   ├── server.js
+├── analytics_service/
+|   ├── extractors/ (extractores de postgres y mongo)
+|   ├── warehouse/ (conexión al warehouse de postgres y cargar data)
+|   ├── app.py (mantener el servicio vivo una vez ejecutado el etl)
+|   ├── dockerfile
+|   ├── etl_job.py
+|   ├── requirements.txt
+├── auth_service/
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── dao/
+|   |   ├── db/
+|   |   ├── middlewares/
+|   |   ├── models/
+|   |   ├── routes/
+|   |   ├── app.js
+|   ├── swagger/
+|   ├── tests/
+|   |   ├── integration/
+|   |   ├── unit/
+|   |   ├── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
 |   ├── package.json
 |   ├── server.js
-├── pruebas
+├── pruebas/
 |   ├── generarDatos.js
 |   ├── generarDatosMasivos.js
 |   ├── menuPrueba.js
 |   ├── package-lock.json
 |   ├── package.json
-├── search_service
-|   ├── src
-|   |   ├── config
-|   |   ├── controllers
-|   |   ├── middlewares
-|   |   ├── models
-|   |   ├── routes
-|   |   ├── services
+├── search_service/
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── middlewares/
+|   |   ├── models/
+|   |   ├── routes/
+|   |   ├── services/ (Elastic y Redis)
 |   |   ├── app.js
 |   |   ├── init.js
-|   ├── swagger
-|   ├── tests
-|   |   ├── integration
-|   |   ├── unit
-|   |   ├── utils
+|   ├── swagger/
+|   ├── tests/
+|   |   ├── integration/
+|   |   ├── unit/
+|   |   ├── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
@@ -69,6 +89,8 @@ C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
 ├── docker-compose.yml
 ├── estructura.txt
 ├── init.sql
+├── warehouse.sql (Crear dimensiones, tablas de hechos y cubos)
+├── warehouse_procedures.sql (Crear procedures/functions para usar)
 ├── init_cluster.sh
 ├── set_config.sh
 ├── nginx.conf

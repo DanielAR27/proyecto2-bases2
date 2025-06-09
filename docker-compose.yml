@@ -23,6 +23,59 @@ services:
       timeout: 5s
       retries: 5
 
+  # PostgreSQL Warehouse (OLAP)
+  postgres_warehouse:
+    image: postgres:17
+    container_name: postgres_warehouse
+    profiles:
+      - analytics
+    restart: always
+    environment:
+      POSTGRES_USER: ${WAREHOUSE_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${WAREHOUSE_POSTGRES_PASSWORD}
+      POSTGRES_DB: ${WAREHOUSE_POSTGRES_DB}
+    command: >
+      postgres 
+      -c listen_addresses='*' 
+      -c password_encryption=md5
+      -c shared_preload_libraries='pg_stat_statements'
+      -c pg_stat_statements.track=all
+      -c work_mem=256MB
+      -c maintenance_work_mem=512MB
+      -c effective_cache_size=2GB
+      -c random_page_cost=1.1
+      -c max_connections=200
+    ports:
+      - "15433:5432"
+    volumes:
+      - postgres_warehouse_data:/var/lib/postgresql/data
+      - ./warehouse.sql:/docker-entrypoint-initdb.d/01-warehouse.sql
+      - ./warehouse_procedures.sql:/docker-entrypoint-initdb.d/02-warehouse_procedures.sql
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${WAREHOUSE_POSTGRES_USER} -d ${WAREHOUSE_POSTGRES_DB}"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  # PostgreSQL para Hive (separado)
+  postgres-hive:
+    image: postgres:13
+    container_name: postgres_hive
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_HIVE_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_HIVE_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_HIVE_DB}
+    command: postgres -c 'listen_addresses=*' -c 'password_encryption=md5'
+    ports:
+      - "15434:5432"
+    volumes:
+      - postgres_hive_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
   # REDIS (CACHÉ VOLÁTIL)
   redis:
     image: redis:7.2
@@ -60,6 +113,90 @@ services:
       - "${NEO4J_PORT}:7687"       # Bolt protocol
     volumes:
       - neo4j_data:/data
+    networks:
+      - app_network
+
+  # Hadoop NameNode
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=test
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    networks:
+      - app_network
+
+  # Hadoop DataNode
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    volumes:
+      - hadoop_datanode:/hadoop/dfs/data
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+    ports:
+      - "9864:9864"
+    networks:
+      - app_network
+
+  # Hive Metastore
+  hive-metastore:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-metastore
+    command: /opt/hive/bin/hive --service metastore
+    environment:
+      SERVICE_PRECONDITION: "namenode:9870 datanode:9864 postgres-hive:5432"
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://postgres-hive:5432/${POSTGRES_HIVE_DB}"
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionDriverName: "org.postgresql.Driver"
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionUserName: ${POSTGRES_HIVE_USER}
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionPassword: ${POSTGRES_HIVE_PASSWORD}
+      HIVE_SITE_CONF_hive_metastore_schema_verification: "false"
+      HIVE_SITE_CONF_datanucleus_schema_autoCreateAll: "true"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+      HDFS_CONF_dfs_nameservices: hdfscluster
+      HDFS_CONF_dfs_namenode_rpc_address: namenode:9000
+      YARN_CONF_yarn_resourcemanager_hostname: namenode
+    ports:
+      - "9083:9083"
+    depends_on:
+      - postgres-hive
+      - namenode
+      - datanode
+    networks:
+      - app_network
+
+  # Hive Server
+  hive-server:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-server
+    depends_on:
+      - hive-metastore
+    environment:
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://postgres-hive:5432/${POSTGRES_HIVE_DB}"
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionDriverName: "org.postgresql.Driver"
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionUserName: ${POSTGRES_HIVE_USER}
+      HIVE_SITE_CONF_javax_jdo_option_ConnectionPassword: ${POSTGRES_HIVE_PASSWORD}
+      HIVE_SITE_CONF_hive_metastore_uris: "thrift://hive-metastore:9083"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
+      HDFS_CONF_dfs_nameservices: hdfscluster
+      HDFS_CONF_dfs_namenode_rpc_address: namenode:9000
+      YARN_CONF_yarn_resourcemanager_hostname: namenode
+      # CONFIGURACIONES DE AUTENTICACIÓN CRÍTICAS
+      HIVE_SITE_CONF_hive_server2_authentication: NOSASL
+      HIVE_SITE_CONF_hive_server2_transport_mode: binary
+      HIVE_SITE_CONF_hive_server2_thrift_port: "10000"
+      HIVE_SITE_CONF_hive_server2_enable_doAs: "false"
+    ports:
+      - "10000:10000"
     networks:
       - app_network
 
@@ -312,16 +449,15 @@ services:
     networks:
       - app_network
 
-  # ANALYTICS SERVICE - INSTANCIA 1
-  analytics_service1:
-    build: ./analytics_service
-    container_name: analytics_service1
+  # GRAPH SERVICE - INSTANCIA 1
+  graph_service1:
+    build: ./graph_service
+    container_name: graph_service1
     profiles:
       - backend
-      - test
     restart: always
     ports:
-      - "${ANALYTICS_PORT}:${ANALYTICS_PORT}"
+      - "${GRAPH_PORT}:${GRAPH_PORT}"
     depends_on:
       - auth_service1
       - api1
@@ -335,21 +471,21 @@ services:
       - NEO4J_PASSWORD=${NEO4J_PASSWORD}
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_HOST=${REDIS_HOST}
-      - ANALYTICS_PORT=${ANALYTICS_PORT}
+      - DB_TYPE=${DB_TYPE}
+      - GRAPH_PORT=${GRAPH_PORT}
       - JWT_SECRET=${JWT_SECRET}
     networks:
       - app_network
 
-  # ANALYTICS SERVICE - INSTANCIA 2
-  analytics_service2:
-    build: ./analytics_service
-    container_name: analytics_service2
+  # GRAPH SERVICE - INSTANCIA 2
+  graph_service2:
+    build: ./graph_service
+    container_name: graph_service2
     profiles:
       - backend
-      - test
     restart: always
     expose:
-      - "${ANALYTICS_PORT}"
+      - "${GRAPH_PORT}"
     depends_on:
       - auth_service1
       - api1
@@ -363,11 +499,43 @@ services:
       - NEO4J_PASSWORD=${NEO4J_PASSWORD}
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_HOST=${REDIS_HOST}
-      - ANALYTICS_PORT=${ANALYTICS_PORT}
+      - DB_TYPE=${DB_TYPE}
+      - GRAPH_PORT=${GRAPH_PORT}
       - JWT_SECRET=${JWT_SECRET}
     networks:
       - app_network
     
+  # ANALYTICS SERVICE (OLAP & Data Warehouse)
+  analytics_service:
+    build: ./analytics_service
+    container_name: analytics_service
+    profiles:
+      - analytics
+    restart: always
+    ports:
+      - "5800:5800"
+    depends_on:
+      - postgres_warehouse
+      - postgres
+      - mongos1
+    environment:
+      # Warehouse PostgreSQL
+      - WAREHOUSE_POSTGRES_HOST=${WAREHOUSE_POSTGRES_HOST}
+      - WAREHOUSE_POSTGRES_USER=${WAREHOUSE_POSTGRES_USER}
+      - WAREHOUSE_POSTGRES_PASSWORD=${WAREHOUSE_POSTGRES_PASSWORD}
+      - WAREHOUSE_POSTGRES_DB=${WAREHOUSE_POSTGRES_DB}
+      - WAREHOUSE_POSTGRES_PORT=${POSTGRES_PORT}
+      # Source databases
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - MONGO_URI=${MONGO_URI}
+      - ANALYTICS_PORT=${ANALYTICS_PORT}
+    networks:
+      - app_network
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_container
@@ -578,7 +746,12 @@ volumes:
   mongors2n2-data:
   mongors2n3-data:
   elastic_data:
-  neo4j_data: 
+  neo4j_data:
+  postgres_hive_data:
+  hadoop_namenode:
+  hadoop_datanode:
+  warehouse_duckdb_data:
+  postgres_warehouse_data:
 
 networks:
   app_network:

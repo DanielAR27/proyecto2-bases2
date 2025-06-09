@@ -15,9 +15,6 @@ RUN npm install
 # Copiar todo el código de la app
 COPY . .
 
-# Variables de entorno para producción
-ENV NODE_ENV=production
-
 # Exponer el puerto (importante para Docker)
 EXPOSE 4000
 

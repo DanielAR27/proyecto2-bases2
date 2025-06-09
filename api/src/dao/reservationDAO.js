@@ -81,21 +81,61 @@ const ReservationDAO = {
     }
   },
 
-  // Actualizar reserva
-  async updateReservation(id_reserva, { fecha_hora, estado }) {
+  // Actualizar reserva (fecha_hora y/o estado opcionales)
+  async updateReservation(id_reserva, { fecha_hora = null, estado = null }) {
     if (dbType === 'postgres') {
+      // Construir la query dinámicamente
+      const fields = [];
+      const values = [];
+      let paramCount = 1;
+
+      if (fecha_hora !== null) {
+        fields.push(`fecha_hora = $${paramCount}`);
+        values.push(fecha_hora);
+        paramCount++;
+      }
+
+      if (estado !== null) {
+        fields.push(`estado = $${paramCount}`);
+        values.push(estado);
+        paramCount++;
+      }
+
+      // Si no hay campos para actualizar, retornar null
+      if (fields.length === 0) {
+        return null;
+      }
+
+      values.push(id_reserva);
+      
       const result = await pool.query(
-        `UPDATE Reserva
-         SET fecha_hora = $1, estado = $2
-         WHERE id_reserva = $3
-         RETURNING id_reserva, id_usuario, id_restaurante, fecha_hora, estado`,
-        [fecha_hora, estado, id_reserva]
+        `UPDATE Reserva 
+        SET ${fields.join(', ')}
+        WHERE id_reserva = $${paramCount}
+        RETURNING id_reserva, id_usuario, id_restaurante, fecha_hora, estado`,
+        values
       );
       return result.rows[0];
+
     } else if (dbType === 'mongo') {
+      const updateFields = {};
+      
+      if (fecha_hora !== null) {
+        updateFields.fecha_hora = new Date(fecha_hora);
+      }
+      
+      if (estado !== null) {
+        updateFields.estado = estado;
+      }
+
+      // Si no hay campos para actualizar, retornar null
+      if (Object.keys(updateFields).length === 0) {
+        return null;
+      }
+
       const reservation = await ReservationModelMongo.findOneAndUpdate(
         { id_reserva },
-        { fecha_hora, estado },
+        updateFields,
         { new: true, runValidators: true }
       ).lean();
       
@@ -126,7 +166,7 @@ const ReservationDAO = {
       const resultado = await ReservationModelMongo.findOneAndDelete({ id_reserva });
       return resultado !== null;
     }
-  },
+  }
 };
 
 module.exports = ReservationDAO;

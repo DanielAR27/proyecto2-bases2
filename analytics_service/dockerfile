@@ -1,12 +1,29 @@
-FROM node:18-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Variables de entorno para logging
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONIOENCODING=UTF-8
 
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements e instalar
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar código
 COPY . .
 
-EXPOSE 5600
+# Crear directorio para logs
+RUN mkdir -p /app/logs
 
-CMD ["npm", "start"]
+# Exponer puerto
+EXPOSE 5800
+
+# Comando por defecto con logging explícito
+CMD ["python", "-u", "app.py"]
