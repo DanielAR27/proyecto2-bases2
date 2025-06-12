@@ -78,6 +78,16 @@ const coordenadas_costa_rica = {
   min_lng: -85.0, max_lng: -83.6
 };
 
+const provincias_coordenadas = {
+  'San José': { min_lat: 9.8, max_lat: 10.1, min_lng: -84.4, max_lng: -84.0 },
+  'Cartago': { min_lat: 9.7, max_lat: 10.2, min_lng: -84.2, max_lng: -83.6 },
+  'Heredia': { min_lat: 9.9, max_lat: 10.5, min_lng: -84.4, max_lng: -84.0 },
+  'Alajuela': { min_lat: 10.0, max_lat: 10.9, min_lng: -84.9, max_lng: -84.1 },
+  'Guanacaste': { min_lat: 10.2, max_lat: 11.2, min_lng: -86.0, max_lng: -85.0 },
+  'Puntarenas': { min_lat: 8.5, max_lat: 11.0, min_lng: -85.9, max_lng: -84.6 },
+  'Limón': { min_lat: 8.5, max_lat: 11.2, min_lng: -84.0, max_lng: -82.5 }
+};
+
 const crearDatosMasivos = async (opciones = {}) => {
   try {
     console.time('Ejecución total');
@@ -214,21 +224,25 @@ const crearDatosMasivos = async (opciones = {}) => {
       id_referido
     });
 
-    // Asignar ubicación aleatoria al usuario dentro de Costa Rica
+    // 1. Elegir provincia aleatoria
+    const provincia_elegida = faker.helpers.arrayElement(Object.keys(provincias_coordenadas));
+    const coords = provincias_coordenadas[provincia_elegida];
+
+    // 2. Generar coordenadas coherentes con la provincia
     const latitud_usuario = faker.number.float({
-      min: coordenadas_costa_rica.min_lat,
-      max: coordenadas_costa_rica.max_lat,
-      fractionDigits: 6
-    });
-    
-    const longitud_usuario = faker.number.float({
-      min: coordenadas_costa_rica.min_lng,
-      max: coordenadas_costa_rica.max_lng,
+      min: coords.min_lat,
+      max: coords.max_lat,
       fractionDigits: 6
     });
 
-    // Generar dirección realista para el usuario
-    const direccion_usuario = generarDireccionCostaRica();
+    const longitud_usuario = faker.number.float({
+      min: coords.min_lng,
+      max: coords.max_lng,
+      fractionDigits: 6
+    });
+
+    // 3. Generar dirección coherente con la provincia
+    const direccion_usuario = generarDireccionCostaRica(provincia_elegida);
 
     try {
       await axios.put(`${AUTH_API}/users/${login.data.usuario.id_usuario}/location`, {
@@ -515,8 +529,8 @@ function generarEmailDesdeNombre(nombreCompleto) {
   return `${usuarioEmail}${numeroAleatorio}@${dominio}`;
 }
 
-function generarDireccionCostaRica() {
-  const provincia = faker.helpers.arrayElement(provincias_costa_rica);
+function generarDireccionCostaRica(provincia_especifica = null) {
+  const provincia = provincia_especifica || faker.helpers.arrayElement(provincias_costa_rica);
   let canton;
   
   // Si es San José, usar cantones específicos, sino usar la provincia como cantón

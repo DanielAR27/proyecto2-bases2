@@ -4,15 +4,23 @@
 -- =============================================================================
 -- FUNCIÓN: OBTENER O CREAR TIEMPO_ID
 -- =============================================================================
-CREATE OR REPLACE FUNCTION warehouse.get_or_create_tiempo_id(fecha_param DATE)
+CREATE OR REPLACE FUNCTION warehouse.get_or_create_tiempo_id(fecha_hora_param TIMESTAMP)
 RETURNS INTEGER AS $$
 DECLARE
     tiempo_id_result INTEGER;
+    fecha_solo DATE;
+    hora_solo INTEGER;
+    minuto_solo INTEGER;
 BEGIN
+    -- Extraer componentes
+    fecha_solo := fecha_hora_param::DATE;
+    hora_solo := EXTRACT(HOUR FROM fecha_hora_param);
+    minuto_solo := EXTRACT(MINUTE FROM fecha_hora_param);
+    
     -- Intentar obtener tiempo_id existente
     SELECT tiempo_id INTO tiempo_id_result
     FROM warehouse.dim_tiempo 
-    WHERE fecha = fecha_param;
+    WHERE fecha = fecha_solo AND hora = hora_solo AND minuto = minuto_solo;
     
     -- Si existe, devolverlo
     IF tiempo_id_result IS NOT NULL THEN
@@ -21,15 +29,16 @@ BEGIN
     
     -- Si no existe, crearlo
     INSERT INTO warehouse.dim_tiempo (
-        fecha, anio, mes, dia, trimestre, dia_semana, es_fin_semana
+        fecha, hora, minuto, anio, mes, dia, trimestre, dia_semana, es_fin_semana, es_horario_pico
     ) VALUES (
-        fecha_param,
-        EXTRACT(YEAR FROM fecha_param),
-        EXTRACT(MONTH FROM fecha_param),
-        EXTRACT(DAY FROM fecha_param),
-        EXTRACT(QUARTER FROM fecha_param),
-        EXTRACT(DOW FROM fecha_param) + 1,
-        EXTRACT(DOW FROM fecha_param) IN (0, 6)
+        fecha_solo, hora_solo, minuto_solo,
+        EXTRACT(YEAR FROM fecha_solo),
+        EXTRACT(MONTH FROM fecha_solo),
+        EXTRACT(DAY FROM fecha_solo),
+        EXTRACT(QUARTER FROM fecha_solo),
+        EXTRACT(DOW FROM fecha_solo) + 1,
+        EXTRACT(DOW FROM fecha_solo) IN (0, 6),
+        hora_solo BETWEEN 11 AND 14 OR hora_solo BETWEEN 18 AND 21  -- Horarios pico típicos
     ) RETURNING tiempo_id INTO tiempo_id_result;
     
     RETURN tiempo_id_result;
@@ -58,6 +67,77 @@ BEGIN
         WHEN lat BETWEEN 8.5 AND 11.2 AND lng BETWEEN -84.2 AND -82.5 THEN 'Limón'
         ELSE 'Sin Ubicación'
     END;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =============================================================================
+-- FUNCIÓN: GET OR CREATE CATEGORÍA  
+-- =============================================================================
+CREATE OR REPLACE FUNCTION warehouse.get_or_create_categoria_id(categoria_nombre VARCHAR)
+RETURNS INTEGER AS $$
+DECLARE
+    categoria_id_result INTEGER;
+BEGIN
+    -- Si es NULL o vacío, usar default
+    IF categoria_nombre IS NULL OR TRIM(categoria_nombre) = '' THEN
+        categoria_nombre := 'Especialidad';
+    END IF;
+    
+    -- Buscar existente
+    SELECT categoria_id INTO categoria_id_result
+    FROM warehouse.dim_categorias 
+    WHERE nombre_categoria = categoria_nombre;
+    
+    -- Si no existe, crear
+    IF categoria_id_result IS NULL THEN
+        INSERT INTO warehouse.dim_categorias (nombre_categoria) 
+        VALUES (categoria_nombre) 
+        RETURNING categoria_id INTO categoria_id_result;
+    END IF;
+    
+    RETURN categoria_id_result;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =============================================================================
+-- FUNCIÓN: SYNC PRODUCTO (UPSERT)
+-- =============================================================================
+-- En warehouse_procedures.sql, cambiar la función sync_producto:
+CREATE OR REPLACE FUNCTION warehouse.sync_producto(
+    p_id_producto INTEGER,
+    p_nombre VARCHAR,
+    p_categoria VARCHAR,
+    p_precio DECIMAL,
+    p_id_menu INTEGER,
+    p_id_restaurante INTEGER
+) RETURNS INTEGER AS $$
+DECLARE
+    v_categoria_id INTEGER;
+BEGIN
+    -- Obtener o crear categoría
+    v_categoria_id := warehouse.get_or_create_categoria_id(p_categoria);
+    
+    -- Upsert del producto
+    INSERT INTO warehouse.dim_productos (
+        producto_id, nombre, categoria_id, precio_actual, 
+        precio_promedio, id_menu, id_restaurante
+    ) VALUES (
+        p_id_producto, p_nombre, v_categoria_id, p_precio,
+        p_precio, p_id_menu, p_id_restaurante
+    )
+    ON CONFLICT (producto_id) 
+    DO UPDATE SET
+        nombre = EXCLUDED.nombre,
+        categoria_id = EXCLUDED.categoria_id,
+        precio_actual = EXCLUDED.precio_actual,
+        precio_promedio = (dim_productos.precio_promedio + EXCLUDED.precio_actual) / 2,
+        id_menu = EXCLUDED.id_menu,
+        id_restaurante = EXCLUDED.id_restaurante,
+        fecha_ultima_actualizacion = NOW()
+        -- NO actualizar fecha_primera_venta en UPDATE
+    ;
+    
+    RETURN v_categoria_id;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -100,7 +180,7 @@ BEGIN
         END IF;
         
         -- Obtener tiempo_id para la fecha
-        v_tiempo_id := warehouse.get_or_create_tiempo_id(pedido_record.fecha_hora::DATE);
+        v_tiempo_id := warehouse.get_or_create_tiempo_id(pedido_record.fecha_hora);
         
         -- Calcular provincias usando las coordenadas
         v_provincia_cliente := warehouse.get_provincia_from_coords(
@@ -178,7 +258,7 @@ BEGIN
         END IF;
         
         -- Obtener tiempo_id para la fecha
-        v_tiempo_id := warehouse.get_or_create_tiempo_id(reserva_record.fecha_hora::DATE);
+        v_tiempo_id := warehouse.get_or_create_tiempo_id(reserva_record.fecha_hora);
         
         -- Upsert de la reserva
         INSERT INTO warehouse.fact_reservas (
@@ -192,6 +272,102 @@ BEGIN
         ON CONFLICT (id_reserva, tiempo_id, fuente_datos) 
         DO UPDATE SET
             estado = EXCLUDED.estado,
+            fecha_etl = NOW();
+            
+        count_processed := count_processed + 1;
+    END LOOP;
+    
+    RETURN count_processed;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =============================================================================
+-- PROCEDURE: BATCH UPSERT DETALLE PEDIDOS
+-- =============================================================================
+CREATE OR REPLACE FUNCTION warehouse.batch_upsert_detalle_pedidos(
+    detalles_json JSONB
+) RETURNS INTEGER AS $$
+DECLARE
+    detalle_record RECORD;
+    v_tiempo_id INTEGER;
+    v_categoria_id INTEGER;
+    v_provincia_cliente VARCHAR(50);
+    v_provincia_restaurante VARCHAR(50);
+    count_processed INTEGER := 0;
+BEGIN
+    FOR detalle_record IN 
+        SELECT * FROM jsonb_to_recordset(detalles_json) AS x(
+            id_pedido INTEGER,
+            id_producto INTEGER,
+            fecha_hora TIMESTAMP,
+            id_usuario INTEGER,
+            id_restaurante INTEGER,
+            id_repartidor INTEGER,
+            estado_pedido VARCHAR(20),
+            tipo_pedido VARCHAR(20),
+            cantidad INTEGER,
+            precio_unitario DECIMAL(10,2),
+            subtotal DECIMAL(10,2),
+            nombre_producto VARCHAR(200),
+            categoria_producto VARCHAR(100),
+            precio_producto DECIMAL(10,2),
+            id_menu INTEGER,
+            usuario_latitud DECIMAL(10,8),        
+            usuario_longitud DECIMAL(11,8),       
+            restaurante_latitud DECIMAL(10,8),   
+            restaurante_longitud DECIMAL(11,8),   
+            fuente_datos VARCHAR(20)
+        )
+    LOOP
+        -- Verificar fecha
+        IF detalle_record.fecha_hora IS NULL THEN
+            CONTINUE;
+        END IF;
+        
+        -- Obtener tiempo_id
+        v_tiempo_id := warehouse.get_or_create_tiempo_id(detalle_record.fecha_hora);
+        
+        -- Sync producto y obtener categoria_id
+        v_categoria_id := warehouse.sync_producto(
+            detalle_record.id_producto,
+            detalle_record.nombre_producto,
+            detalle_record.categoria_producto,
+            detalle_record.precio_producto,
+            detalle_record.id_menu,
+            detalle_record.id_restaurante
+        );
+        
+        -- Calcular provincias usando las coordenadas
+        v_provincia_cliente := warehouse.get_provincia_from_coords(
+            detalle_record.usuario_latitud, 
+            detalle_record.usuario_longitud
+        );
+        
+        v_provincia_restaurante := warehouse.get_provincia_from_coords(
+            detalle_record.restaurante_latitud, 
+            detalle_record.restaurante_longitud
+        );
+
+        -- Insert detalle del pedido
+        INSERT INTO warehouse.fact_detalle_pedidos (
+            id_pedido, id_producto, tiempo_id, categoria_id,
+            id_usuario, id_restaurante, id_repartidor,
+            estado_pedido, tipo_pedido, cantidad, precio_unitario, subtotal,
+            provincia_cliente, provincia_restaurante, fecha_creacion, fuente_datos
+        ) VALUES (
+            detalle_record.id_pedido, detalle_record.id_producto, v_tiempo_id, v_categoria_id,
+            detalle_record.id_usuario, detalle_record.id_restaurante, detalle_record.id_repartidor,
+            detalle_record.estado_pedido, detalle_record.tipo_pedido, 
+            detalle_record.cantidad, detalle_record.precio_unitario, detalle_record.subtotal,
+            v_provincia_cliente, v_provincia_restaurante, 
+            detalle_record.fecha_hora, detalle_record.fuente_datos
+        )
+        ON CONFLICT (id_pedido, id_producto, tiempo_id, fuente_datos) 
+        DO UPDATE SET
+            cantidad = EXCLUDED.cantidad,
+            precio_unitario = EXCLUDED.precio_unitario,
+            subtotal = EXCLUDED.subtotal,
+            estado_pedido = EXCLUDED.estado_pedido,
             fecha_etl = NOW();
             
         count_processed := count_processed + 1;
@@ -251,6 +427,30 @@ BEGIN
         resultado := resultado || 'cubo_matriz_od: ERROR - ' || SQLERRM || chr(10);
     END;
     
+    -- Refrescar cubo productos por tiempo
+    BEGIN
+        REFRESH MATERIALIZED VIEW warehouse.cubo_top_productos_anual;
+        resultado := resultado || 'cubo_top_productos_anual: OK' || chr(10);
+    EXCEPTION WHEN OTHERS THEN
+        resultado := resultado || 'cubo_top_productos_anual: ERROR - ' || SQLERRM || chr(10);
+    END;
+    
+    -- Refrescar cubo productos por ubicación
+    BEGIN
+        REFRESH MATERIALIZED VIEW warehouse.cubo_productos_ubicacion;
+        resultado := resultado || 'cubo_productos_ubicacion: OK' || chr(10);
+    EXCEPTION WHEN OTHERS THEN
+        resultado := resultado || 'cubo_productos_ubicacion: ERROR - ' || SQLERRM || chr(10);
+    END;
+
+    -- Refrescar cubo frecuencia de uso
+    BEGIN
+        REFRESH MATERIALIZED VIEW warehouse.cubo_frecuencia_uso;
+        resultado := resultado || 'cubo_frecuencia_uso: OK' || chr(10);
+    EXCEPTION WHEN OTHERS THEN
+        resultado := resultado || 'cubo_frecuencia_uso: ERROR - ' || SQLERRM || chr(10);
+    END;
+
     RETURN resultado;
 END;
 $$ LANGUAGE plpgsql;

@@ -21,7 +21,7 @@ class AnalyticsService:
     
     def signal_handler(self, signum, frame):
         """Manejar señales para shutdown graceful"""
-        self.log(f"\n🛑 Señal recibida ({signum}), cerrando servicio...")
+        self.log(f"\nSeñal recibida ({signum}), cerrando servicio...")
         self.running = False
     
     def setup_signal_handlers(self):
@@ -46,21 +46,21 @@ class AnalyticsService:
                 missing.append(var)
         
         if missing:
-            self.log(f"❌ Variables de entorno faltantes: {missing}")
+            self.log(f"Variables de entorno faltantes: {missing}")
             return False
         else:
-            self.log("✅ Variables de entorno OK")
+            self.log("Variables de entorno OK")
             return True
     
     def wait_for_dependencies(self):
         """Esperar a que las dependencias estén disponibles"""
-        self.log("🔄 Esperando a que las dependencias estén disponibles...")
+        self.log("Esperando a que las dependencias estén disponibles...")
         
         for attempt in range(1, self.max_retries + 1):
             if not self.running:  # Si se cancela con Ctrl+C
                 return False
                 
-            self.log(f"🔍 Intento {attempt}/{self.max_retries} - Verificando conexiones...")
+            self.log(f"Intento {attempt}/{self.max_retries} - Verificando conexiones...")
             
             try:
                 # Test básico de ETL (solo verificación de conexiones)
@@ -70,39 +70,39 @@ class AnalyticsService:
                 # Test warehouse connection
                 warehouse = WarehouseConnection()
                 if warehouse.test_connection():
-                    self.log("✅ Warehouse PostgreSQL: Conectado")
+                    self.log("Warehouse PostgreSQL: Conectado")
                     warehouse.close()
                     
                     # Test source connections
                     try:
                         postgres_extractor = PostgresExtractor()
                         postgres_extractor.connect()
-                        self.log("✅ PostgreSQL fuente: Conectado")
+                        self.log("PostgreSQL fuente: Conectado")
                         postgres_extractor.close()
                     except Exception as e:
-                        self.log(f"⚠️ PostgreSQL fuente: {e}")
+                        self.log(f"PostgreSQL fuente: {e}")
                     
                     try:
                         mongo_extractor = MongoExtractor()
                         mongo_extractor.connect()
-                        self.log("✅ MongoDB: Conectado")
+                        self.log("MongoDB: Conectado")
                         mongo_extractor.close()
                     except Exception as e:
-                        self.log(f"⚠️ MongoDB: {e}")
+                        self.log(f"MongoDB: {e}")
                     
-                    self.log("🎉 Todas las dependencias están disponibles!")
+                    self.log("Todas las dependencias están disponibles!")
                     return True
                 else:
                     raise Exception("Warehouse connection test failed")
                     
             except Exception as e:
-                self.log(f"❌ Intento {attempt} falló: {e}")
+                self.log(f"Intento {attempt} falló: {e}")
                 
                 if attempt < self.max_retries:
-                    self.log(f"⏳ Esperando {self.retry_interval} segundos antes del siguiente intento...")
+                    self.log(f"Esperando {self.retry_interval} segundos antes del siguiente intento...")
                     time.sleep(self.retry_interval)
                 else:
-                    self.log(f"💥 Se agotaron los {self.max_retries} intentos. Las dependencias no están disponibles.")
+                    self.log(f"Se agotaron los {self.max_retries} intentos. Las dependencias no están disponibles.")
                     return False
         
         return False
@@ -115,40 +115,41 @@ class AnalyticsService:
             if not self.running:
                 return False
                 
-            self.log(f"🔄 Ejecutando ETL - Intento {attempt}/{max_etl_retries}")
+            self.log(f" Ejecutando ETL - Intento {attempt}/{max_etl_retries}")
             
             try:
                 result = run_etl()
                 
                 if result['success']:
-                    self.log("\n✅ ETL completado exitosamente")
-                    self.log(f"📊 Pedidos procesados: {result['pedidos_procesados']}")
-                    self.log(f"📊 Reservas procesadas: {result['reservas_procesadas']}")
+                    self.log("\nETL completado exitosamente")
+                    self.log(f"Pedidos procesados: {result['pedidos_procesados']}")
+                    self.log(f"Reservas procesadas: {result['reservas_procesadas']}")
+                    self.log(f"Detalles procesados: {result['detalles_procesados']}")
                     return True
                 else:
                     raise Exception(f"ETL falló: {result['message']}")
                     
             except Exception as e:
-                self.log(f"❌ ETL intento {attempt} falló: {e}")
+                self.log(f"ETL intento {attempt} falló: {e}")
                 
                 if attempt < max_etl_retries:
-                    self.log(f"⏳ Reintentando ETL en {self.retry_interval} segundos...")
+                    self.log(f"Reintentando ETL en {self.retry_interval} segundos...")
                     time.sleep(self.retry_interval)
                 else:
-                    self.log("💥 ETL falló después de todos los reintentos")
+                    self.log("ETL falló después de todos los reintentos")
                     return False
         
         return False
     
     def run(self):
         """Ejecutar servicio analytics"""
-        self.log("🚀 Iniciando Analytics Service...")
-        self.log(f"🐍 Python version: {sys.version}")
-        self.log(f"📋 Modo: ETL con retry + mantener vivo")
+        self.log("Iniciando Analytics Service...")
+        self.log(f"Python version: {sys.version}")
+        self.log(f"Modo: ETL con retry + mantener vivo")
         
         # Verificar entorno
         if not self.check_environment():
-            self.log("💥 Faltan variables de entorno críticas, terminando...")
+            self.log(" Faltan variables de entorno críticas, terminando...")
             return
         
         # Configurar señales
@@ -156,27 +157,27 @@ class AnalyticsService:
         
         # ESPERAR DEPENDENCIAS
         self.log("\n" + "="*50)
-        self.log("🔄 Esperando dependencias...")
+        self.log(" Esperando dependencias...")
         self.log("="*50)
         
         if not self.wait_for_dependencies():
-            self.log("💥 No se pudieron conectar las dependencias, terminando...")
+            self.log(" No se pudieron conectar las dependencias, terminando...")
             return
         
         # EJECUTAR ETL CON RETRY
         self.log("\n" + "="*50)
-        self.log("🔄 Ejecutando ETL...")
+        self.log(" Ejecutando ETL...")
         self.log("="*50)
         
         self.etl_executed = self.run_etl_with_retry()
         
         if not self.etl_executed:
-            self.log("⚠️ ETL no se completó exitosamente, pero el servicio continuará...")
+            self.log("️ ETL no se completó exitosamente, pero el servicio continuará...")
         
         # MANTENER SERVICIO VIVO
         self.log("\n" + "="*50)
-        self.log("💤 Manteniendo servicio vivo...")
-        self.log("💡 Usa Ctrl+C o docker stop para terminar")
+        self.log(" Manteniendo servicio vivo...")
+        self.log(" Usa Ctrl+C o docker stop para terminar")
         self.log("="*50)
         
         # Loop infinito
@@ -189,23 +190,23 @@ class AnalyticsService:
                 # Log periódico (cada 5 minutos)
                 if heartbeat_counter % 10 == 0:
                     status = "ETL completado" if self.etl_executed else "ETL pendiente"
-                    self.log(f"💓 Servicio activo - {status}")
+                    self.log(f" Servicio activo - {status}")
                     
             except KeyboardInterrupt:
                 break
         
-        self.log("\n👋 Analytics Service terminado")
+        self.log("\n Analytics Service terminado")
 
 
 def main():
     """Punto de entrada principal"""
-    print("🎬 Analytics Service iniciando...", flush=True)
+    print(" Analytics Service iniciando...", flush=True)
     
     try:
         service = AnalyticsService()
         service.run()
     except Exception as e:
-        print(f"💥 Error fatal: {e}", flush=True)
+        print(f" Error fatal: {e}", flush=True)
         sys.exit(1)
 
 

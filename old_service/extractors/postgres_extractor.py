@@ -103,6 +103,84 @@ class PostgresExtractor:
         cursor.close()
         return reservas
     
+    def extract_detalle_pedidos(self):
+        if not self.conn:
+            self.connect()
+            
+        cursor = self.conn.cursor()
+        
+        query = """
+        SELECT 
+            -- IDs principales
+            dp.id_pedido,
+            dp.id_producto,
+            
+            -- Métricas del detalle
+            dp.cantidad,
+            dp.subtotal,
+            pr.precio as precio_unitario,  -- precio actual del catálogo
+            
+            -- Info del producto
+            pr.nombre as nombre_producto,
+            pr.categoria as categoria_producto,
+            pr.precio as precio_producto,
+            pr.id_menu,
+            
+            -- Info del pedido (contexto)
+            p.fecha_hora,
+            p.id_usuario,
+            p.id_restaurante,
+            p.id_repartidor,
+            p.estado as estado_pedido,
+            p.tipo as tipo_pedido,
+            
+            -- Coordenadas para provincias
+            u.latitud as usuario_latitud,
+            u.longitud as usuario_longitud,
+            r.latitud as restaurante_latitud,
+            r.longitud as restaurante_longitud
+            
+        FROM Detalle_Pedido dp
+        JOIN Pedido p ON dp.id_pedido = p.id_pedido
+        JOIN Producto pr ON dp.id_producto = pr.id_producto
+        JOIN Menu m ON pr.id_menu = m.id_menu
+        JOIN Restaurante r ON p.id_restaurante = r.id_restaurante
+        LEFT JOIN Usuario u ON p.id_usuario = u.id_usuario
+        ORDER BY p.fecha_hora DESC, dp.id_pedido, dp.id_producto
+        """
+        
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        
+        detalles = []
+        for row in rows:
+            detalles.append({
+                'id_pedido': row[0],
+                'id_producto': row[1],
+                'cantidad': row[2],
+                'subtotal': float(row[3]),
+                'precio_unitario': float(row[4]),
+                'nombre_producto': row[5],
+                'categoria_producto': row[6],
+                'precio_producto': float(row[7]),
+                'id_menu': row[8],
+                'fecha_hora': row[9],
+                'id_usuario': row[10],
+                'id_restaurante': row[11], 
+                'id_repartidor': row[12],
+                'estado_pedido': row[13],
+                'tipo_pedido': row[14],
+                'usuario_latitud': row[15],
+                'usuario_longitud': row[16],
+                'restaurante_latitud': row[17],
+                'restaurante_longitud': row[18],
+                'fuente_datos': 'postgres'
+            })
+            
+        cursor.close()
+        print(f"{len(detalles)} detalles de pedidos extraídos de PostgreSQL")
+        return detalles
+    
     def close(self):
         if self.conn:
             self.conn.close()

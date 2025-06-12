@@ -11,17 +11,24 @@ CREATE SCHEMA IF NOT EXISTS warehouse;
 -- =============================================================================
 CREATE TABLE warehouse.dim_tiempo (
     tiempo_id SERIAL PRIMARY KEY,
-    fecha DATE NOT NULL UNIQUE,
+    fecha DATE NOT NULL,
+    hora INTEGER,
+    minuto INTEGER,
     anio INTEGER NOT NULL,
     mes INTEGER NOT NULL,
     dia INTEGER NOT NULL,
     trimestre INTEGER NOT NULL,
     dia_semana INTEGER NOT NULL, -- 1=Lunes, 7=Domingo
-    es_fin_semana BOOLEAN NOT NULL
+    es_fin_semana BOOLEAN NOT NULL,
+    es_horario_pico BOOLEAN DEFAULT FALSE,
+    
+    -- Constraint único en la combinación fecha + hora + minuto
+    UNIQUE (fecha, hora, minuto)
 );
 
 CREATE INDEX idx_dim_tiempo_fecha ON warehouse.dim_tiempo(fecha);
 CREATE INDEX idx_dim_tiempo_anio_mes ON warehouse.dim_tiempo(anio, mes);
+CREATE INDEX idx_dim_tiempo_hora ON warehouse.dim_tiempo(hora); 
 
 -- =============================================================================
 -- DIMENSIÓN UBICACIÓN
@@ -49,6 +56,34 @@ INSERT INTO warehouse.dim_ubicacion (provincia, latitud_min, latitud_max, longit
 ('Sin Ubicación', NULL, NULL, NULL, NULL, 'Coordenadas no válidas o no disponibles');
 
 CREATE INDEX idx_dim_ubicacion_provincia ON warehouse.dim_ubicacion(provincia);
+
+-- =============================================================================
+-- DIMENSIÓN CATEGORÍAS
+-- =============================================================================
+CREATE TABLE warehouse.dim_categorias (
+    categoria_id SERIAL PRIMARY KEY,
+    nombre_categoria VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE INDEX idx_dim_categorias_nombre ON warehouse.dim_categorias(nombre_categoria);
+
+-- =============================================================================
+-- DIMENSIÓN PRODUCTOS
+-- =============================================================================
+CREATE TABLE warehouse.dim_productos (
+    producto_id INTEGER PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    categoria_id INTEGER REFERENCES warehouse.dim_categorias(categoria_id),
+    precio_actual DECIMAL(10,2),
+    precio_promedio DECIMAL(10,2),
+    id_menu INTEGER,
+    id_restaurante INTEGER,
+    activo BOOLEAN DEFAULT TRUE,
+    fecha_ultima_actualizacion TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_dim_productos_categoria ON warehouse.dim_productos(categoria_id);
+CREATE INDEX idx_dim_productos_restaurante ON warehouse.dim_productos(id_restaurante);
 
 -- =============================================================================
 -- TABLA DE HECHOS: PEDIDOS 
@@ -110,6 +145,44 @@ CREATE INDEX idx_fact_reservas_tiempo ON warehouse.fact_reservas(tiempo_id);
 CREATE INDEX idx_fact_reservas_restaurante ON warehouse.fact_reservas(id_restaurante);
 CREATE INDEX idx_fact_reservas_estado ON warehouse.fact_reservas(estado);
 CREATE INDEX idx_fact_reservas_fuente ON warehouse.fact_reservas(fuente_datos);
+
+-- =============================================================================
+-- TABLA DE HECHOS: DETALLE PEDIDOS
+-- =============================================================================
+CREATE TABLE warehouse.fact_detalle_pedidos (
+    id_pedido INTEGER NOT NULL,
+    id_producto INTEGER NOT NULL,
+    tiempo_id INTEGER NOT NULL REFERENCES warehouse.dim_tiempo(tiempo_id),
+    categoria_id INTEGER REFERENCES warehouse.dim_categorias(categoria_id),
+    
+    -- Info del contexto del pedido
+    id_usuario INTEGER,
+    id_restaurante INTEGER,
+    id_repartidor INTEGER,
+    estado_pedido VARCHAR(20),
+    tipo_pedido VARCHAR(20),
+    
+    -- Métricas del producto en el pedido
+    cantidad INTEGER NOT NULL,
+    precio_unitario DECIMAL(10,2),
+    subtotal DECIMAL(10,2) NOT NULL,
+    
+    -- Geografía (heredada del pedido)
+    provincia_cliente VARCHAR(50),
+    provincia_restaurante VARCHAR(50),
+    
+    -- Trazabilidad
+    fecha_creacion TIMESTAMP,
+    fecha_etl TIMESTAMP DEFAULT NOW(),
+    fuente_datos VARCHAR(20) NOT NULL CHECK (fuente_datos IN ('postgres', 'mongo')),
+    
+    PRIMARY KEY (id_pedido, id_producto, tiempo_id, fuente_datos)
+);
+
+CREATE INDEX idx_fact_detalle_tiempo ON warehouse.fact_detalle_pedidos(tiempo_id);
+CREATE INDEX idx_fact_detalle_categoria ON warehouse.fact_detalle_pedidos(categoria_id);
+CREATE INDEX idx_fact_detalle_restaurante ON warehouse.fact_detalle_pedidos(id_restaurante);
+CREATE INDEX idx_fact_detalle_provincia_cliente ON warehouse.fact_detalle_pedidos(provincia_cliente);
 
 -- =============================================================================
 -- CUBO: PEDIDOS POR TIEMPO
@@ -337,3 +410,142 @@ ORDER BY dt.anio DESC, dt.mes DESC, total_pedidos DESC;
 CREATE INDEX idx_cubo_matriz_od_origen_destino ON warehouse.cubo_matriz_od(origen, destino);
 CREATE INDEX idx_cubo_matriz_od_tiempo ON warehouse.cubo_matriz_od(anio, mes);
 CREATE INDEX idx_cubo_matriz_od_tipo_flujo ON warehouse.cubo_matriz_od(tipo_flujo);
+
+-- =============================================================================
+-- CUBO: PRODUCTOS POR TIEMPO
+-- =============================================================================
+CREATE MATERIALIZED VIEW warehouse.cubo_productos_tiempo AS
+SELECT 
+    dt.fecha,
+    dt.anio,
+    dt.mes,
+    dt.trimestre,
+    dt.dia_semana,
+    dt.es_fin_semana,
+    
+    -- Métricas de productos
+    COUNT(fdp.id_producto) as total_productos_vendidos,
+    COUNT(DISTINCT fdp.id_producto) as productos_unicos,
+    COALESCE(SUM(fdp.subtotal), 0) as ingresos_productos,
+    COALESCE(SUM(fdp.cantidad), 0) as unidades_vendidas,
+    COALESCE(AVG(fdp.precio_unitario), 0) as precio_promedio,
+    
+    -- Top categorías
+    COUNT(CASE WHEN dc.nombre_categoria = 'Bebida' THEN 1 END) as ventas_bebidas,
+    COUNT(CASE WHEN dc.nombre_categoria = 'Plato principal' THEN 1 END) as ventas_platos_principales,
+    COUNT(CASE WHEN dc.nombre_categoria = 'Postre' THEN 1 END) as ventas_postres,
+    COUNT(CASE WHEN dc.nombre_categoria = 'Entrada' THEN 1 END) as ventas_entradas,
+    
+    -- Por estado del pedido
+    COUNT(CASE WHEN fdp.estado_pedido = 'entregado' THEN 1 END) as productos_entregados,
+    COUNT(CASE WHEN fdp.estado_pedido = 'pendiente' THEN 1 END) as productos_pendientes,
+    
+    -- Por fuente
+    COUNT(CASE WHEN fdp.fuente_datos = 'postgres' THEN 1 END) as productos_postgres,
+    COUNT(CASE WHEN fdp.fuente_datos = 'mongo' THEN 1 END) as productos_mongo
+
+FROM warehouse.dim_tiempo dt
+LEFT JOIN warehouse.fact_detalle_pedidos fdp ON dt.tiempo_id = fdp.tiempo_id
+LEFT JOIN warehouse.dim_categorias dc ON fdp.categoria_id = dc.categoria_id
+GROUP BY dt.fecha, dt.anio, dt.mes, dt.trimestre, dt.dia_semana, dt.es_fin_semana
+ORDER BY dt.fecha;
+
+CREATE INDEX idx_cubo_productos_tiempo_fecha ON warehouse.cubo_productos_tiempo(fecha);
+
+-- =============================================================================
+-- CUBO: PRODUCTOS POR UBICACIÓN
+-- =============================================================================
+CREATE MATERIALIZED VIEW warehouse.cubo_productos_ubicacion AS
+SELECT 
+    fdp.provincia_cliente,
+    fdp.provincia_restaurante,
+    dc.nombre_categoria,
+    dt.anio,
+    dt.mes,
+    dt.trimestre,
+    
+    -- Métricas básicas
+    COUNT(*) as total_ventas,
+    COALESCE(SUM(fdp.subtotal), 0) as ingresos_categoria,
+    COALESCE(SUM(fdp.cantidad), 0) as unidades_vendidas,
+    COALESCE(AVG(fdp.precio_unitario), 0) as precio_promedio,
+    COUNT(DISTINCT fdp.id_producto) as productos_unicos,
+    COUNT(DISTINCT fdp.id_restaurante) as restaurantes_vendedores,
+    COUNT(DISTINCT fdp.id_usuario) as usuarios_compradores,
+    
+    -- Análisis de penetración
+    CASE 
+        WHEN COUNT(*) > 0 THEN 
+            ROUND((COUNT(CASE WHEN fdp.provincia_cliente = fdp.provincia_restaurante THEN 1 END) * 100.0 / COUNT(*)), 2)
+        ELSE 0 
+    END as porcentaje_ventas_locales,
+    
+    -- Por fuente
+    COUNT(CASE WHEN fdp.fuente_datos = 'postgres' THEN 1 END) as ventas_postgres,
+    COUNT(CASE WHEN fdp.fuente_datos = 'mongo' THEN 1 END) as ventas_mongo
+
+FROM warehouse.fact_detalle_pedidos fdp
+JOIN warehouse.dim_tiempo dt ON fdp.tiempo_id = dt.tiempo_id
+JOIN warehouse.dim_categorias dc ON fdp.categoria_id = dc.categoria_id
+WHERE fdp.provincia_cliente IS NOT NULL 
+  AND fdp.provincia_restaurante IS NOT NULL
+GROUP BY fdp.provincia_cliente, fdp.provincia_restaurante, dc.nombre_categoria, dt.anio, dt.mes, dt.trimestre
+ORDER BY dt.anio DESC, dt.mes DESC, ingresos_categoria DESC;
+
+CREATE INDEX idx_cubo_productos_ubicacion_provincias ON warehouse.cubo_productos_ubicacion(provincia_cliente, provincia_restaurante);
+CREATE INDEX idx_cubo_productos_ubicacion_categoria ON warehouse.cubo_productos_ubicacion(nombre_categoria);
+
+-- =============================================================================
+-- CUBO: TOP PRODUCTOS 
+-- =============================================================================
+-- Cubo agregado por año completo (menos granular)
+CREATE MATERIALIZED VIEW warehouse.cubo_top_productos_anual AS
+SELECT 
+    dp.producto_id,
+    dp.nombre as nombre_producto,
+    dc.nombre_categoria,
+    dt.anio,  -- Solo año, no mes
+    
+    COUNT(*) as total_ventas,
+    SUM(fdp.subtotal) as ingresos_totales,
+    SUM(fdp.cantidad) as unidades_vendidas,
+    
+    RANK() OVER (PARTITION BY dt.anio ORDER BY SUM(fdp.subtotal) DESC) as ranking_ingresos
+    
+FROM warehouse.fact_detalle_pedidos fdp
+JOIN warehouse.dim_tiempo dt ON fdp.tiempo_id = dt.tiempo_id
+JOIN warehouse.dim_productos dp ON fdp.id_producto = dp.producto_id
+JOIN warehouse.dim_categorias dc ON fdp.categoria_id = dc.categoria_id
+GROUP BY dp.producto_id, dp.nombre, dc.nombre_categoria, dt.anio
+ORDER BY dt.anio DESC, ingresos_totales DESC;
+
+CREATE INDEX idx_cubo_top_productos_anual_anio ON warehouse.cubo_top_productos_anual(anio);
+CREATE INDEX idx_cubo_top_productos_anual_categoria ON warehouse.cubo_top_productos_anual(nombre_categoria);
+CREATE INDEX idx_cubo_top_productos_anual_ranking ON warehouse.cubo_top_productos_anual(ranking_ingresos);
+CREATE INDEX idx_cubo_top_productos_anual_producto ON warehouse.cubo_top_productos_anual(producto_id);
+
+CREATE MATERIALIZED VIEW warehouse.cubo_frecuencia_uso AS
+SELECT 
+    fdp.id_usuario,
+    dp.producto_id,
+    dp.nombre as producto,
+    dc.nombre_categoria,
+    
+    -- Métricas de frecuencia
+    COUNT(*) as veces_comprado,
+    SUM(fdp.cantidad) as unidades_totales,
+    AVG(fdp.subtotal) as gasto_promedio_por_compra,
+    SUM(fdp.subtotal) as gasto_total_producto,
+    
+    -- Primera y última compra
+    MIN(fdp.fecha_creacion) as primera_compra,
+    MAX(fdp.fecha_creacion) as ultima_compra,
+    
+    -- Ranking de preferencia del usuario
+    RANK() OVER (PARTITION BY fdp.id_usuario ORDER BY COUNT(*) DESC) as ranking_preferencia_usuario
+    
+FROM warehouse.fact_detalle_pedidos fdp
+JOIN warehouse.dim_productos dp ON fdp.id_producto = dp.producto_id
+JOIN warehouse.dim_categorias dc ON fdp.categoria_id = dc.categoria_id
+GROUP BY fdp.id_usuario, dp.producto_id, dp.nombre, dc.nombre_categoria
+ORDER BY fdp.id_usuario, veces_comprado DESC;

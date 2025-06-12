@@ -51,6 +51,21 @@ def run_etl():
         all_reservas = postgres_reservas + mongo_reservas
         print(f"  📊 Total reservas: {len(all_reservas)}")
         
+        # === EXTRAER DETALLE PEDIDOS ===
+        print("\n📥 Extrayendo detalle de pedidos...")
+        
+        print("  - Extrayendo detalles de pedidos de PostgreSQL...")
+        postgres_detalles = postgres_extractor.extract_detalle_pedidos()
+        print(f"    ✅ {len(postgres_detalles)} detalles extraídos de PostgreSQL")
+        
+        print("  - Extrayendo detalles de pedidos de MongoDB...")
+        mongo_detalles = mongo_extractor.extract_detalle_pedidos()
+        print(f"    ✅ {len(mongo_detalles)} detalles extraídos de MongoDB")
+        
+        # Combinar detalles
+        all_detalles = postgres_detalles + mongo_detalles
+        print(f"  📊 Total detalles de pedidos: {len(all_detalles)}")
+        
         # === CARGAR AL WAREHOUSE ===
         print("\n📤 Cargando datos al warehouse...")
         
@@ -66,6 +81,12 @@ def run_etl():
         else:
             print("  ⚠️ No hay reservas para cargar")
         
+        if all_detalles:
+            detalles_procesados = warehouse.load_detalle_pedidos(all_detalles)
+            print(f"  ✅ {detalles_procesados} detalles de pedidos cargados al warehouse")
+        else:
+            print("  ⚠️ No hay detalles de pedidos para cargar")
+        
         # === REFRESCAR CUBOS OLAP ===
         print("\n🔄 Refrescando cubos OLAP...")
         cubes_result = warehouse.refresh_cubos()
@@ -76,6 +97,7 @@ def run_etl():
             'success': True,
             'pedidos_procesados': len(all_pedidos),
             'reservas_procesadas': len(all_reservas),
+            'detalles_procesados': len(all_detalles),
             'message': 'ETL ejecutado correctamente'
         }
         

@@ -1,66 +1,18 @@
-  # PostgreSQL Warehouse (OLAP)
-  postgres-warehouse:
-    image: postgres:17
-    container_name: postgres_warehouse
+  # Hive (Datawarehouse)
+  hive:
+    image: apache/hive:4.0.0
+    container_name: mini-hive
     profiles:
       - analytics
-    restart: always
-    environment:
-      POSTGRES_USER: ${WAREHOUSE_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${WAREHOUSE_POSTGRES_PASSWORD}
-      POSTGRES_DB: ${WAREHOUSE_POSTGRES_DB}
-    command: >
-      postgres 
-      -c listen_addresses='*' 
-      -c password_encryption=md5
-      -c shared_preload_libraries='pg_stat_statements'
-      -c pg_stat_statements.track=all
-      -c work_mem=256MB
-      -c maintenance_work_mem=512MB
-      -c effective_cache_size=2GB
-      -c random_page_cost=1.1
-      -c max_connections=200
     ports:
-      - "15433:5432"
+      - "10000:10000"
+      - "10002:10002"
+    environment:
+      - SERVICE_NAME=hiveserver2
     volumes:
-      - postgres_warehouse_data:/var/lib/postgresql/data
-      - ./warehouse.sql:/docker-entrypoint-initdb.d/01-warehouse.sql
-      - ./warehouse_procedures.sql:/docker-entrypoint-initdb.d/02-warehouse_procedures.sql
+      - hive-warehouse:/opt/hive/data/warehouse
+      - hive-metastore:/tmp
+      - ./hive_warehouse_init.sql:/tmp/warehouse_init.sql  # ← Aquí
     networks:
       - app_network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${WAREHOUSE_POSTGRES_USER} -d ${WAREHOUSE_POSTGRES_DB}"]
-      interval: 15s
-      timeout: 10s
-      retries: 5
 
-  # ANALYTICS SERVICE (OLAP & Data Warehouse)
-  analytics_service:
-    build: ./analytics_service
-    container_name: analytics_service
-    profiles:
-      - analytics
-    restart: always
-    ports:
-      - "5800:5800"
-    depends_on:
-      - postgres-warehouse
-      - postgres
-      - mongos1
-    environment:
-      # Warehouse PostgreSQL
-      - WAREHOUSE_POSTGRES_HOST=${WAREHOUSE_POSTGRES_HOST}
-      - WAREHOUSE_POSTGRES_USER=${WAREHOUSE_POSTGRES_USER}
-      - WAREHOUSE_POSTGRES_PASSWORD=${WAREHOUSE_POSTGRES_PASSWORD}
-      - WAREHOUSE_POSTGRES_DB=${WAREHOUSE_POSTGRES_DB}
-      - WAREHOUSE_POSTGRES_PORT=${POSTGRES_PORT}
-      # Source databases
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - MONGO_URI=${MONGO_URI}
-      - ANALYTICS_PORT=${ANALYTICS_PORT}
-    networks:
-      - app_network

@@ -28,7 +28,7 @@ services:
     image: postgres:17
     container_name: postgres_warehouse
     profiles:
-      - analytics
+      - papu
     restart: always
     environment:
       POSTGRES_USER: ${WAREHOUSE_POSTGRES_USER}
@@ -59,23 +59,6 @@ services:
       timeout: 10s
       retries: 5
 
-  # PostgreSQL para Hive (separado)
-  postgres-hive:
-    image: postgres:13
-    container_name: postgres_hive
-    restart: always
-    environment:
-      POSTGRES_USER: ${POSTGRES_HIVE_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_HIVE_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_HIVE_DB}
-    command: postgres -c 'listen_addresses=*' -c 'password_encryption=md5'
-    ports:
-      - "15434:5432"
-    volumes:
-      - postgres_hive_data:/var/lib/postgresql/data
-    networks:
-      - app_network
-
   # REDIS (CACHÉ VOLÁTIL)
   redis:
     image: redis:7.2
@@ -102,6 +85,7 @@ services:
     networks:
       - app_network
 
+  # Neo4J
   neo4j:
     image: neo4j:latest
     container_name: neo4j
@@ -116,87 +100,20 @@ services:
     networks:
       - app_network
 
-  # Hadoop NameNode
-  namenode:
-    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
-    container_name: namenode
-    restart: always
-    ports:
-      - "9870:9870"
-      - "9000:9000"
-    volumes:
-      - hadoop_namenode:/hadoop/dfs/name
-    environment:
-      - CLUSTER_NAME=test
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
-    networks:
-      - app_network
-
-  # Hadoop DataNode
-  datanode:
-    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
-    container_name: datanode
-    restart: always
-    volumes:
-      - hadoop_datanode:/hadoop/dfs/data
-    environment:
-      SERVICE_PRECONDITION: "namenode:9870"
-      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
-    ports:
-      - "9864:9864"
-    networks:
-      - app_network
-
-  # Hive Metastore
-  hive-metastore:
-    image: bde2020/hive:2.3.2-postgresql-metastore
-    container_name: hive-metastore
-    command: /opt/hive/bin/hive --service metastore
-    environment:
-      SERVICE_PRECONDITION: "namenode:9870 datanode:9864 postgres-hive:5432"
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://postgres-hive:5432/${POSTGRES_HIVE_DB}"
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionDriverName: "org.postgresql.Driver"
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionUserName: ${POSTGRES_HIVE_USER}
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionPassword: ${POSTGRES_HIVE_PASSWORD}
-      HIVE_SITE_CONF_hive_metastore_schema_verification: "false"
-      HIVE_SITE_CONF_datanucleus_schema_autoCreateAll: "true"
-      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
-      HDFS_CONF_dfs_nameservices: hdfscluster
-      HDFS_CONF_dfs_namenode_rpc_address: namenode:9000
-      YARN_CONF_yarn_resourcemanager_hostname: namenode
-    ports:
-      - "9083:9083"
-    depends_on:
-      - postgres-hive
-      - namenode
-      - datanode
-    networks:
-      - app_network
-
-  # Hive Server
-  hive-server:
-    image: bde2020/hive:2.3.2-postgresql-metastore
-    container_name: hive-server
-    depends_on:
-      - hive-metastore
-    environment:
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://postgres-hive:5432/${POSTGRES_HIVE_DB}"
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionDriverName: "org.postgresql.Driver"
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionUserName: ${POSTGRES_HIVE_USER}
-      HIVE_SITE_CONF_javax_jdo_option_ConnectionPassword: ${POSTGRES_HIVE_PASSWORD}
-      HIVE_SITE_CONF_hive_metastore_uris: "thrift://hive-metastore:9083"
-      SERVICE_PRECONDITION: "hive-metastore:9083"
-      CORE_CONF_fs_defaultFS: hdfs://namenode:9000
-      HDFS_CONF_dfs_nameservices: hdfscluster
-      HDFS_CONF_dfs_namenode_rpc_address: namenode:9000
-      YARN_CONF_yarn_resourcemanager_hostname: namenode
-      # CONFIGURACIONES DE AUTENTICACIÓN CRÍTICAS
-      HIVE_SITE_CONF_hive_server2_authentication: NOSASL
-      HIVE_SITE_CONF_hive_server2_transport_mode: binary
-      HIVE_SITE_CONF_hive_server2_thrift_port: "10000"
-      HIVE_SITE_CONF_hive_server2_enable_doAs: "false"
+  # Hive (Datawarehouse)
+  hive:
+    image: apache/hive:4.0.0
+    container_name: mini-hive
+    profiles:
+      - analytics
     ports:
       - "10000:10000"
+      - "10002:10002"
+    environment:
+      - SERVICE_NAME=hiveserver2
+    volumes:
+      - hive-warehouse:/opt/hive/data/warehouse
+      - hive-metastore:/tmp
     networks:
       - app_network
 
@@ -505,12 +422,26 @@ services:
     networks:
       - app_network
     
-  # ANALYTICS SERVICE (OLAP & Data Warehouse)
-  analytics_service:
-    build: ./analytics_service
-    container_name: analytics_service
+  app:
+    build:
+      context: ./app
+    container_name: hive-client
     profiles:
-      - analytics
+      - quintero
+    depends_on:
+      - hive
+    networks:
+      - app_network
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: sh -c "sleep 60 && python main.py"
+
+  # OLD SERVICE (OLAP & Data Warehouse)
+  old_service:
+    build: ./old_service
+    container_name: old_service
+    profiles:
+      - papu
     restart: always
     ports:
       - "5800:5800"
@@ -747,11 +678,9 @@ volumes:
   mongors2n3-data:
   elastic_data:
   neo4j_data:
-  postgres_hive_data:
-  hadoop_namenode:
-  hadoop_datanode:
-  warehouse_duckdb_data:
   postgres_warehouse_data:
+  hive-warehouse:
+  hive-metastore:
 
 networks:
   app_network:

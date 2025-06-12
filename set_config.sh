@@ -4,9 +4,14 @@ docker-compose up -d
 
 docker-compose --profile backend up --build -d
 
+docker-compose --profile analytics up --build -d
 
+./init_hive_warehouse.sh
 
 # docker-compose --profile analytics up --build -d
+
+# docker-compose --profile analytics --profile analyticpapu up --build -d
+
 
 # docker compose --profile test build api_test && docker compose --profile test run --rm api_test
 
