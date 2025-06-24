@@ -139,6 +139,9 @@ router.get('/products/category/:categoria', searchController.searchProductsByCat
  */
 router.post('/reindex', authMiddleware, searchController.reindexProducts);
 
+// Ruta exclusiva para airflow
+router.post('/reindex-internal', searchController.reindexProductsInternal);
+
 /**
  * @swagger
  * /search/product:

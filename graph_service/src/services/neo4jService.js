@@ -203,19 +203,33 @@ const neo4jService = {
     };
   },
 
-  // Crear todas las relaciones de referencia - FUNCIÓN CORREGIDA
+  // Crear todas las relaciones de referencia
   async createReferenceRelationships(usersResponse) {
-    // La respuesta viene con estructura: { message, total, usuarios: [...] }
     const users = usersResponse.usuarios || [];
     
     console.log(`Creando relaciones REFIERE para DB: ${SOURCE_DB}...`);
+    
+    // Limpiar relaciones REFIERE existentes para esta DB
+    const clearQuery = `
+      MATCH ()-[r:REFIERE {source_db: $source_db}]-()
+      DELETE r
+      RETURN COUNT(r) AS eliminadas
+    `;
+    
+    const clearResult = await runQuery(clearQuery, { source_db: SOURCE_DB });
+    const eliminadas = clearResult.records[0]?.get('eliminadas') || 0;
+    console.log(`Eliminadas ${eliminadas} relaciones REFIERE anteriores para DB: ${SOURCE_DB}`);
     
     let relaciones_creadas = 0;
     
     for (const user of users) {
       if (user.id_referido) {
-        await this.createRefiereRelation(user.id_referido, user.id_usuario);
-        relaciones_creadas++;
+        try {
+          await this.createRefiereRelation(user.id_referido, user.id_usuario);
+          relaciones_creadas++;
+        } catch (error) {
+          console.warn(`Error creando relación para usuario ${user.id_usuario}: ${error.message}`);
+        }
       }
     }
     
@@ -338,13 +352,13 @@ const neo4jService = {
   // Obtener top 5 usuarios más influyentes (solo de esta DB)
   async getTopInfluencers() {
     const query = `
-      MATCH (u:Usuario {source_db: $source_db})-[r:REFIERE]->(referido:Usuario {source_db: $source_db})
-      WHERE r.source_db = $source_db
+      MATCH (u:Usuario {source_db: $source_db})
+      OPTIONAL MATCH (u)-[r:REFIERE {source_db: $source_db}]->(referido:Usuario {source_db: $source_db})
       WITH u, COUNT(referido) AS total_referidos
       RETURN u.id_usuario AS id_usuario,
             u.nombre AS nombre,
             total_referidos
-      ORDER BY total_referidos DESC
+      ORDER BY total_referidos DESC, u.id_usuario ASC
       LIMIT 5
     `;
     

@@ -1,8 +1,8 @@
-# Proyecto1 - Bases de Datos II
+# Proyecto2 - Bases de Datos II
 
 ## Portada
 
-**Proyecto 1: API de restaurantes**  
+**Proyecto 2: API de restaurantes y Capa OLAP**  
 **Curso: Bases de Datos II**    
 **Integrantes:**
 
@@ -29,27 +29,29 @@
    - [Instalación del Proyecto](#instalación-del-proyecto)
    - [Instalación de Módulos](#instalación-de-módulos)
 7. [Construcción y Levantamiento](#construcción-y-levantamiento-de-los-servicios)
-8. [Pruebas](#pruebas)
+8. [Agregación de datos sintéticos](#agregación-de-datos-sintéticos)
+9. [Levantamiento de servicios ETL, Airflow y capa OLAP](#levantamiento-de-servicios-etl-airflow-y-capa-olap)
+10. [Pruebas](#pruebas)
    - [Pruebas Unitarias y de Integración](#pruebas-unitarias-y-de-integración)
    - [Cobertura de Pruebas](#cobertura-de-pruebas)
-9. [CI/CD Pipeline](#cicd-pipeline)
-10. [Acceso a Interfaces](#acceso-a-interfaces)
+11. [CI/CD Pipeline](#cicd-pipeline)
+12. [Acceso a Interfaces](#acceso-a-interfaces)
    - [Documentación API REST](#documentación-de-la-api-rest)
    - [Visualización de Postgres DB](#visualización-en-tiempo-real-de-postgres-db)
    - [Visualización de MongoDB](#visualización-en-tiempo-real-de-mongo-db)
    - [Elasticsearch y Kibana](#elasticsearch-y-kibana)
-11. [Reinicio de Entorno](#reinicio-completo-del-entorno)
+13. [Reinicio de Entorno](#reinicio-completo-del-entorno)
 
 ## Enlace de GitHub
 
-[Repositorio del Proyecto](https://github.com/DanielAR27/proyecto1-bases2)
+[Repositorio del Proyecto](https://github.com/DanielAR27/proyecto2-bases2)
 
 ## Enlace sobre la Arquitectura del Proyecto
-[Arquitectura del Proyecto](./arquitectura_api.svg)
+[Arquitectura del Proyecto](./diagrama_arquitectura.svg)
 
 ## Descripción del Proyecto
 
-Este proyecto implementa un sistema completo para gestión de restaurantes con una arquitectura de microservicios. Permite administrar restaurantes, menús, productos, reservaciones y pedidos a través de un conjunto de APIs RESTful. El sistema está diseñado con alta disponibilidad, escalabilidad y rendimiento como prioridades, empleando tecnologías modernas como balanceo de carga, sharding de bases de datos, caché distribuida y búsquedas optimizadas.
+Este proyecto implementa un sistema completo para gestión de restaurantes con una arquitectura de microservicios. Permite administrar restaurantes, menús, productos, reservaciones y pedidos a través de un conjunto de APIs RESTful. El sistema está diseñado con alta disponibilidad, escalabilidad y rendimiento como prioridades, empleando tecnologías modernas como balanceo de carga, sharding de bases de datos, caché distribuida y búsquedas optimizadas. También implementa mediante Airflow el uso de DAGs para poder realizar ETL y reindexar los productos de manera automática en Elastic. Por otra parte, también incluye la funcionalidad de visualizar datos de analíticas significativas.
 
 ## Arquitectura
 
@@ -61,6 +63,7 @@ El proyecto sigue una arquitectura de microservicios con los siguientes componen
    - API principal para operaciones CRUD de restaurantes, menús, productos, reservas y pedidos
    - Servicio de autenticación para gestión de usuarios y tokens JWT
    - Servicio de búsqueda optimizado con Elasticsearch
+   - Servicio de indexación y operaciones de ruteo dentro de un grafo mediante Neo4J
 
 2. **Balanceo de Carga**:
    - Nginx como proxy inverso y balanceador para distribuir las peticiones entre instancias
@@ -69,6 +72,7 @@ El proyecto sigue una arquitectura de microservicios con los siguientes componen
    - MongoDB: Almacenamiento principal con sharding y replicación para alta disponibilidad
    - PostgreSQL: Almacenamiento alternativo configurable
    - Elasticsearch: Índice de búsqueda para consultas optimizadas
+   - HiveDB: Almacenamiento como Datawarehouse
 
 4. **Caché**:
    - Redis como almacén de caché distribuida para mejorar el rendimiento
@@ -81,19 +85,28 @@ El proyecto sigue una arquitectura de microservicios con los siguientes componen
 La estructura de directorios del proyecto está organizada por funcionalidad:
 
 ```
-proyecto1-bases2/
+proyecto2-bases2/
+├── airflow/                # Servicio de Airflow para realizar DAGs automatizados
+├── analytics_service/      # Servicio de dashboards de analítica
 ├── api/                    # API principal
 ├── auth_service/           # Servicio de autenticación
-├── search_service/         # Servicio de búsqueda
+├── drivers/                # Drivers necesarios para la metadata de Hive
+├── etl_service/            # Servicio con propósito específico de ETL completo
+├── graph_service/          # Servicio de indexación y ruteo con Neo4j
 ├── pruebas/                # Scripts de prueba y generación de datos
+├── search_service/         # Servicio de búsqueda
+├── spark_analytics/        # Script básico de consultas con Spark y Hive
 ├── docker-compose.yml      # Configuración de contenedores
+├── hive_warehouse_init.sql # Inicialización del warehouse mediante HiveQL
 ├── init_cluster.sh         # Script para inicializar el cluster MongoDB
+├── init_hive_warehouse.sh  # Script para inicializar Hive
+├── init.sql                # Inicialización de las tablas de Postgres para los servicios
 ├── set_config.sh           # Script para configurar el entorno
 ├── nginx.conf              # Configuración del balanceador de carga
 └── README.md               # Documentación
 ```
 
-Cada servicio sigue una estructura MVC (Modelo-Vista-Controlador) con separación clara de responsabilidades:
+Cada servicio sigue una estructura MC (Modelo-Controlador) con separación clara de responsabilidades:
 
 ```
 servicio/
@@ -124,6 +137,7 @@ La API principal maneja todas las operaciones CRUD relacionadas con:
 - Productos
 - Reservaciones
 - Pedidos
+- Repartidores
 
 Características clave:
 - Implementación RESTful con Express.js
@@ -166,6 +180,64 @@ Un microservicio independiente dedicado a proporcionar funcionalidad de búsqued
 
 El servicio está diseñado para funcionar de manera independiente, lo que permite que el sistema principal siga operando incluso si el servicio de búsqueda experimenta problemas temporales.
 
+### Servicio de Grafos
+
+Este microservicio se encarga de resolver consultas complejas mediante estructuras de grafos, permitiendo obtener rutas óptimas, relaciones de co-ocurrencia, y recomendaciones inteligentes. Su propósito es brindar capacidades de análisis y búsqueda especializadas dentro del ecosistema del sistema principal.
+
+- **Funcionalidades principales**:
+   - Cálculo y actualización de relaciones de co-compras entre productos.
+   - Identificación de usuarios influyentes a partir de patrones de recomendación.
+   - Cálculo y optimización de la ruta de entrega más eficiente para repartidores.
+   - Asignación automática del repartidor más adecuado para cada pedido.
+
+- **Características técnicas**:
+   - Utiliza Neo4j como motor de base de datos orientada a grafos, optimizada para consultas relacionales complejas.
+   - Implementa índices especializados para búsquedas rápidas y flexibles.
+   - Soporta búsquedas tolerantes a errores tipográficos, mejorando la experiencia del usuario.
+   - Ofrece resultados relevantes mediante ponderación inteligente basada en popularidad, contexto y conexiones.
+   - Realiza actualizaciones en tiempo real del grafo ante cambios en los productos o relaciones.
+   - Garantiza alta disponibilidad mediante múltiples instancias paralelas (graph_service1, graph_service2).
+   - Cuenta con mecanismos de resiliencia para manejar fallos sin afectar al sistema principal.
+
+Este servicio opera de forma desacoplada del núcleo del sistema, asegurando que la funcionalidad general no se vea comprometida ante caídas temporales del servicio de grafos.
+
+### Servicio de ETL y Data Warehouse
+Este microservicio se encarga de la extracción, transformación y carga de datos (ETL) desde las fuentes operacionales hacia el almacén de datos analítico, proporcionando una base sólida para el análisis OLAP y la generación de reportes estratégicos del negocio.
+
+- **Funcionalidades principales**:
+  - Extracción automatizada de datos desde MongoDB y PostgreSQL utilizando conectores Python especializados.
+  - Transformación de datos mediante Apache Spark con SparkSQL para procesamiento distribuido de grandes volúmenes.
+  - Carga optimizada de datos transformados hacia Apache Hive siguiendo esquemas estrella y copo de nieve.
+  - Validación de integridad y calidad de datos durante todo el proceso ETL.
+
+- **Características técnicas**:
+  - Utiliza Apache Spark como motor de procesamiento distribuido para transformaciones complejas y análisis de tendencias.
+  - Implementa Apache Hive como Data Warehouse principal, optimizado para consultas analíticas y almacenamiento columnar.
+  - El warehouse se inicializa automáticamente mediante scripts de shell que configuran esquemas, particiones y estructuras necesarias.
+  - Soporta procesamiento incremental para minimizar el impacto en recursos y tiempo de ejecución.
+  - Mantiene conexiones persistentes y pools de conexiones para optimizar el rendimiento de transferencia de datos.
+  - Implementa mecanismos de recuperación ante fallos y reintentos automáticos para garantizar la consistencia.
+
+### Servicio de Orquestación con Apache Airflow
+Este componente centraliza y automatiza la ejecución de procesos de datos mediante flujos de trabajo programables y monitoreables, asegurando la actualización continua y confiable del ecosistema analítico.
+
+- **Funcionalidades principales**:
+  - Orquestación automatizada del pipeline ETL completo desde extracción hasta carga final.
+  - Coordinación de dependencias entre tareas y servicios del sistema de datos.
+  - Monitoreo y alertas automáticas ante fallos o anomalías en los procesos.
+  - Gestión de reindexación de catálogos de productos en ElasticSearch.
+
+- **Características técnicas**:
+  - Implementa dos DAGs principales especializados para diferentes necesidades operacionales:
+    - **DAG de ETL**: Ejecuta el proceso completo de extracción, transformación y carga cada 6 horas, manteniendo actualizado el Data Warehouse con datos frescos para análisis.
+    - **DAG de Reindexación**: Gestiona la actualización automática de índices de ElasticSearch cuando se detectan cambios en el catálogo de productos, garantizando búsquedas actualizadas.
+  - Utiliza sensores y operadores especializados para integración con Spark, Hive y ElasticSearch.
+  - Proporciona interfaz web para monitoreo en tiempo real del estado de ejecución y logs detallados.
+  - Implementa políticas de reintentos configurables y manejo de excepciones para alta confiabilidad.
+  - Mantiene historial completo de ejecuciones para auditoría y análisis de rendimiento.
+
+Este servicio opera como el cerebro coordinador del ecosistema de datos, asegurando que todas las transformaciones y actualizaciones se ejecuten de manera ordenada, puntual y confiable, sin intervención manual.
+
 ### Balanceador de Carga (Nginx)
 
 El sistema utiliza Nginx como balanceador de carga y proxy inverso para distribuir el tráfico entre múltiples instancias de cada microservicio:
@@ -174,7 +246,8 @@ El sistema utiliza Nginx como balanceador de carga y proxy inverso para distribu
   - Balanceo de carga para API principal entre instancias api1 y api2
   - Balanceo de carga para servicio de autenticación entre auth_service1 y auth_service2
   - Balanceo de carga para servicio de búsqueda entre search_service1 y search_service2
-  - Enrutamiento basado en prefijos de URL (/api/, /auth/, /search/)
+    - Balanceo de carga para servicio de grafos entre grap_service1 y graph_service2
+  - Enrutamiento basado en prefijos de URL (/api/, /auth/, /search/, /graph/)
   - Terminación SSL centralizada
 
 - **Características técnicas**:
@@ -249,8 +322,8 @@ Para ejecutar este proyecto necesita:
 Si desea clonar el repositorio y hacer uso de él, basta con utilizar la siguiente serie de comandos:
 
 ```bash
-git clone https://github.com/DanielAR27/proyecto1-bases2.git
-cd proyecto1-bases2
+git clone https://github.com/DanielAR27/proyecto2-bases2.git
+cd proyecto2-bases2
 ```
 
 ### Instalación de Módulos
@@ -259,6 +332,7 @@ Para cada servicio que requiere instalación de módulos:
 - ./api
 - ./auth_service
 - ./search_service
+- ./graph_service
 
 Para ubicarse dentro de ellos, debe estar en la raíz del proyecto y utilizar el siguiente comando:
 
@@ -279,6 +353,7 @@ Para construir los contenedores e iniciar toda la aplicación, primero debe dar 
 ```bash
 chmod +x set_config.sh
 chmod +x init_cluster.sh
+chmod +x init_hive_warehouse.sh
 ```
 
 Luego ejecute el script principal:
@@ -290,7 +365,8 @@ Luego ejecute el script principal:
 Este script realiza las siguientes acciones:
 1. Levanta todos los servicios base con `docker-compose up -d`
 2. Inicializa el cluster MongoDB con sharding y replicación mediante `./init_cluster.sh`
-3. Levanta los servicios backend (API, Auth, Search) con `docker-compose --profile backend up --build -d`
+3. Inicializa el warehouse de Hive mediante `./init_hive_warehouse.sh`
+4. Levanta los servicios backend (API, Auth, Search) con `docker-compose --profile backend up --build -d`
 
 El script `init_cluster.sh` configura MongoDB con:
 - Replica Set de configuración (3 nodos)
@@ -298,6 +374,64 @@ El script `init_cluster.sh` configura MongoDB con:
 - Habilitación de sharding en la base de datos `apidb`
 - Configuración de colecciones particionadas
 - Preparación de metadatos en los routers
+
+## Agregación de datos sintéticos
+
+Posteriormente, si desea generar datos sintéticos puede seguir los siguientes pasos:
+
+1. Dirigase a la carpeta de pruebas mediante el siguiente comando, debe estar ubicado
+en la raíz del proyecto
+
+```bash
+cd pruebas/
+```
+
+2. Instale las dependencias necesarias para proceder con la generación de los datos
+utilizando el siguiente comando
+
+```bash
+npm install
+```
+
+3. Una vez instaladas las dependencias, puede hacer uso del siguiente comando para generar
+datos sintéticos
+
+```bash
+node generarDatosMasivos.js
+```
+
+## Levantamiento de servicios ETL, Airflow y capa OLAP
+
+Una vez insertados datos dentro de la base de datos, puede hacer uso
+del siguiente comando para levantar el servicio encargado de ETL
+
+```bash
+docker-compose --profile etl up --build -d
+```
+
+Debe esperar un tiempo a que se ejecute la primera vez para luego poder levantar
+el servicio de Airflow encargado de ejecutar el proceso ETL y la reindexación
+cada cierto tiempo, está configurado por defecto en 6 horas.
+
+```bash
+docker-compose --profile airflow up --build -d
+```
+
+Finalmente, para poder visualizar dashboards de analítica puede hacer uso del siguiente
+comando
+
+```bash
+docker-compose --profile analytics up --build -d
+```
+
+Para visualizar los dashboards puede hacer uso de la siguiente dirección: ``` http://localhost:8501/ ```
+
+Si desea ver algunas métricas básicas, puede esperar a que cargue el contenedor y luego
+utilizar el siguiente comando
+
+```bash
+docker logs -f spark_analytics
+```
 
 ## Pruebas
 
@@ -416,6 +550,7 @@ Para visualizar la documentación interactiva generada con Swagger:
 - API Principal: `http://localhost/api/api-docs/`
 - Servicio de Autenticación: `http://localhost/auth/api-docs/`
 - Servicio de Búsqueda: `http://localhost/search/api-docs/`
+- Servicio de Grafos: `http://localhost/graph/api-docs/`
 
 ### Visualización en Tiempo Real de Postgres DB
 

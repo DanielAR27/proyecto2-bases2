@@ -1,0 +1,58 @@
+docker-compose up -d
+
+./init_cluster.sh
+
+./init_hive_warehouse.sh
+
+docker-compose --profile backend up --build -d
+
+# Insertar pruebas en mongo y postgres
+
+docker-compose --profile etl up --build -d
+
+# Esperar un poco
+
+docker-compose --profile airflow up --build -d
+
+docker-compose --profile analytics up --build -d
+
+docker exec -it hive-server2 bash
+beeline -u jdbc:hive2://localhost:10000
+
+-- 1. Métricas Generales del Negocio
+SELECT 
+    COUNT(DISTINCT fecha) as dias_con_datos,
+    SUM(total_pedidos) as pedidos_totales,
+    SUM(ingresos_totales) as ingresos_totales,
+    ROUND(AVG(ticket_promedio), 2) as ticket_promedio_general,
+    SUM(items_vendidos) as items_totales,
+    SUM(pedidos_entregados) as pedidos_completados,
+    ROUND((SUM(pedidos_entregados) * 100.0 / SUM(total_pedidos)), 2) as tasa_completitud_global
+FROM cubo_pedidos_tiempo
+WHERE total_pedidos > 0;
+
+-- 2. Ranking de Provincias por Volumen de Negocio
+SELECT 
+    provincia,
+    SUM(total_transacciones) as transacciones_totales,
+    SUM(volumen_negocio) as volumen_total,
+    SUM(restaurantes_activos) as restaurantes_activos,
+    SUM(usuarios_activos) as usuarios_activos,
+    ROUND(AVG(ticket_promedio_zona), 2) as ticket_promedio,
+    ROUND(AVG(tasa_completitud_pct), 2) as tasa_completitud_promedio
+FROM cubo_actividad_zona
+WHERE provincia != 'Sin Ubicación'
+GROUP BY provincia
+ORDER BY volumen_total DESC;
+
+-- 3. Analisis de reservas
+SELECT 
+    SUM(total_reservas) as reservas_totales,
+    SUM(reservas_confirmadas) as confirmadas,
+    SUM(reservas_pendientes) as pendientes,
+    SUM(reservas_canceladas) as canceladas,
+    ROUND(AVG(tasa_confirmacion_pct), 2) as tasa_confirmacion_promedio
+FROM cubo_reservas_tiempo
+WHERE total_reservas > 0;
+
+docker exec -it airflow_scheduler bash

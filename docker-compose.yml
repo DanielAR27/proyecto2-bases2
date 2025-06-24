@@ -23,41 +23,141 @@ services:
       timeout: 5s
       retries: 5
 
-  # PostgreSQL Warehouse (OLAP)
-  postgres_warehouse:
-    image: postgres:17
-    container_name: postgres_warehouse
-    profiles:
-      - papu
-    restart: always
+  metastore-db:
+    image: postgres:14
+    container_name: hive-metastore-db
     environment:
-      POSTGRES_USER: ${WAREHOUSE_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${WAREHOUSE_POSTGRES_PASSWORD}
-      POSTGRES_DB: ${WAREHOUSE_POSTGRES_DB}
-    command: >
-      postgres 
-      -c listen_addresses='*' 
-      -c password_encryption=md5
-      -c shared_preload_libraries='pg_stat_statements'
-      -c pg_stat_statements.track=all
-      -c work_mem=256MB
-      -c maintenance_work_mem=512MB
-      -c effective_cache_size=2GB
-      -c random_page_cost=1.1
-      -c max_connections=200
-    ports:
-      - "15433:5432"
+      POSTGRES_USER: hive
+      POSTGRES_PASSWORD: hive
+      POSTGRES_DB: metastore
     volumes:
-      - postgres_warehouse_data:/var/lib/postgresql/data
-      - ./warehouse.sql:/docker-entrypoint-initdb.d/01-warehouse.sql
-      - ./warehouse_procedures.sql:/docker-entrypoint-initdb.d/02-warehouse_procedures.sql
+      - metastore-db-data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  # AIRFLOW POSTGRES (metadata)
+  airflow-postgres:
+    image: postgres:14
+    container_name: airflow_postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - airflow-postgres-data:/var/lib/postgresql/data
     networks:
       - app_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${WAREHOUSE_POSTGRES_USER} -d ${WAREHOUSE_POSTGRES_DB}"]
-      interval: 15s
-      timeout: 10s
+      test: ["CMD-SHELL", "pg_isready -U airflow"]
+      interval: 10s
+      timeout: 5s
       retries: 5
+
+  hive-metastore:
+    image: apache/hive:4.0.0
+    container_name: hive-metastore
+    environment:
+      - SERVICE_NAME=metastore
+      - DB_DRIVER=postgres
+      - SERVICE_OPTS=-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://metastore-db:5432/metastore -Djavax.jdo.option.ConnectionUserName=hive -Djavax.jdo.option.ConnectionPassword=hive
+    ports:
+      - "9083:9083"
+    volumes:
+      - warehouse:/opt/hive/data/warehouse
+      - ./drivers/postgresql-42.7.7.jar:/opt/hive/lib/postgresql.jar
+    depends_on:
+      - metastore-db
+    networks:
+      - app_network
+
+  hive-server:
+    image: apache/hive:4.0.0
+    container_name: hive-server2
+    environment:
+      - SERVICE_NAME=hiveserver2
+      - SERVICE_OPTS=-Dhive.metastore.uris=thrift://hive-metastore:9083
+    ports:
+      - "10000:10000"
+      - "10002:10002"
+    volumes:
+      - warehouse:/opt/hive/data/warehouse  # ¡AGREGAR ESTE VOLUMEN!
+    depends_on:
+      - hive-metastore
+    networks:
+      - app_network
+  spark:
+    image: bitnami/spark:latest
+    container_name: spark
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    volumes:
+      - warehouse:/opt/bitnami/spark/warehouse
+    networks:
+      - app_network
+    depends_on:
+      - hive-metastore
+
+  # AIRFLOW SCHEDULER
+  airflow-scheduler:
+    build: ./airflow
+    container_name: airflow_scheduler
+    profiles:
+      - airflow
+    command: >
+      bash -c "
+        echo 'Esperando a que el webserver inicialice la DB...' &&
+        sleep 30 &&
+        airflow scheduler
+      "
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+      - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  # AIRFLOW WEBSERVER
+  airflow-webserver:
+    build: ./airflow
+    container_name: airflow_webserver
+    profiles:
+      - airflow
+    command: >
+      bash -c "
+        airflow db migrate && 
+        sleep 15 &&
+        airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com || true &&
+        airflow webserver
+      "
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+      - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=false
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    networks:
+      - app_network
 
   # REDIS (CACHÉ VOLÁTIL)
   redis:
@@ -77,7 +177,6 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=false
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - "${ELASTIC_PORT}:${ELASTIC_PORT}"
     volumes:
@@ -97,23 +196,6 @@ services:
       - "${NEO4J_PORT}:7687"       # Bolt protocol
     volumes:
       - neo4j_data:/data
-    networks:
-      - app_network
-
-  # Hive (Datawarehouse)
-  hive:
-    image: apache/hive:4.0.0
-    container_name: mini-hive
-    profiles:
-      - analytics
-    ports:
-      - "10000:10000"
-      - "10002:10002"
-    environment:
-      - SERVICE_NAME=hiveserver2
-    volumes:
-      - hive-warehouse:/opt/hive/data/warehouse
-      - hive-metastore:/tmp
     networks:
       - app_network
 
@@ -421,51 +503,65 @@ services:
       - JWT_SECRET=${JWT_SECRET}
     networks:
       - app_network
-    
-  app:
-    build:
-      context: ./app
-    container_name: hive-client
-    profiles:
-      - quintero
-    depends_on:
-      - hive
-    networks:
-      - app_network
-    environment:
-      - PYTHONUNBUFFERED=1
-    command: sh -c "sleep 60 && python main.py"
 
-  # OLD SERVICE (OLAP & Data Warehouse)
-  old_service:
-    build: ./old_service
-    container_name: old_service
-    profiles:
-      - papu
-    restart: always
+  etl_service:
+      build:
+        context: ./etl_service
+      container_name: etl_service
+      volumes:
+        - warehouse:/opt/hive/data/warehouse
+      depends_on:
+        - hive-metastore
+        - metastore-db
+        - postgres
+        - mongos1
+      profiles:
+        - etl
+      environment:
+        - POSTGRES_HOST=${POSTGRES_HOST}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_PORT=${POSTGRES_PORT}
+        - MONGO_URI=${MONGO_URI}
+      networks:
+        - app_network  
+
+  # ANALYTICS SERVER
+  analytics_service:
+    build:
+      context: ./analytics_service
+    container_name: analytics_service
     ports:
-      - "5800:5800"
-    depends_on:
-      - postgres_warehouse
-      - postgres
-      - mongos1
+      - "8501:8501"  # Puerto por defecto de Streamlit
+    volumes:
+      - warehouse:/opt/hive/data/warehouse
     environment:
-      # Warehouse PostgreSQL
-      - WAREHOUSE_POSTGRES_HOST=${WAREHOUSE_POSTGRES_HOST}
-      - WAREHOUSE_POSTGRES_USER=${WAREHOUSE_POSTGRES_USER}
-      - WAREHOUSE_POSTGRES_PASSWORD=${WAREHOUSE_POSTGRES_PASSWORD}
-      - WAREHOUSE_POSTGRES_DB=${WAREHOUSE_POSTGRES_DB}
-      - WAREHOUSE_POSTGRES_PORT=${POSTGRES_PORT}
-      # Source databases
-      - POSTGRES_HOST=${POSTGRES_HOST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - MONGO_URI=${MONGO_URI}
-      - ANALYTICS_PORT=${ANALYTICS_PORT}
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+    depends_on:
+      - hive-metastore
+      - metastore-db
+      - neo4j
+    profiles:
+      - analytics
     networks:
       - app_network
+
+  spark_analytics:
+      build:
+        context: ./spark_analytics
+      container_name: spark_analytics
+      volumes:
+        - warehouse:/opt/hive/data/warehouse
+      depends_on:
+        - hive-metastore
+        - metastore-db
+      profiles:
+        - analytics
+      networks:
+        - app_network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -678,9 +774,9 @@ volumes:
   mongors2n3-data:
   elastic_data:
   neo4j_data:
-  postgres_warehouse_data:
-  hive-warehouse:
-  hive-metastore:
+  metastore-db-data:
+  warehouse:
+  airflow-postgres-data:
 
 networks:
   app_network:

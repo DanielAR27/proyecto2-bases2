@@ -1,0 +1,7 @@
+pyspark==3.5.1
+streamlit==1.29.0
+plotly==5.17.0
+pandas==2.1.4
+neo4j==5.15.0
+openpyxl>=3.0.0
+reportlab>=3.6.0

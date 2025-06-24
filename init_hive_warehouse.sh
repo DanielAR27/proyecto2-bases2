@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SQL_FILE="hive_warehouse_init.sql"
-CONTAINER_NAME="mini-hive"
+CONTAINER_NAME="hive-server2"
 CONTAINER_PATH="/tmp/$SQL_FILE"
 
 # Copiar archivo SQL al contenedor

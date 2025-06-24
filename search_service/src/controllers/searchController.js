@@ -82,7 +82,7 @@ const searchController = {
         return res.status(403).json({ error: 'Solo los administradores pueden reindexar productos.' });
       }
       
-      // Obtener todos los productos de la API
+      // Obtener todos los productos deÑ la API
       const apiUrl = process.env.API_URL;
       const productsResponse = await axios.get(`${apiUrl}/products`);
       const products = productsResponse.data;
@@ -102,6 +102,59 @@ const searchController = {
       console.error('Error reindexando productos:', error);
       /* istanbul ignore next */
       res.status(500).json({ error: 'Error al reindexar productos' });
+    }
+  },
+
+  // Endpoint interno para Airflow
+  async reindexProductsInternal(req, res) {
+    try {
+      // Validar que viene de la red Docker interna
+      // Extraer IP real manejando diferentes formatos
+      let clientIP = req.ip;
+      
+      // Remover prefijos IPv6-mapped IPv4 comunes
+      if (clientIP.startsWith('::ffff:')) {
+        clientIP = clientIP.replace('::ffff:', '');
+      } else if (clientIP.startsWith('::1')) {
+        clientIP = '127.0.0.1'; // IPv6 localhost
+      }
+      
+      // Validar red Docker (172.18.x.x) o localhost
+      const isInternalIP = clientIP.startsWith('172.18.') || 
+                          clientIP === '127.0.0.1' ||
+                          clientIP.startsWith('192.168.') ||  // Otras redes Docker comunes
+                          clientIP.startsWith('10.'); // Redes privadas
+      
+      if (!isInternalIP) {
+        return res.status(403).json({ 
+          error: 'Acceso no autorizado',
+          ip: req.ip,
+          cleanIP: clientIP // Para debugging
+        });
+      }
+      
+      // Obtener todos los productos de la API
+      const apiUrl = process.env.API_URL;
+      const productsResponse = await axios.get(`${apiUrl}/products`);
+      const products = productsResponse.data;
+      
+      // Reindexar productos
+      await elasticService.reindexAllProducts(products);
+      
+      // Invalidar caché de búsqueda
+      await redisClient.flushDb();
+      
+      res.json({
+        message: 'Productos reindexados correctamente desde Airflow',
+        count: products.length,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Error reindexando productos desde Airflow:', error);
+      res.status(500).json({ 
+        error: 'Error al reindexar productos',
+        details: error.message
+      });
     }
   },
 

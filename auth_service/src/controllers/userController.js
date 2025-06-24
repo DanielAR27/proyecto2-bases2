@@ -74,6 +74,39 @@ const userController = {
     }
   },
 
+  // Obtener todos los usuarios (para análisis completo de referidos)
+  getAllUsers: async (req, res) => {
+    try {
+      const cacheKey = 'users:all';
+      
+      // Intentar obtener de caché (expira en 10 minutos por ser datos para análisis)
+      const cachedData = await redisClient.get(cacheKey);
+      
+      if (cachedData) {
+        return res.json(JSON.parse(cachedData));
+      }
+
+      const usuarios = await UserDAO.getAllUsers();
+
+      // CREAR EL OBJETO COMPLETO PARA GUARDAR EN CACHÉ
+      const responseData = {
+        message: 'Todos los usuarios obtenidos correctamente.',
+        total: usuarios.length,
+        usuarios: usuarios
+      };
+
+      // Guardar el objeto completo en caché (expira en 10 minutos)
+      await redisClient.set(cacheKey, JSON.stringify(responseData), {
+        EX: 600
+      });
+
+      res.json(responseData);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error en el servidor.' });
+    }
+  },
+
   // Obtener todos los usuarios con ubicación (para ETL y análisis)
   getAllUsersWithLocation: async (req, res) => {
     try {
@@ -219,6 +252,7 @@ const userController = {
       await redisClient.del('restaurants:all');
       await redisClient.del('reservas:all');
       await redisClient.del('pedidos:all');
+      await redisClient.del('users:all');
       
       res.json({ message: 'Usuario eliminado correctamente.'});
 

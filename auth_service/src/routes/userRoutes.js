@@ -13,6 +13,99 @@ const router = express.Router();
 
 /**
 * @swagger
+* /users:
+*   get:
+*     summary: Obtener todos los usuarios
+*     description: Endpoint para análisis completo de referidos. Devuelve todos los usuarios del sistema.
+*     tags: [Usuarios]
+*     responses:
+*       200:
+*         description: Lista completa de usuarios obtenida exitosamente
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 message:
+*                   type: string
+*                   example: "Todos los usuarios obtenidos correctamente."
+*                 total:
+*                   type: integer
+*                   example: 50
+*                 usuarios:
+*                   type: array
+*                   items:
+*                     type: object
+*                     properties:
+*                       id_usuario:
+*                         type: integer
+*                       nombre:
+*                         type: string
+*                       email:
+*                         type: string
+*                       rol:
+*                         type: string
+*                       latitud:
+*                         type: number
+*                         format: float
+*                         nullable: true
+*                       longitud:
+*                         type: number
+*                         format: float
+*                         nullable: true
+*                       direccion_completa:
+*                         type: string
+*                         nullable: true
+*                       fecha_registro:
+*                         type: string
+*                         format: date-time
+*                       id_referido:
+*                         type: integer
+*                         nullable: true
+*                   example:
+*                     - id_usuario: 1
+*                       nombre: "Juan Pérez"
+*                       email: "juan@example.com"
+*                       rol: "cliente"
+*                       latitud: 9.9341
+*                       longitud: -84.0877
+*                       direccion_completa: "Cartago, Costa Rica"
+*                       fecha_registro: "2025-01-15T10:30:00Z"
+*                       id_referido: null
+*                     - id_usuario: 9
+*                       nombre: "María López"
+*                       email: "maria@example.com"
+*                       rol: "cliente"
+*                       latitud: null
+*                       longitud: null
+*                       direccion_completa: null
+*                       fecha_registro: "2025-01-20T14:45:00Z"
+*                       id_referido: null
+*                     - id_usuario: 15
+*                       nombre: "Carlos Gómez"
+*                       email: "carlos@example.com"
+*                       rol: "cliente"
+*                       latitud: 10.0167
+*                       longitud: -84.2167
+*                       direccion_completa: "Alajuela, Costa Rica"
+*                       fecha_registro: "2025-01-22T16:30:00Z"
+*                       id_referido: 9
+*                     - "..."
+*       500:
+*         description: Error interno del servidor
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                 error:
+*                   type: string
+*                   example: "Error en el servidor."
+*/
+router.get('/', userController.getAllUsers);
+
+/**
+* @swagger
 * /users/me:
 *   get:
 *     summary: Obtener información del usuario autenticado

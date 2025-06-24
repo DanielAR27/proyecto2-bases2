@@ -1,5 +1,16 @@
-
-C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
+Proyecto #2 - BD2
+├── airflow/
+|   ├── dags/ (DAGS para reindexar en elastic y procesar el ETL cada 6 horas)
+|   ├── dockerfile
+|   └── requirements.txt
+├── analytics_service/
+|   ├── connection/
+|   ├── graph_analytics/
+|   ├── pages/
+|   ├── utils/
+|   ├── dockerfile
+|   ├── main.py
+|   └── requirements.txt
 ├── api/
 |   ├── src/
 |   |   ├── config/
@@ -9,37 +20,17 @@ C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
 |   |   ├── middlewares/
 |   |   ├── models/
 |   |   ├── routes/
-|   |   ├── app.js
+|   |   └── app.js
 |   ├── swagger/
 |   ├── tests/
 |   |   ├── integration/
 |   |   ├── unit/
-|   |   ├── utils/
+|   |   └── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
 |   ├── package.json
-|   ├── server.js
-├── graph_service/
-|   ├── src/
-|   |   ├── config/
-|   |   ├── controllers/
-|   |   ├── middlewares/
-|   |   ├── routes/
-|   |   ├── services/ (Neo4J y Redis)
-|   |   ├── app.js
-|   ├── swagger/
-|   ├── dockerfile
-|   ├── package-lock.json
-|   ├── package.json
-|   ├── server.js
-├── analytics_service/
-|   ├── extractors/ (extractores de postgres y mongo)
-|   ├── warehouse/ (conexión al warehouse de postgres y cargar data)
-|   ├── app.py (mantener el servicio vivo una vez ejecutado el etl)
-|   ├── dockerfile
-|   ├── etl_job.py
-|   ├── requirements.txt
+|   └── server.
 ├── auth_service/
 |   ├── src/
 |   |   ├── config/
@@ -49,23 +40,47 @@ C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
 |   |   ├── middlewares/
 |   |   ├── models/
 |   |   ├── routes/
-|   |   ├── app.js
+|   |   └── app.js
 |   ├── swagger/
 |   ├── tests/
 |   |   ├── integration/
 |   |   ├── unit/
-|   |   ├── utils/
+|   |   └── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
 |   ├── package.json
-|   ├── server.js
+|   └── server.js
+├── drivers/
+|   └── postgresql-42.7.7.jar (Driver para guardar el metastore en hive)
+├── etl_service/
+|   ├── connection/
+|   ├── extractors/ (extractores de postgres y mongo)
+|   ├── warehouse/ (operaciones para procesar el ETL)
+|   ├── app.py (mantener el servicio vivo una vez ejecutado el etl)
+|   ├── dockerfile
+|   ├── etl_job.py
+|   └── requirements.txt
+├── graph_service/
+|   ├── src/
+|   |   ├── config/
+|   |   ├── controllers/
+|   |   ├── middlewares/
+|   |   ├── routes/
+|   |   ├── services/ (Neo4J y Redis)
+|   |   └── app.js
+|   ├── swagger/
+|   ├── dockerfile
+|   ├── package-lock.json
+|   ├── package.json
+|   └── server.js
 ├── pruebas/
 |   ├── generarDatos.js
 |   ├── generarDatosMasivos.js
 |   ├── menuPrueba.js
 |   ├── package-lock.json
 |   ├── package.json
+|   └── restaurantes.json
 ├── search_service/
 |   ├── src/
 |   |   ├── config/
@@ -75,17 +90,17 @@ C:\Users\colos\OneDrive\Documents\TEC\Bases 2\Proyecto #1\Proyecto #1 - BD2
 |   |   ├── routes/
 |   |   ├── services/ (Elastic y Redis)
 |   |   ├── app.js
-|   |   ├── init.js
+|   |   └── init.js
 |   ├── swagger/
 |   ├── tests/
 |   |   ├── integration/
 |   |   ├── unit/
-|   |   ├── utils/
+|   |   └── utils/
 |   ├── dockerfile
 |   ├── dockerfile.test
 |   ├── package-lock.json
 |   ├── package.json
-|   ├── server.js
+|   └── server.js
 ├── docker-compose.yml
 ├── estructura.txt
 ├── init.sql

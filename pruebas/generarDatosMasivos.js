@@ -8,13 +8,13 @@ const API = 'http://localhost/api';
 
 // Configuración para datos masivos
 const CONFIG = {
-  TOTAL_USERS: 100,
-  MAX_RESTAURANTS: 10, //50 // null = todos los restaurantes del JSON, número = límite específico
+  TOTAL_USERS: 50,
+  MAX_RESTAURANTS: 20, //50 // null = todos los restaurantes del JSON, número = límite específico
   MENUS_PER_RESTAURANT: 2, //3
-  PRODUCTS_PER_MENU: 3, // 8
+  PRODUCTS_PER_MENU: 6, // 8
   RESERVATIONS_PER_USER: 3,
-  ORDERS_PER_USER: 6, // 5
-  TOTAL_REPARTIDORES: 15
+  ORDERS_PER_USER: 2, // 5
+  TOTAL_REPARTIDORES: 20
 };
 
 const dominios = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'protonmail.com'];
@@ -170,7 +170,7 @@ const crearDatosMasivos = async (opciones = {}) => {
       }
     }
 
-    const productosGlobales = [];
+    const productosPorRestaurante = {};
     const adminNombre = faker.person.fullName();
     const adminEmail = generarEmailDesdeNombre(adminNombre);
 
@@ -224,8 +224,15 @@ const crearDatosMasivos = async (opciones = {}) => {
       id_referido
     });
 
+
+    const provincias_ponderadas = [
+      'San José', 'San José', 'San José', 'San José', 'San José',  // 50%
+      'Cartago', 'Cartago', 'Cartago',                              // 30%
+      'Heredia', 'Alajuela'                                         // 20%
+    ];
+
     // 1. Elegir provincia aleatoria
-    const provincia_elegida = faker.helpers.arrayElement(Object.keys(provincias_coordenadas));
+    const provincia_elegida = faker.helpers.arrayElement(provincias_ponderadas);
     const coords = provincias_coordenadas[provincia_elegida];
 
     // 2. Generar coordenadas coherentes con la provincia
@@ -253,7 +260,7 @@ const crearDatosMasivos = async (opciones = {}) => {
         headers: { Authorization: `Bearer ${login.data.token}` }
       });
     } catch (locationError) {
-      console.log(`⚠️ No se pudo asignar ubicación al usuario ${nombre}: endpoint no disponible`);
+      console.log(`️ No se pudo asignar ubicación al usuario ${nombre}: endpoint no disponible`);
     }
 
     if ((i + 1) % 20 === 0) {
@@ -288,7 +295,7 @@ const crearDatosMasivos = async (opciones = {}) => {
             headers: { Authorization: `Bearer ${adminToken}` }
           });
         } catch (locationError) {
-          console.log(`⚠️ No se pudo asignar ubicación al restaurante ${restauranteInfo.nombre}: endpoint no disponible`);
+          console.log(`️ No se pudo asignar ubicación al restaurante ${restauranteInfo.nombre}: endpoint no disponible`);
         }
       }
 
@@ -326,9 +333,15 @@ const crearDatosMasivos = async (opciones = {}) => {
             headers: { Authorization: `Bearer ${adminToken}` }
           });
 
-          productosGlobales.push({
+          // Inicializar array para este restaurante si no existe
+          if (!productosPorRestaurante[id_restaurante]) {
+            productosPorRestaurante[id_restaurante] = [];
+          }
+
+          // Agregar producto al restaurante correspondiente
+          productosPorRestaurante[id_restaurante].push({
             id_producto: producto.data.producto.id_producto,
-            id_restaurante
+            precio: parseFloat(faker.commerce.price({ min: 2500, max: 25000 }))
           });
         }
       }
@@ -344,15 +357,17 @@ const crearDatosMasivos = async (opciones = {}) => {
       const vehiculo = faker.helpers.arrayElement(vehiculos_repartidor);
       
       // Coordenadas aleatorias en Costa Rica
+      const provincia_repartidor = faker.helpers.arrayElement(['San José', 'Cartago']);
+      const coords_rep = provincias_coordenadas[provincia_repartidor];
       const latitud = faker.number.float({
-        min: coordenadas_costa_rica.min_lat,
-        max: coordenadas_costa_rica.max_lat,
+        min: coords_rep.min_lat,
+        max: coords_rep.max_lat,
         fractionDigits: 6
       });
-      
+
       const longitud = faker.number.float({
-        min: coordenadas_costa_rica.min_lng,
-        max: coordenadas_costa_rica.max_lng,
+        min: coords_rep.min_lng,
+        max: coords_rep.max_lng,
         fractionDigits: 6
       });
 
@@ -426,7 +441,7 @@ const crearDatosMasivos = async (opciones = {}) => {
             headers: { Authorization: `Bearer ${user.token}` }
           });
         } catch (error) {
-          console.log(`⚠️ Error actualizando reserva ${id_reserva}:`, error.response?.data || error.message);
+          console.log(`️ Error actualizando reserva ${id_reserva}:`, error.response?.data || error.message);
         }
         
         reservacionesCreadas++;
@@ -434,9 +449,28 @@ const crearDatosMasivos = async (opciones = {}) => {
 
       // Crear pedidos
       for (let o = 0; o < config.pedidosPorUsuario; o++) {
+        // 1. Elegir restaurante aleatorio que tenga productos
+        const restaurantesConProductos = Object.keys(productosPorRestaurante).filter(
+          id_rest => productosPorRestaurante[id_rest].length > 0
+        );
+
+        if (restaurantesConProductos.length === 0) {
+          console.log('️ No hay restaurantes con productos disponibles');
+          continue; // Saltar este pedido
+        }
+
+        const restauranteElegido = faker.helpers.arrayElement(restaurantesConProductos);
+        const productosDisponibles = productosPorRestaurante[restauranteElegido];
+
+        // 2. Seleccionar productos solo de este restaurante
+        const cantidadProductos = faker.number.int({ 
+          min: 1, 
+          max: Math.min(6, productosDisponibles.length) 
+        });
+
         const productosPedido = faker.helpers.arrayElements(
-          productosGlobales, 
-          faker.number.int({ min: 2, max: 6 })
+          productosDisponibles, 
+          cantidadProductos
         );
 
         const productosFormateados = productosPedido.map(p => ({
@@ -447,7 +481,7 @@ const crearDatosMasivos = async (opciones = {}) => {
         // Crear pedido inicial
         const pedido = await axios.post(`${API}/orders`, {
           id_usuario: user.id,
-          id_restaurante: productosPedido[0].id_restaurante,
+          id_restaurante: parseInt(restauranteElegido),
           tipo: faker.helpers.arrayElement(['en restaurante', 'para recoger']),
           productos: productosFormateados
         }, {
@@ -460,7 +494,7 @@ const crearDatosMasivos = async (opciones = {}) => {
           to: new Date() // Hasta hoy
         });
 
-        const id_pedido = pedido.data.pedido.id_pedido; // Ajustar según tu API
+        const id_pedido = pedido.data.pedido.id_pedido; // Ajustar según API
 
         // Determinar estado basado en la fecha para más realismo
         let estadoPedido;
@@ -475,15 +509,17 @@ const crearDatosMasivos = async (opciones = {}) => {
           estadoPedido = faker.helpers.arrayElement(['pendiente', 'en preparacion', 'listo']);
         }
 
+        estadoPedido = 'pendiente'; // Forzar a que el estado sea pendiente, para pruebas en ruteo
+
         try {
           await axios.put(`${API}/orders/${id_pedido}`, {
             estado: estadoPedido,
-            fecha_hora: fechaPedido.toISOString() // Ajustar campo según tu API
+            fecha_hora: fechaPedido.toISOString() // Ajustar campo según API
           }, {
             headers: { Authorization: `Bearer ${user.token}` }
           });
         } catch (error) {
-          console.log(`⚠️ Error actualizando pedido ${id_pedido}:`, error.response?.data || error.message);
+          console.log(`️ Error actualizando pedido ${id_pedido}:`, error.response?.data || error.message);
         }
         
         pedidosCreados++;
@@ -497,18 +533,20 @@ const crearDatosMasivos = async (opciones = {}) => {
 
     console.timeEnd('Ejecución total');
     console.log('\n=== RESUMEN DE DATOS CREADOS ===');
-    console.log(`✅ Usuarios: ${usuarios.length}`);
-    console.log(`✅ Restaurantes: ${restaurantes.length}`);
-    console.log(`✅ Productos: ${productosGlobales.length}`);
-    console.log(`✅ Repartidores: ${config.repartidores}`);
-    console.log(`✅ Reservaciones: ${reservacionesCreadas}`);
-    console.log(`✅ Pedidos: ${pedidosCreados}`);
-    console.log('\n🎉 Base de datos poblada exitosamente!');
+    console.log(` Usuarios: ${usuarios.length}`);
+    console.log(` Restaurantes: ${restaurantes.length}`);
+    const totalProductos = Object.values(productosPorRestaurante)
+      .reduce((total, productos) => total + productos.length, 0);
+    console.log(` Productos: ${totalProductos}`);
+    console.log(` Repartidores: ${config.repartidores}`);
+    console.log(` Reservaciones: ${reservacionesCreadas}`);
+    console.log(` Pedidos: ${pedidosCreados}`);
+    console.log('\n Base de datos poblada exitosamente!');
 
   } catch (err) {
-    console.error('❌ Error durante la ejecución:', err.response?.data || err.message);
+    console.error(' Error durante la ejecución:', err.response?.data || err.message);
     if (err.response?.status === 409) {
-      console.log('💡 Tip: Es posible que algunos datos ya existan. Considera limpiar la base de datos primero.');
+      console.log(' Tip: Es posible que algunos datos ya existan. Considera limpiar la base de datos primero.');
     }
   }
 };

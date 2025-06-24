@@ -1,6 +1,0 @@
-# analytics_service/requirements.txt
-psycopg2-binary==2.9.7
-pymongo==4.5.0
-python-dotenv==1.0.0
-pyspark==3.4.0
-py4j==0.10.9.5
